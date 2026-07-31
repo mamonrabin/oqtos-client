@@ -48,14 +48,14 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
+/* :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #087096;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -81,7 +81,68 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+} */
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Brand */
+  --primary: #087096;
+  --primary-foreground: #ffffff;
+
+  /* Light teal */
+  --secondary: #e6f4f8;
+  --secondary-foreground: #087096;
+
+  /* Gray backgrounds */
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+
+  /* Hover & active */
+  --accent: #d8edf4;
+  --accent-foreground: #087096;
+
+  /* Error */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+
+  /* Focus ring */
+  --ring: #087096;
+
+  /* Charts */
+  --chart-1: #087096;
+  --chart-2: #0ea5e9;
+  --chart-3: #22c55e;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #087096;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6f4f8;
+  --sidebar-accent-foreground: #087096;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #087096;
 }
+
+
 
 .dark {
   --background: oklch(0.145 0 0);
@@ -126,5 +187,51 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer base {
+  .Container {
+    @apply 2xl:px-28 xl:px-20 lg:px-8 md:px-8 px-4;
+  }
+}
+
+
+
+/* ===========================
+   Swiper Styles
+=========================== */
+
+.swiper-pagination-bullet {
+  background: #155DFC !important;
+  opacity: 0.5 !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #155DFC !important;
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 5px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: none !important;
+}
+
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 16px !important;
   }
 }
