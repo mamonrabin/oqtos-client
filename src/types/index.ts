@@ -66,7 +66,7 @@ export type TProduct = {
   slug?: string;
   quantity?: number;
   mrpPrice: number;
-  price?: number;
+  price: number;
   discount?: number;
   discountType?: string;
   soldQuantity?: number;
