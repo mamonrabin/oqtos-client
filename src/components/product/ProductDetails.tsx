@@ -114,7 +114,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       </div>
 
       <div className="mt-10">
-        <ProductInformation product={product} />
+        {/* <ProductInformation product={product} /> */}
+        <ProductInformation product={product}/>
       </div>
     </div>
   );

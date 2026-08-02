@@ -2,7 +2,7 @@ import { apiBaseUrl } from "@/config";
 import { getLogoAndFooter } from "@/services/logo.api";
 import { TLogo } from "@/types";
 import { menuList } from "@/utils/menuList";
-import { Heart, Search, ShoppingCart, TextAlignJustify, UserRound } from "lucide-react";
+import { Heart, Search, ShoppingCart, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
