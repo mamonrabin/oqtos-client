@@ -1,16 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { apiBaseUrl } from "@/config";
 import { getLogoAndFooter } from "@/services/logo.api";
 import { TLogo } from "@/types";
 import { menuList } from "@/utils/menuList";
-import { Heart, Search, ShoppingCart, UserRound } from "lucide-react";
+import { Heart, Search, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Responsivebar from "./Responsivebar";
+import CartSidebar from "@/components/cart/CartSidebar";
+
 
 const Navbar = async () => {
   const { data: logoList } = await getLogoAndFooter();
-  console.log(logoList);
+  
   return (
     <div className="Container flex items-center justify-between py-3">
         <div className="lg:hidden">
@@ -54,13 +57,7 @@ const Navbar = async () => {
             0
           </span>
         </button>
-
-        <button className="p-2 cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600 relative">
-          <ShoppingCart size={18} />
-          <span className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-            0
-          </span>
-        </button>
+        <CartSidebar/>
       </div>
     </div>
   );

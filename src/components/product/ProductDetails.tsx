@@ -1,9 +1,5 @@
 "use client";
 
-
-import AddToCart from "./AddToCart";
-
-
 import { TProduct } from "@/types";
 import SizeColorAndQuantity from "./SizeColeAndQuantity";
 import ProductImageGallery from "./ProductImageGallery";
@@ -93,22 +89,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             )}
 
           <SizeColorAndQuantity product={product} />
-          <AddToCart />
-
-          {/* Tags */}
-          {/* {product.tags && product.tags.length > 0 && (
-            <div className="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
-              {product.tags.map((tag: string, idx: number) => (
-                <span
-                  key={idx}
-                  className="text-[10px] sm:text-xs bg-primary/10 text-primary px-2 sm:px-3 py-0.5 sm:py-1 rounded-full"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )} */}
-
           <ShippingPolicyCard/>
         </div>
       </div>

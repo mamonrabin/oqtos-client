@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { poppins } from "./font";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Oqtos",
@@ -14,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.className} antialiased`}>
-      <body className="">{children}</body>
+
+      <body className="">
+        <Toaster richColors position="top-right" />
+        {children}
+        </body>
     </html>
   );
 }

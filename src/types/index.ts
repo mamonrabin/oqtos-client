@@ -61,9 +61,9 @@ export type TSpecification = {
   value: string;
 };
 export type TProduct = {
-   _id: string;
+  _id: string;
   title: string;
-  slug?: string;
+  slug: string;
   quantity?: number;
   mrpPrice: number;
   price: number;
@@ -94,4 +94,20 @@ export type TProduct = {
   metaDescription?: string;
   warranty?: string;
   availableQuantity?: number;
+};
+
+export type TCartProduct = {
+  _id: string;
+  product: TProduct;
+  price: number;
+  image: string;
+  name: string;
+  slug: string;
+}
+
+export type TCartItem = {
+  product: TCartProduct;
+  quantity: number;
+  color?: string;
+  size?: string;
 };

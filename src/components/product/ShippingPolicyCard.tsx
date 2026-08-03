@@ -9,7 +9,7 @@ const ShippingPolicyCard = () => {
     <div className="mt-6 bg-[#FAFAFA] rounded-lg border border-gray-200 overflow-hidden">
       {/* Toggle Header */}
       <div 
-        className="shipping-toggle flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+        className="shipping-toggle flex  items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="label-left flex items-center gap-2">
@@ -26,7 +26,7 @@ const ShippingPolicyCard = () => {
       </div>
 
       {/* Highlights Section */}
-      <div className="shipping-highlights flex items-center gap-4 px-4 pb-4">
+      <div className="shipping-highlights flex md:flex-row flex-col md:items-center md:gap-4 gap-2 px-4 pb-4">
         <div className="flex items-center gap-2 text-xs text-gray-600">
           <CheckCircle size={16} className="text-primary" />
           <span>Tell us within 7 days</span>

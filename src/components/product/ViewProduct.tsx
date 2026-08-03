@@ -87,9 +87,6 @@ const ViewProduct: React.FC<productProps> = ({ product }) => {
             </div>
 
            <SizeColorAndQuantity product={product} />
-
-           <AddToCart/>
-
           </div>
         </div>
       </DialogContent>

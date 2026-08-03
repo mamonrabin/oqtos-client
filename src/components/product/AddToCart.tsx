@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import { Minus, Plus, ShoppingCart } from 'lucide-react';
+import React from "react";
+import { Loader2, Minus, Plus, ShoppingCart } from "lucide-react";
 
 interface AddToCartProps {
-  maxQuantity?: number;
-  onAddToCart?: (quantity: number) => void;
-  initialQuantity?: number;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  availableQuantity: number;
+  onAddToCart: () => void;
+  isAdding: boolean;
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({
-  maxQuantity = 10,
+  quantity,
+  setQuantity,
+  availableQuantity,
   onAddToCart,
-  initialQuantity = 1,
+  isAdding,
 }) => {
-  const [quantity, setQuantity] = useState(initialQuantity);
+  // const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -21,24 +25,21 @@ const AddToCart: React.FC<AddToCartProps> = ({
   };
 
   const handleIncrement = () => {
-    if (quantity < maxQuantity) {
+    if (quantity < availableQuantity) {
       setQuantity(quantity + 1);
     }
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= 1 && value <= maxQuantity) {
+    if (!isNaN(value) && value >= 1 && value <= availableQuantity) {
       setQuantity(value);
     }
   };
 
   const handleAddToCart = () => {
-    if (onAddToCart) {
-      onAddToCart(quantity);
-    }
-    // You can add toast notification or other logic here
-    console.log(`Added ${quantity} item(s) to cart`);
+    onAddToCart();
+    console.log("Add to Cart clicked with quantity:", quantity);
   };
 
   return (
@@ -51,8 +52,8 @@ const AddToCart: React.FC<AddToCartProps> = ({
             disabled={quantity <= 1}
             className={`p-2 rounded-full border-2 transition-all ${
               quantity <= 1
-                ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                : 'border-gray-300 hover:border-primary hover:bg-primary/5 text-gray-700'
+                ? "border-gray-200 text-gray-300 cursor-not-allowed"
+                : "border-gray-300 hover:border-primary hover:bg-primary/5 text-gray-700"
             }`}
             aria-label="Decrease quantity"
           >
@@ -63,18 +64,19 @@ const AddToCart: React.FC<AddToCartProps> = ({
             type="number"
             value={quantity}
             onChange={handleQuantityChange}
+            disabled={availableQuantity === 0}
             min={1}
-            max={maxQuantity}
+            max={availableQuantity}
             className="w-16 h-11 text-center border-2 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-gray-700 font-medium"
           />
 
           <button
             onClick={handleIncrement}
-            disabled={quantity >= maxQuantity}
+            disabled={quantity >= availableQuantity}
             className={`p-2 rounded-full border-2 transition-all ${
-              quantity >= maxQuantity
-                ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                : 'border-gray-300 hover:border-primary hover:bg-primary/5 text-gray-700'
+              quantity >= availableQuantity
+                ? "border-gray-200 text-gray-300 cursor-not-allowed"
+                : "border-gray-300 hover:border-primary hover:bg-primary/5 text-gray-700"
             }`}
             aria-label="Increase quantity"
           >
@@ -85,11 +87,22 @@ const AddToCart: React.FC<AddToCartProps> = ({
 
       {/* Add to Cart Button */}
       <button
+        disabled={availableQuantity === 0 || isAdding}
         onClick={handleAddToCart}
         className="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/35"
       >
-        <ShoppingCart size={20} />
-        Add to Cart
+        {isAdding ? (
+          <>
+            <Loader2 className="h-5 w-5 animate-spin" />
+            Adding...
+          </>
+        ) : (
+          <>
+            <ShoppingCart size={20} />
+            Add to Cart
+          </>
+        )}
+        {/* {availableQuantity === 0 ? "Out of Stock" : "Add to Cart"} */}
         <span className="bg-white/20 px-2 py-0.5 rounded-full text-sm">
           {quantity}
         </span>
