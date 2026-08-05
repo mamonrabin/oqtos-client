@@ -5,8 +5,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { apiBaseUrl } from "@/config";
-import { getAllCategory } from "@/services/category.api";
-import { getAllSubCategory } from "@/services/subcategory.api";
 import { TCategory, TLogo, TSubCategory } from "@/types";
 import { TextAlignJustify, X, ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -15,11 +13,12 @@ import React from "react";
 
 interface logoProps {
   logoList: TLogo[];
+  categoryList:TCategory[]
+  subcategoryList:TSubCategory[]
 }
 
-const Responsivebar: React.FC<logoProps> = async ({ logoList }) => {
-  const { data: categoryList } = await getAllCategory();
-  const { data: subcategoryList } = await getAllSubCategory();
+const Responsivebar: React.FC<logoProps> = ({ logoList,categoryList,subcategoryList }) => {
+  
 
   return (
     <Sheet>

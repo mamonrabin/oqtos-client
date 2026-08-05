@@ -11,16 +11,17 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { login as loginUser } from "@/services/auth.api";
+import { googleLogin, login as loginUser } from "@/services/auth.api";
+import { useCurrentUser } from "./AuthContext";
 
 type LoginFormData = {
   email: string;
   password: string;
- 
 };
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const { refetch } = useCurrentUser();
   const router = useRouter();
   const {
     register,
@@ -31,7 +32,6 @@ export default function LoginPage() {
     defaultValues: {
       email: "",
       password: "",
-     
     },
   });
 
@@ -41,15 +41,13 @@ export default function LoginPage() {
         email: data.email,
         password: data.password,
       });
-
+      await refetch();
       toast.success(res.message);
       router.push("/");
       reset();
-      reset();
-      reset();
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("Login error:", error);
-       toast.error(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -99,7 +97,9 @@ export default function LoginPage() {
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-sm text-red-500">{errors.email.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
 
@@ -128,7 +128,9 @@ export default function LoginPage() {
                       type="button"
                       onClick={togglePasswordVisibility}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                     >
                       {showPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -138,16 +140,16 @@ export default function LoginPage() {
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="text-sm text-red-500">{errors.password.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.password.message}
+                    </p>
                   )}
                 </div>
 
                 {/* Remember & Forgot Password */}
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="rememberMe"
-                    />
+                    <Checkbox id="rememberMe" />
                     <label htmlFor="rememberMe" className="cursor-pointer">
                       Remember me
                     </label>
@@ -183,6 +185,7 @@ export default function LoginPage() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <button
+                   onClick={googleLogin}
                     type="button"
                     className="border rounded py-2 text-sm font-medium hover:bg-primary hover:text-white duration-300 cursor-pointer"
                   >

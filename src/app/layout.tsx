@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { poppins } from "./font";
 import { Toaster } from "sonner";
+import Providers from "@/providers/Providers";
 
 export const metadata: Metadata = {
   title: "Oqtos",
@@ -18,7 +19,7 @@ export default function RootLayout({
 
       <body className="">
         <Toaster richColors position="top-right" />
-        {children}
+        <Providers>{children}</Providers>
         </body>
     </html>
   );

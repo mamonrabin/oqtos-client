@@ -48,6 +48,10 @@ export const login = async (payload: LoginPayload) => {
   return data;
 };
 
+export const googleLogin = () => {
+  window.location.href = `${apiBaseUrl}/auth/google`;
+};
+
 export const getRecentUser = async () => {
   const res = await fetch(`${apiBaseUrl}/user/me`, {
     credentials: "include",
@@ -62,7 +66,20 @@ export const getRecentUser = async () => {
   return data;
 };
 
-// export const getSupperAdmin = async () => {
-//   const { data } = await AxiosInstance.get("/user/me");
-//   return data;
-// };
+export const logout = async () => {
+  const res = await fetch(`${apiBaseUrl}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Logout failed");
+  }
+
+  return data;
+}

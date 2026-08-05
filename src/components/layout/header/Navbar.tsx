@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 import { apiBaseUrl } from "@/config";
-import { getLogoAndFooter } from "@/services/logo.api";
-import { TLogo } from "@/types";
+import { TCategory, TLogo, TSubCategory } from "@/types";
 import { menuList } from "@/utils/menuList";
 import { Heart, Search, UserRound } from "lucide-react";
 import Image from "next/image";
@@ -10,17 +9,30 @@ import React from "react";
 import Responsivebar from "./Responsivebar";
 import CartSidebar from "@/components/cart/CartSidebar";
 import UserMenu from "@/components/auth/UserMenu";
+import { useCurrentUser } from "@/components/auth/AuthContext";
 
 
-const Navbar = async () => {
-  const { data: logoList } = await getLogoAndFooter();
+interface logoProps {
+  logoList: TLogo[];
+  categoryList: TCategory[];
+  subcategoryList: TSubCategory[];
+}
 
-  
+const Navbar: React.FC<logoProps> = ({
+  logoList,
+  categoryList,
+  subcategoryList,
+}) => {
+  const { user } = useCurrentUser();
 
   return (
     <div className="Container flex items-center justify-between py-3">
       <div className="lg:hidden">
-        <Responsivebar logoList={logoList} />
+        <Responsivebar
+          logoList={logoList}
+          categoryList={categoryList}
+          subcategoryList={subcategoryList}
+        />
       </div>
       <div className="flex  items-center justify-center md:ml-0 ml-10 lg:w-auto w-full">
         {logoList?.map((item: TLogo) => (
@@ -52,13 +64,15 @@ const Navbar = async () => {
           <Search size={18} />
         </button>
 
-        <Link href="/logIn">
-          <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
-            <UserRound size={18} />
-          </button>
-        </Link>
-
-        <UserMenu/>
+        {user ? (
+          <UserMenu />
+        ) : (
+          <Link href="/logIn">
+            <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
+              <UserRound size={18} />
+            </button>
+          </Link>
+        )}
 
         <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600 relative">
           <Heart size={18} />

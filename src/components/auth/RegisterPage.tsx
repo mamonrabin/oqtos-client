@@ -6,7 +6,7 @@ import { Mail, Lock, ShieldCheck, User, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { register as registerUser } from "@/services/auth.api";
+import { googleLogin, register as registerUser } from "@/services/auth.api";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -197,6 +197,7 @@ export default function RegisterPage() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <button
+                  onClick={googleLogin}
                     type="button"
                     className="border rounded py-2 text-sm font-medium hover:bg-primary hover:text-white duration-300 cursor-pointer"
                   >
