@@ -9,16 +9,19 @@ import Link from "next/link";
 import React from "react";
 import Responsivebar from "./Responsivebar";
 import CartSidebar from "@/components/cart/CartSidebar";
+import UserMenu from "@/components/auth/UserMenu";
 
 
 const Navbar = async () => {
   const { data: logoList } = await getLogoAndFooter();
+
   
+
   return (
     <div className="Container flex items-center justify-between py-3">
-        <div className="lg:hidden">
-            <Responsivebar logoList={logoList}/>
-        </div>
+      <div className="lg:hidden">
+        <Responsivebar logoList={logoList} />
+      </div>
       <div className="flex  items-center justify-center md:ml-0 ml-10 lg:w-auto w-full">
         {logoList?.map((item: TLogo) => (
           <Image
@@ -35,21 +38,27 @@ const Navbar = async () => {
       <div>
         <ul className="lg:flex hidden  items-center gap-6 ">
           {menuList.map((menu, index) => (
-            <li key={index} className="font-medium text-gray-600 hover:text-primary duration-300 translation-all">
+            <li
+              key={index}
+              className="font-medium text-gray-600 hover:text-primary duration-300 translation-all"
+            >
               <Link href={menu.link}>{menu.title}</Link>
             </li>
           ))}
         </ul>
       </div>
       <div className="flex items-center cursor-pointer">
-      
         <button className="flex p-2 cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
           <Search size={18} />
         </button>
 
-        <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
-          <UserRound size={18} />
-        </button>
+        <Link href="/logIn">
+          <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
+            <UserRound size={18} />
+          </button>
+        </Link>
+
+        <UserMenu/>
 
         <button className="p-2 lg:flex hidden cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600 relative">
           <Heart size={18} />
@@ -57,7 +66,7 @@ const Navbar = async () => {
             0
           </span>
         </button>
-        <CartSidebar/>
+        <CartSidebar />
       </div>
     </div>
   );
