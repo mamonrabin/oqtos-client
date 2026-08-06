@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Banknote,
   CreditCard,
@@ -16,7 +15,6 @@ const paymentMethods = [
     iconBg: "bg-green-100",
     iconColor: "text-green-600",
   },
-
   {
     id: "CARD",
     name: "Online",
@@ -28,9 +26,12 @@ const paymentMethods = [
   },
 ];
 
-export default function PaymentMethods() {
-  const [selected, setSelected] = useState("COD");
+interface PaymentMethodsProps {
+  selected?: string;
+  onChange?: (value: string) => void;
+}
 
+export default function PaymentMethods({ selected, onChange }: PaymentMethodsProps) {
   return (
     <div className="flex md:flex-row flex-col gap-4 mt-2">
       {paymentMethods.map((method) => {
@@ -39,9 +40,9 @@ export default function PaymentMethods() {
         return (
           <label
             key={method.id}
-            className={`flex cursor-pointer items-center gap-4 border px-4 py-3 transition-all rounded ${
+            className={`flex cursor-pointer items-center gap-4 border px-4 py-3 transition-all rounded flex-1 ${
               selected === method.id
-                ? "border-primary"
+                ? "border-primary bg-primary/5"
                 : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
             }`}
           >
@@ -50,7 +51,7 @@ export default function PaymentMethods() {
               name="paymentMethod"
               value={method.id}
               checked={selected === method.id}
-              onChange={(e) => setSelected(e.target.value)}
+              onChange={(e) => onChange?.(e.target.value)}
               className="hidden"
             />
 

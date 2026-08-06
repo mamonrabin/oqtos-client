@@ -8,11 +8,17 @@ import CheckoutProduct from "./CheckoutProduct";
 interface OrderSummaryToggleProps {
   cart: TCartItem[] | undefined;
   totalPrice: number | undefined;
+  subTottalPrice: number | undefined;
+  shippingCost: number | undefined;
+  discount: number | undefined;
 }
 
 const OrderSummaryToggle: React.FC<OrderSummaryToggleProps> = ({
   cart,
   totalPrice,
+  subTottalPrice,
+  shippingCost,
+  discount,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +37,13 @@ const OrderSummaryToggle: React.FC<OrderSummaryToggleProps> = ({
           isOpen ? "max-h-[2000px] opacity-100 mt-3" : "max-h-0 opacity-0"
         }`}
       >
-        <CheckoutProduct cart={cart} totalPrice={totalPrice} />
+        <CheckoutProduct
+          cart={cart}
+          totalPrice={totalPrice}
+          subTottalPrice={subTottalPrice}
+          shippingCost={shippingCost}
+          discount={discount}
+        />
       </div>
     </div>
   );

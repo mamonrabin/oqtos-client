@@ -108,6 +108,7 @@ export type TCartProduct = {
 export type TCartItem = {
   product: TCartProduct;
   quantity: number;
+  price: number;
   color?: string;
   size?: string;
 };

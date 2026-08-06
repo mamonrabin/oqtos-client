@@ -8,13 +8,19 @@ import React from "react";
 interface CheckoutProductProps {
   cart: TCartItem[] | undefined;
   totalPrice: number | undefined;
+  subTottalPrice: number | undefined;
+  shippingCost: number | undefined;
+  discount: number | undefined;
 }
 
 const CheckoutProduct: React.FC<CheckoutProductProps> = ({
   cart,
   totalPrice,
+  subTottalPrice,
+  shippingCost,
+  discount
 }) => {
-  console.log(cart, totalPrice, "cart and totalPrice");
+
 
   return (
     <div className="bg-white rounded shadow-xs border border-[#262626]/15 overflow-hidden">
@@ -74,17 +80,17 @@ const CheckoutProduct: React.FC<CheckoutProductProps> = ({
 
       <div className="border-t flex flex-col text-sm text-gray-600 gap-2 p-4">
         <p className="flex items-center justify-between">
-          <span className="">Subtotal:</span> ৳{totalPrice?.toFixed(2)}
+          <span className="">Subtotal:</span> ৳{subTottalPrice}
         </p>
         <p className="flex items-center justify-between">
-          <span className="">Shipping (Dhaka)</span> ৳ 60
+          <span className="">Shipping (Dhaka)</span> ৳ {shippingCost || "00"}
         </p>
         <p className="flex items-center justify-between">
-          <span className="">Coupon Discount</span> ৳ 00
+          <span className="">Coupon Discount</span> ৳ {discount || "00"}
         </p>
 
         <p className="flex items-center justify-between border-t pt-4 font-semibold text-gray-800">
-          <span className="">Total:</span> ৳ {totalPrice ? (totalPrice + 60).toFixed(2) : '0.00'}
+          <span className="">Total:</span> ৳ {totalPrice}
         </p>
 
         <p className="flex items-center justify-center py-3 bg-primary/10 gap-2 xl:text-sm  text-xs text-primary mt-2">
