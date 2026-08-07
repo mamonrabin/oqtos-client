@@ -2,10 +2,10 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { TProduct } from "@/types";
 import { Eye } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import QuickImageGallery from "./QuickImageGallery";
 import SizeColorAndQuantity from "./SizeColeAndQuantity";
-import AddToCart from "./AddToCart";
+
 
 interface productProps {
   product: TProduct;

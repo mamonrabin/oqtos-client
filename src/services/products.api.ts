@@ -9,6 +9,15 @@ export const getNewArrivalProducts = async () => {
 
   return res.json();
 };
+export const getBestSellingProducts = async () => {
+  const res = await fetch(`${apiBaseUrl}/product/best-selling`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  return res.json();
+};
 export const getSingleProductBySlug = async (slug: string) => {
   const res = await fetch(`${apiBaseUrl}/product/productSlug/${slug}`);
 

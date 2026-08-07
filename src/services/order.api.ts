@@ -21,3 +21,14 @@ export const createOrder = async (order:any) => {
     return { error: error };
   }
 };
+
+
+export const getSingleOrder = async (id: string) => {
+  const res = await fetch(`${apiBaseUrl}/order/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch order");
+  }
+
+  return res.json();
+};

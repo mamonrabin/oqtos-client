@@ -2,22 +2,21 @@
 import { THomeControl, TProduct } from "@/types";
 import React from "react";
 import SectionHeader from "../shared/SectionHeader";
-import ProductCard from "../product/ProductCard";
 import ProductSlider from "../common/ProductSlider";
 
 interface productProps {
-  newArrivals: THomeControl;
+  bestSelling: THomeControl;
   productList: TProduct[];
   isLoading: any
 }
 
-const NewArrivals: React.FC<productProps> = ({ newArrivals, productList,isLoading }) => {
-  console.log("newArrivals", newArrivals);
+const BestSelles: React.FC<productProps> = ({ bestSelling, productList,isLoading }) => {
+  console.log("newArrivals", bestSelling);
   return (
-    <div className="Container md:mt-12 mt-6">
+    <div className="Container md:mt-12 mt-6 pb-20">
       <SectionHeader
-        title={newArrivals.title}
-        subTitle={newArrivals.subTitle}
+        title={bestSelling.title}
+        subTitle={bestSelling.subTitle}
       />
 
 {/* 
@@ -32,4 +31,4 @@ const NewArrivals: React.FC<productProps> = ({ newArrivals, productList,isLoadin
   );
 };
 
-export default NewArrivals;
+export default BestSelles;

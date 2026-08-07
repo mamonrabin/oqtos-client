@@ -84,7 +84,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
     if (!currentUser?.user?._id) {
       toast.warning("Please sign in to place your order.");
-      router.push("/login");
+      router.push("/logIn");
       return;
     }
 

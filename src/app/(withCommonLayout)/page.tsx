@@ -1,11 +1,12 @@
 import Banner from "@/components/home/Banner";
 import BestSell from "@/components/home/BestSell";
+import BestSelles from "@/components/home/BestSelles";
 import Category from "@/components/home/Category";
 import NewArrivals from "@/components/home/NewArrivals";
 import { getAllBanner } from "@/services/banner.api";
 import { getAllCategory } from "@/services/category.api";
 import { getHomeControl } from "@/services/homecontrol.api";
-import { getNewArrivalProducts } from "@/services/products.api";
+import { getBestSellingProducts, getNewArrivalProducts } from "@/services/products.api";
 import { TBanner, THomeControl } from "@/types";
 import React from "react";
 
@@ -16,7 +17,8 @@ const Home = async () => {
   );
 
   const { data: categoryList } = await getAllCategory();
-  const { data: productList,isLoading } = await getNewArrivalProducts();
+  const { data: newArrivalProducts,isLoading:newArrivalLoading } = await getNewArrivalProducts();
+  const { data: bestSelingProduct,isLoading:bestSellingLoading } = await getBestSellingProducts();
 
   const { data: sectionList } = await getHomeControl();
 
@@ -25,10 +27,13 @@ const Home = async () => {
     (section: THomeControl) => React.ReactNode
   > = {
     "New Arrivals": (section) => (
-      <NewArrivals key={section._id} newArrivals={section} productList={productList} isLoading={isLoading} />
+      <NewArrivals key={section._id} newArrivals={section} productList={newArrivalProducts} isLoading={newArrivalLoading} />
+    ),
+    "Best Selling": (section) => (
+      <BestSelles key={section._id} bestSelling={section} productList={bestSelingProduct} isLoading={bestSellingLoading} />
     ),
 
-    "Best Selling": (section) => <BestSell key={section._id} />,
+    
   };
 
   const orderMap: Record<string, number> = {

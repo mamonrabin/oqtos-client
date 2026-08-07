@@ -10,6 +10,7 @@ import { TProduct } from "@/types";
 import { toast } from "sonner";
 import { apiBaseUrl } from "@/config";
 import ViewProduct from "./ViewProduct";
+import { useCartStore } from "@/store/cartStore";
 
 interface productProps {
   product: TProduct;
@@ -17,6 +18,7 @@ interface productProps {
 }
 
 const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
+  const { addToCart } = useCartStore();
   const {
     title,
     price,
@@ -32,22 +34,20 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
   const [isHovered, setIsHovered] = useState(false);
   //   const [isCartLoading, setIsCartLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const handleAddToCart = async () => {
+    addToCart({
+      product: {
+        _id: product._id,
+        name: product.title,
+        slug: product.slug,
+        image: product.thumbnailImage, // change if your image field has a different name
+        price: product.price,
+      },
+      quantity,
+    });
 
-  const handleAddToCart = () => {
-    // if (isCartLoading) return;
-    // setIsCartLoading(true);
-    setTimeout(() => {
-      //   setIsCartLoading(false);
-      toast.success("Added to cart successfully!", {
-        duration: 3000,
-        position: "bottom-right",
-        style: {
-          background: "#1a1a1a",
-          color: "#fff",
-          borderRadius: "8px",
-        },
-      });
-    }, 1000);
+    toast.success("Added to cart");
   };
 
   const handleLike = (e: React.MouseEvent) => {
@@ -70,8 +70,8 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
     >
       <div className="bg-white dark:bg-zinc-900 rounded shadow hover:shadow-md transition-shadow duration-500 overflow-hidden border border-gray-100 dark:border-zinc-800 hover:border-primary/30">
         {/* Image Container */}
-        
-          <div className="relative block overflow-hidden aspect-square bg-gray-50 dark:bg-zinc-800">
+
+        <div className="relative block overflow-hidden aspect-square bg-gray-50 dark:bg-zinc-800">
           <Link href={`/product/${slug}`} className="">
             <Image
               src={apiBaseUrl + thumbnailImage}
@@ -99,43 +99,42 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
                 className="w-full h-full object-cover"
               />
             </motion.div>
-    </Link>
-            {/* Label Badge */}
-            {label && (
-              <motion.span
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                className="absolute top-3 left-3 px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full shadow-lg"
-              >
-                {label}
-              </motion.span>
-            )}
+          </Link>
+          {/* Label Badge */}
+          {label && (
+            <motion.span
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="absolute top-3 left-3 px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full shadow-lg"
+            >
+              {label}
+            </motion.span>
+          )}
 
-            {/* Quick Action Buttons */}
-            <div className="absolute right-3 top-3 flex flex-col gap-2">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleLike}
-                className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-colors"
-              >
-                <Heart
-                  size={18}
-                  className={
-                    isLiked ? "fill-red-500 text-red-500" : "text-gray-700"
-                  }
-                />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className=""
-              >
-                <ViewProduct product={product} />
-              </motion.button>
-            </div>
+          {/* Quick Action Buttons */}
+          <div className="absolute right-3 top-3 flex flex-col gap-2">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleLike}
+              className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow hover:bg-white transition-colors"
+            >
+              <Heart
+                size={18}
+                className={
+                  isLiked ? "fill-red-500 text-red-500" : "text-gray-700"
+                }
+              />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className=""
+            >
+              <ViewProduct product={product} />
+            </motion.button>
           </div>
-       
+        </div>
 
         {/* Product Info */}
         <div className="p-4">
@@ -161,24 +160,28 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
 
           {/* Title */}
           <Link href={`/product/${slug}`}>
-            <h3 className="text-base font-medium text-gray-800 dark:text-white hover:text-primary transition-colors line-clamp-1 mb-1">
+            <h3 className="md:text-base text-sm font-medium text-gray-800 dark:text-white hover:text-primary transition-colors line-clamp-1 mb-1">
               {title}
             </h3>
           </Link>
 
           {/* Price */}
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xl font-bold text-primary">
-              ৳ {price?.toLocaleString() ?? "0"}
-            </span>
-            {mrpPrice && (
-              <span className="text-sm text-gray-400 line-through">
-                ৳ {mrpPrice?.toLocaleString() ?? "0"}
+          <div className="flex md:flex-row flex-col md:items-center gap-2 mb-3">
+            <div className="flex items-center gap-2">
+              <span className="xl:text-xl lg:text-base md:text-base text-sm font-bold text-primary">
+                ৳ {price ?? "0"}
               </span>
-            )}
+              {mrpPrice && (
+                <span className="md:text-sm text-xs text-gray-400 line-through">
+                  ৳ {mrpPrice?.toLocaleString() ?? "0"}
+                </span>
+              )}
+            </div>
             {mrpPrice && price && (
-              <span className="text-xs font-semibold text-green-600 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
+              <span className="text-xs inline-flex font-semibold text-green-600 md:bg-green-50  px-2 py-0.5 rounded-full">
+              
                 {Math.round(((mrpPrice - price) / mrpPrice) * 100)}% OFF
+                
               </span>
             )}
           </div>
