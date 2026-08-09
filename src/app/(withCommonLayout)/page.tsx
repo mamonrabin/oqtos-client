@@ -2,8 +2,10 @@ import Banner from "@/components/home/Banner";
 import BestSell from "@/components/home/BestSell";
 import BestSelles from "@/components/home/BestSelles";
 import Category from "@/components/home/Category";
+import FlashSellProducts from "@/components/home/FlashSellProducts";
 import NewArrivals from "@/components/home/NewArrivals";
 import { getAllBanner } from "@/services/banner.api";
+import { getflasSellProducts } from "@/services/campaign.api";
 import { getAllCategory } from "@/services/category.api";
 import { getHomeControl } from "@/services/homecontrol.api";
 import { getBestSellingProducts, getNewArrivalProducts } from "@/services/products.api";
@@ -19,6 +21,9 @@ const Home = async () => {
   const { data: categoryList } = await getAllCategory();
   const { data: newArrivalProducts,isLoading:newArrivalLoading } = await getNewArrivalProducts();
   const { data: bestSelingProduct,isLoading:bestSellingLoading } = await getBestSellingProducts();
+  const { data: flasSellProducts,isLoading:flasSellProductsLoading } = await getflasSellProducts();
+
+ 
 
   const { data: sectionList } = await getHomeControl();
 
@@ -31,6 +36,9 @@ const Home = async () => {
     ),
     "Best Selling": (section) => (
       <BestSelles key={section._id} bestSelling={section} productList={bestSelingProduct} isLoading={bestSellingLoading} />
+    ),
+    "Flash Sale": (section) => (
+      <FlashSellProducts key={section._id} flashSale={section} productList={flasSellProducts} isLoading={flasSellProductsLoading} />
     ),
 
     

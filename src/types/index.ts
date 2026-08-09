@@ -112,3 +112,27 @@ export type TCartItem = {
   color?: string;
   size?: string;
 };
+
+export type TCoupon = {
+  _id: string;
+  code: string;
+  discount: number;
+  discountType:string
+  useLimit: number;
+  used: number;
+  perUserLimit: number;
+  startDate: string;
+  expireDate: string;
+};
+
+export type TFlashProduct = {
+  title: string;
+  products: TProduct;
+  image:string;
+  couponId:TCoupon
+  campaigntype: string;
+  couponType: string;
+  status: string;
+};
+
+

@@ -13,7 +13,7 @@ interface productProps {
 const BestSelles: React.FC<productProps> = ({ bestSelling, productList,isLoading }) => {
   console.log("newArrivals", bestSelling);
   return (
-    <div className="Container md:mt-12 mt-6 pb-20">
+    <div className="Container md:mt-12 mt-6">
       <SectionHeader
         title={bestSelling.title}
         subTitle={bestSelling.subTitle}
