@@ -27,3 +27,13 @@ export const getSingleProductBySlug = async (slug: string) => {
 
   return res.json();
 };
+
+export const getProductsByLabel = async (label: string) => {
+  const res = await fetch(`${apiBaseUrl}/product/labels/${label}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  return res.json();
+};

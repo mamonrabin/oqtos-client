@@ -22,7 +22,7 @@ const FlashSellProducts: React.FC<ProductProps> = ({
     : [];
 
   return (
-    <section className="Container md:mt-12 mt-6 pb-12 md:pb-20">
+    <section className="Container md:mt-12 mt-6">
       <SectionHeader
         title={flashSale.title}
         subTitle={flashSale.subTitle}

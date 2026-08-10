@@ -1,14 +1,19 @@
 import Banner from "@/components/home/Banner";
 import BestSell from "@/components/home/BestSell";
 import BestSelles from "@/components/home/BestSelles";
+import Blog from "@/components/home/Blog";
+import Brand from "@/components/home/Brand";
 import Category from "@/components/home/Category";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
 import FlashSellProducts from "@/components/home/FlashSellProducts";
 import NewArrivals from "@/components/home/NewArrivals";
 import { getAllBanner } from "@/services/banner.api";
+import { getAllBlog } from "@/services/blog.api";
+import { getAllBrand } from "@/services/brand.api";
 import { getflasSellProducts } from "@/services/campaign.api";
 import { getAllCategory } from "@/services/category.api";
 import { getHomeControl } from "@/services/homecontrol.api";
-import { getBestSellingProducts, getNewArrivalProducts } from "@/services/products.api";
+import { getBestSellingProducts, getNewArrivalProducts, getProductsByLabel } from "@/services/products.api";
 import { TBanner, THomeControl } from "@/types";
 import React from "react";
 
@@ -22,6 +27,9 @@ const Home = async () => {
   const { data: newArrivalProducts,isLoading:newArrivalLoading } = await getNewArrivalProducts();
   const { data: bestSelingProduct,isLoading:bestSellingLoading } = await getBestSellingProducts();
   const { data: flasSellProducts,isLoading:flasSellProductsLoading } = await getflasSellProducts();
+  const { data: featuredProduct,isLoading:featuredLoading } = await getProductsByLabel("Featured");
+  const { data: brands,isLoading:brandLoading } = await getAllBrand();
+  const { data: blogs,isLoading:blogLoading } = await getAllBlog();
 
  
 
@@ -39,6 +47,15 @@ const Home = async () => {
     ),
     "Flash Sale": (section) => (
       <FlashSellProducts key={section._id} flashSale={section} productList={flasSellProducts} isLoading={flasSellProductsLoading} />
+    ),
+    "Featured Products": (section) => (
+      <FeaturedProducts key={section._id} featured={section} productList={featuredProduct} isLoading={featuredLoading} />
+    ),
+    "Brands": (section) => (
+      <Brand key={section._id} brand={section} brands={brands} isLoading={brandLoading} />
+    ),
+    "Blog": (section) => (
+      <Blog key={section._id} blog={section} bloges={blogs} isLoading={blogLoading} />
     ),
 
     

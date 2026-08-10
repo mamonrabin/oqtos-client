@@ -31,6 +31,22 @@ export type TSubCategory = {
 export type TBrand = {
   _id: string;
   title: string;
+  image:string;
+  status:string;
+  slug:string;
+};
+export type TBlog = {
+  _id: string;
+  title: string;
+  cardDescription: string;
+  content: string;
+  image:string;
+  images:string[];
+  status:string;
+  slug:string;
+  updatedAt:string;
+  createdAt:string;
+  tags:string[];
 };
 
 export type TBanner = {

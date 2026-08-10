@@ -84,21 +84,24 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
             />
 
             {/* Hover Image */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={apiBaseUrl + backviewImage}
-                alt={title}
-                width={500}
-                height={500}
-                unoptimized
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
+
+            {backviewImage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={apiBaseUrl + backviewImage}
+                  alt={title}
+                  width={500}
+                  height={500}
+                  unoptimized
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            )}
           </Link>
           {/* Label Badge */}
           {label && (
@@ -179,9 +182,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
             </div>
             {mrpPrice && price && (
               <span className="text-xs inline-flex font-semibold text-green-600 md:bg-green-50  px-2 py-0.5 rounded-full">
-              
                 {Math.round(((mrpPrice - price) / mrpPrice) * 100)}% OFF
-                
               </span>
             )}
           </div>
