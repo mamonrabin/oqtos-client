@@ -1,24 +1,16 @@
+
+import DownFooter from "@/components/layout/footer/DownFooter";
+import Footer from "@/components/layout/footer/Footer";
+import TopFooter from "@/components/layout/footer/TopFooter";
 import Categorybar from "@/components/layout/header/Categorybar";
 import Navbar from "@/components/layout/header/Navbar";
-import Providers from "@/providers/Providers";
+
 import { getAllCategory } from "@/services/category.api";
 import { getLogoAndFooter } from "@/services/logo.api";
+import { getAllSocilLink } from "@/services/socialIcon.api";
 import { getAllSubCategory } from "@/services/subcategory.api";
 
-// export default function layout({
-//   children,
-// }: Readonly<{
-//   children: React.ReactNode;
-// }>) {
 
-//   return (
-//     <div className="">
-//       <Navbar />
-//       <Categorybar />
-//       {children}
-//     </div>
-//   );
-// }
 
 import React from "react";
 
@@ -30,6 +22,8 @@ const layout = async ({
   const { data: logoList } = await getLogoAndFooter();
   const { data: categoryList } = await getAllCategory();
   const { data: subcategoryList } = await getAllSubCategory();
+
+  const {data:socialLinkes} = await getAllSocilLink()
   return (
     <div className="">
       <Navbar
@@ -39,6 +33,9 @@ const layout = async ({
       />
       <Categorybar />
       {children}
+      <TopFooter/>
+      <Footer logoList={logoList} socialLinkes={socialLinkes}/>
+      <DownFooter/>
     </div>
   );
 };

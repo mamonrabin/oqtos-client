@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { TBlog, THomeControl } from "@/types";
 import React from "react";
 import SectionHeader from "../shared/SectionHeader";

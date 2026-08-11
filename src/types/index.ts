@@ -31,22 +31,22 @@ export type TSubCategory = {
 export type TBrand = {
   _id: string;
   title: string;
-  image:string;
-  status:string;
-  slug:string;
+  image: string;
+  status: string;
+  slug: string;
 };
 export type TBlog = {
   _id: string;
   title: string;
   cardDescription: string;
   content: string;
-  image:string;
-  images:string[];
-  status:string;
-  slug:string;
-  updatedAt:string;
-  createdAt:string;
-  tags:string[];
+  image: string;
+  images: string[];
+  status: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  tags: string[];
 };
 
 export type TBanner = {
@@ -119,7 +119,7 @@ export type TCartProduct = {
   image: string;
   name: string;
   slug: string;
-}
+};
 
 export type TCartItem = {
   product: TCartProduct;
@@ -133,7 +133,7 @@ export type TCoupon = {
   _id: string;
   code: string;
   discount: number;
-  discountType:string
+  discountType: string;
   useLimit: number;
   used: number;
   perUserLimit: number;
@@ -144,11 +144,15 @@ export type TCoupon = {
 export type TFlashProduct = {
   title: string;
   products: TProduct;
-  image:string;
-  couponId:TCoupon
+  image: string;
+  couponId: TCoupon;
   campaigntype: string;
   couponType: string;
   status: string;
 };
-
-
+export type TSocilaLink = {
+  _id: string;
+  link: string;
+  socialType: string;
+  status: string;
+};
