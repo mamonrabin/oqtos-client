@@ -74,7 +74,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const router = useRouter();
   const currentUser = useCurrentUser();
 
-  console.log("currwnt user", currentUser);
+  
 
   const onSubmit = async (data: CheckoutFormData) => {
     if (!cart || cart.length === 0) {
@@ -134,7 +134,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         return;
       }
 
-      console.log("----------order--------", order);
+     
 
       toast.success(res?.message || "Your order has been placed successfully!");
 

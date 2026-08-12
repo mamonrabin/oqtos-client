@@ -26,7 +26,7 @@ const Navbar: React.FC<logoProps> = ({
   const { user } = useCurrentUser();
 
   return (
-    <div className="Container flex items-center justify-between py-3">
+    <div className="Container flex items-center justify-between py-3 sticky -top-2 z-50 bg-white border-b shadow-xs">
       <div className="lg:hidden">
         <Responsivebar
           logoList={logoList}
@@ -34,6 +34,7 @@ const Navbar: React.FC<logoProps> = ({
           subcategoryList={subcategoryList}
         />
       </div>
+      <Link href="/">
       <div className="flex  items-center justify-center md:ml-0 ml-10 lg:w-auto w-full">
         {logoList?.map((item: TLogo) => (
           <Image
@@ -47,6 +48,7 @@ const Navbar: React.FC<logoProps> = ({
           ></Image>
         ))}
       </div>
+      </Link>
       <div>
         <ul className="lg:flex hidden  items-center gap-6 ">
           {menuList.map((menu, index) => (

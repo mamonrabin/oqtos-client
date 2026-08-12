@@ -12,8 +12,6 @@ const Page = async ({
 
   const { data } = await getSingleProductBySlug(productSlug);
 
-  console.log("Product Data:", data);
-
   return (
     <div className="min-h-screen">
       <ProductDetails product={data} />

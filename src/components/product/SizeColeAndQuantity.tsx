@@ -88,7 +88,7 @@ const SizeColorAndQuantity: React.FC<productProps> = ({ product }) => {
     setIsAdding(false);
   };
 
-  console.log("Selected Inventory:", selectedInventory);
+ 
 
   return (
     <div>

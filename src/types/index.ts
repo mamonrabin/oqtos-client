@@ -27,6 +27,7 @@ export type TSubCategory = {
   status: string;
   slug: string;
   length: number;
+  productCount: number;
 };
 export type TBrand = {
   _id: string;

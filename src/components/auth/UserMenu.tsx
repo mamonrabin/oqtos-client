@@ -26,7 +26,7 @@ import { useCurrentUser } from "./AuthContext";
 const UserMenu = () => {
   const { user,setUser } = useCurrentUser();
 
-  console.log("current user", user);
+
 
   const menuItems = [
     {

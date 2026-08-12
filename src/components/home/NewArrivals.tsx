@@ -2,7 +2,7 @@
 import { THomeControl, TProduct } from "@/types";
 import React from "react";
 import SectionHeader from "../shared/SectionHeader";
-import ProductCard from "../product/ProductCard";
+
 import ProductSlider from "../common/ProductSlider";
 
 interface productProps {
@@ -12,7 +12,7 @@ interface productProps {
 }
 
 const NewArrivals: React.FC<productProps> = ({ newArrivals, productList,isLoading }) => {
-  console.log("newArrivals", newArrivals);
+
   return (
     <div className="Container md:mt-12 mt-6">
       <SectionHeader

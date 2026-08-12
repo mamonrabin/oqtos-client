@@ -39,7 +39,7 @@ const AddToCart: React.FC<AddToCartProps> = ({
 
   const handleAddToCart = () => {
     onAddToCart();
-    console.log("Add to Cart clicked with quantity:", quantity);
+    
   };
 
   return (

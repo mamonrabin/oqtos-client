@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import { apiBaseUrl } from "@/config";
 import { TCategory } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -29,24 +30,26 @@ const Category: React.FC<categoryProps> = ({ categoryList }) => {
         // onSwiper={(swiper) => (swiperRef.current = swiper as SwiperClass)}
         speed={1000}
       >
-      {categoryList?.map((category,index) => (
-        <SwiperSlide key={category._id} className="px-1">
-          <div className="overflow-hidden border border-[#262626]/24 hover:border-primary/40 duration-300 rounded cursor-pointer">
-            <Image
-              src={`${apiBaseUrl}${category.image}`}
-              alt={category.categoryName}
-              width={80}
-              height={80}
-              unoptimized
-               className="bg-[#262626]/12 rounded hover:scale-110 duration-300 w-full h-full"
-               priority={index === 0}
-            />
-          </div>
-           <p className=" md:text-[12px] text-[10px] text-center font-semibold capitalize mt-1 text-[#262626]/60 group-hover:text-primary duration-300">
-                {category?.categoryName?.slice(0,14) || "N/A"}
+        {categoryList?.map((category, index) => (
+          <SwiperSlide key={category._id} className="px-1">
+            <Link href={`/product?category=${category.slug}`}>
+              <div className="overflow-hidden border border-[#262626]/24 hover:border-primary/40 duration-300 rounded cursor-pointer">
+                <Image
+                  src={`${apiBaseUrl}${category.image}`}
+                  alt={category.categoryName}
+                  width={80}
+                  height={80}
+                  unoptimized
+                  className="bg-[#262626]/12 rounded hover:scale-110 duration-300 w-full h-full"
+                  priority={index === 0}
+                />
+              </div>
+              <p className=" md:text-[12px] text-[10px] text-center font-semibold capitalize mt-1 text-[#262626]/60 group-hover:text-primary duration-300">
+                {category?.categoryName?.slice(0, 14) || "N/A"}
               </p>
-        </SwiperSlide>
-      ))}
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

@@ -14,7 +14,7 @@ import { useCartStore } from "@/store/cartStore";
 
 interface productProps {
   product: TProduct;
-  isLoading: any;
+  isLoading: boolean;
 }
 
 const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
@@ -115,7 +115,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
           )}
 
           {/* Quick Action Buttons */}
-          <div className="absolute right-3 top-3 flex flex-col gap-2">
+          {/* <div className="absolute right-3 top-3 flex flex-col gap-2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -136,7 +136,67 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
             >
               <ViewProduct product={product} />
             </motion.button>
-          </div>
+          </div> */}
+
+          {/* Quick Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, x: 15, y: -15 }}
+            animate={{
+              opacity: isHovered ? 1 : 0,
+              x: isHovered ? 0 : 15,
+              y: isHovered ? 0 : -15,
+            }}
+            transition={{
+              duration: 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute top-4 right-3 flex flex-col gap-2"
+            style={{
+              pointerEvents: isHovered ? "auto" : "none",
+            }}
+          >
+            {/* Wishlist */}
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={handleLike}
+              className="
+      flex h-9 w-9
+      items-center justify-center
+      rounded-full
+      bg-white/95
+      text-gray-700
+      shadow-md
+      backdrop-blur-sm
+      transition-colors
+      hover:bg-white
+    "
+              aria-label="Add to wishlist"
+            >
+              <Heart
+                size={17}
+                className={
+                  isLiked ? "fill-red-500 text-red-500" : "text-gray-700"
+                }
+              />
+            </motion.button>
+
+            {/* Quick View */}
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              className="
+      flex h-9 w-9
+      items-center justify-center
+      rounded-full
+      bg-white/95
+      shadow-md
+      backdrop-blur-sm
+    "
+            >
+              <ViewProduct product={product} />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Product Info */}
@@ -163,7 +223,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
 
           {/* Title */}
           <Link href={`/product/${slug}`}>
-            <h3 className="md:text-base text-sm font-medium text-gray-800 dark:text-white hover:text-primary transition-colors line-clamp-1 mb-1">
+            <h3 className="min-h-[40px] sm:text-sm text-xs font-medium text-gray-800 dark:text-white hover:text-primary transition-colors line-clamp-2 mb-1">
               {title}
             </h3>
           </Link>
@@ -171,17 +231,17 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
           {/* Price */}
           <div className="flex md:flex-row flex-col md:items-center gap-2 mb-3">
             <div className="flex items-center gap-2">
-              <span className="xl:text-xl lg:text-base md:text-base text-sm font-bold text-primary">
+              <span className="md:text-base text-sm font-bold text-primary">
                 ৳ {price ?? "0"}
               </span>
               {mrpPrice && (
-                <span className="md:text-sm text-xs text-gray-400 line-through">
+                <span className="text-xs text-gray-400 line-through">
                   ৳ {mrpPrice?.toLocaleString() ?? "0"}
                 </span>
               )}
             </div>
             {mrpPrice && price && (
-              <span className="text-xs inline-flex font-semibold text-green-600 md:bg-green-50  px-2 py-0.5 rounded-full">
+              <span className="text-[10px] inline-flex font-semibold text-green-600 md:bg-green-50  px-2 py-0.5 rounded-full">
                 {Math.round(((mrpPrice - price) / mrpPrice) * 100)}% OFF
               </span>
             )}

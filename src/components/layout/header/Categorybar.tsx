@@ -9,6 +9,8 @@ const Categorybar = async () => {
   const { data: categoryList } = await getAllCategory();
   const { data: subcategoryList } = await getAllSubCategory();
 
+
+
   return (
     <div className="bg-primary border-b border-blue-500/30 lg:block hidden shadow-md">
       <div className="Container max-w-7xl mx-auto px-4">
@@ -19,13 +21,15 @@ const Categorybar = async () => {
             );
             const hasSubcategories = subcategories?.length > 0;
 
+        
+
             return (
               <li
                 key={category._id}
                 className="relative group"
               >
                 <Link
-                  href="/product"
+                 href={`/product?category=${category.slug}`}
                   className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-white transition-all duration-200 group-hover:scale-105"
                 >
                   {category.categoryName}
@@ -49,7 +53,7 @@ const Categorybar = async () => {
                     {subcategories.map((sub: TSubCategory, index: number) => (
                       <li key={sub._id}>
                         <Link
-                          href={`/product?subcategory=${sub.slug}`}
+                          href={`/product?category=${category.slug}&subCategory=${sub.slug}`}
                           className={`flex items-center gap-2 px-5 py-3 text-sm text-white hover:text-primary hover:bg-blue-50 transition-all duration-200 capitalize ${
                             index !== subcategories.length - 1 ? "border-b border-[#fff]/10" : ""
                           }`}
