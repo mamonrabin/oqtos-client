@@ -8,29 +8,40 @@ const page = async () => {
 
   if (!policy) {
     return (
-      <div className="mx-auto flex min-h-[60vh] max-w-4xl items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-xl font-semibold text-gray-800">
-            Privacy Policy not found
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">
-            The requested policy is currently unavailable.
-          </p>
+      <main className="min-h-[60vh] bg-gray-50/70">
+        <div className="Container flex min-h-[60vh] items-center justify-center">
+          <div className="text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+              <ShieldCheck className="h-6 w-6 text-primary" />
+            </div>
+
+            <h1 className="text-xl font-semibold text-gray-900">
+              Privacy Policy not found
+            </h1>
+
+            <p className="mt-2 text-sm text-gray-500">
+              The requested policy is currently unavailable.
+            </p>
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-50/70 Container">
-      {/* Header */}
+    <main className="min-h-screen bg-gray-50/70">
+      {/* =========================
+          HEADER
+      ========================== */}
       <section className="border-b bg-white">
-        <div className="mx-auto   py-10 sm:px-6 sm:py-14">
+        <div className="Container py-10 sm:py-14">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+            {/* Icon */}
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
               <ShieldCheck className="h-5 w-5 text-primary" />
             </div>
 
+            {/* Title */}
             <div>
               <p className="text-xs font-medium uppercase tracking-wider text-primary">
                 {policy.type}
@@ -42,8 +53,11 @@ const page = async () => {
             </div>
           </div>
 
-          {/* Meta information */}
+          {/* =========================
+              META INFORMATION
+          ========================== */}
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-500">
+            {/* Updated */}
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
 
@@ -57,12 +71,16 @@ const page = async () => {
               </span>
             </div>
 
+            {/* Divider */}
             <span className="hidden h-4 w-px bg-gray-200 sm:block" />
 
+            {/* Status */}
             <div className="flex items-center gap-2">
               <span
                 className={`h-2 w-2 rounded-full ${
-                  policy.status === "Active" ? "bg-green-500" : "bg-gray-400"
+                  policy.status === "Active"
+                    ? "bg-green-500"
+                    : "bg-gray-400"
                 }`}
               />
 
@@ -72,46 +90,90 @@ const page = async () => {
         </div>
       </section>
 
-      {/* Policy Content */}
-      <section className="mx-auto ">
-        <article
-  className="
-    mt-8
-    max-w-none
+      {/* =========================
+          POLICY CONTENT
+      ========================== */}
+      <section className="Container">
+        <div className="mx-auto max-w-5xl py-10 sm:py-14">
+          <article
+            className="
+              max-w-none
 
-    [&_p]:mb-4
-    [&_p]:leading-6
-    [&_p]:text-gray-600
+              /* Paragraph */
+              [&_p]:mb-4
+              [&_p]:text-[15px]
+              [&_p]:leading-7
+              [&_p]:text-gray-600
 
-    [&_h2]:mt-8
-    [&_h2]:mb-4
-    [&_h2]:text-xl
-    [&_h2]:font-semibold
-    [&_h2]:text-gray-900
+              /* H1 */
+              [&_h1]:mt-0
+              [&_h1]:mb-5
+              [&_h1]:text-3xl
+              [&_h1]:font-bold
+              [&_h1]:leading-tight
+              [&_h1]:text-gray-900
 
-    [&_h3]:mt-6
-    [&_h3]:mb-3
-    [&_h3]:text-lg
-    [&_h3]:font-semibold
+              /* H2 */
+              [&_h2]:mt-10
+              [&_h2]:mb-4
+              [&_h2]:text-xl
+              [&_h2]:font-semibold
+              [&_h2]:leading-tight
+              [&_h2]:text-gray-900
 
-    [&_ul]:my-2
-    [&_ul]:space-y-2
-    [&_ul]:list-disc
-    [&_ul]:pl-6
+              /* H3 */
+              [&_h3]:mt-8
+              [&_h3]:mb-3
+              [&_h3]:text-lg
+              [&_h3]:font-semibold
+              [&_h3]:leading-tight
+              [&_h3]:text-gray-900
 
-    [&_li]:text-gray-600
-    [&_li]:leading-6
+              /* Lists */
+              [&_ul]:my-4
+              [&_ul]:list-disc
+              [&_ul]:space-y-2
+              [&_ul]:pl-6
 
-    [&_strong]:font-semibold
-    [&_strong]:text-gray-900
+              [&_ol]:my-4
+              [&_ol]:list-decimal
+              [&_ol]:space-y-2
+              [&_ol]:pl-6
 
-    [&_a]:text-primary
-    [&_a]:underline
-  "
-  dangerouslySetInnerHTML={{
-    __html: policy.description || "",
-  }}
-/>
+              /* List items */
+              [&_li]:text-[15px]
+              [&_li]:leading-7
+              [&_li]:text-gray-600
+
+              /* Strong */
+              [&_strong]:font-semibold
+              [&_strong]:text-gray-900
+
+              /* Links */
+              [&_a]:font-medium
+              [&_a]:text-primary
+              [&_a]:underline
+              [&_a]:underline-offset-2
+              hover:[&_a]:opacity-80
+
+              /* Blockquote */
+              [&_blockquote]:my-6
+              [&_blockquote]:border-l-4
+              [&_blockquote]:border-primary
+              [&_blockquote]:bg-primary/5
+              [&_blockquote]:px-5
+              [&_blockquote]:py-3
+              [&_blockquote]:text-gray-600
+
+              /* Horizontal rule */
+              [&_hr]:my-8
+              [&_hr]:border-gray-200
+            "
+            dangerouslySetInnerHTML={{
+              __html: policy.description || "",
+            }}
+          />
+        </div>
       </section>
     </main>
   );
