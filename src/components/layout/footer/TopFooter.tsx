@@ -37,7 +37,7 @@ const features = [
 
 const TopFooter = () => {
   return (
-    <section className="Container mt-12 bg-primary px-5 py-6 sm:px-8 lg:px-10">
+    <section className="Container bg-primary px-5 py-6 sm:px-8 lg:px-10">
       <Swiper
         modules={[Autoplay]}
         spaceBetween={0}

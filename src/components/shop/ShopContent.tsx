@@ -49,6 +49,7 @@ const ShopContent: React.FC<ShopContentProps> = ({
    */
   const getFilters = useCallback((): ProductFilter => {
     return {
+      searchTerm: searchParams.get("searchTerm") || undefined,
       category: searchParams.get("category") || undefined,
 
       subCategory: searchParams.get("subCategory") || undefined,

@@ -57,7 +57,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
         <div className="Container py-8 sm:py-10 md:py-12">
           {/* Back Button */}
           <Link
-            href="/blogs"
+            href="/blog"
             className="group inline-flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-[#087096]"
           >
             <ArrowLeft

@@ -157,3 +157,10 @@ export type TSocilaLink = {
   socialType: string;
   status: string;
 };
+
+export type TContact = {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+};

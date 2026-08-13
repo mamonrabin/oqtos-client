@@ -38,12 +38,10 @@ export const getProductsByLabel = async (label: string) => {
   return res.json();
 };
 
-
-
-
 export type ProductFilter = {
   page?: number;
   limit?: number;
+  searchTerm?: string;
   brand?: string;
   category?: string;
   subCategory?: string;
@@ -58,6 +56,7 @@ export type ProductFilter = {
 export const getAllProducts = async ({
   page = 1,
   limit = 4,
+  searchTerm,
   brand,
   category,
   subCategory,
@@ -73,11 +72,20 @@ export const getAllProducts = async ({
   params.set("page", page.toString());
   params.set("limit", limit.toString());
 
+  // Search
+  if (searchTerm?.trim()) {
+    params.set("searchTerm", searchTerm.trim());
+  }
+
+  // Filters
+
   if (brand) params.set("brand", brand);
   if (category) params.set("category", category);
   if (subCategory) params.set("subCategory", subCategory);
   if (color) params.set("color", color);
   if (size) params.set("size", size);
+
+  // Price
 
   if (minPrice !== undefined) {
     params.set("minPrice", minPrice.toString());
@@ -86,6 +94,8 @@ export const getAllProducts = async ({
   if (maxPrice !== undefined) {
     params.set("maxPrice", maxPrice.toString());
   }
+
+  // Other
 
   if (dateFilter) params.set("dateFilter", dateFilter);
   if (sort) params.set("sort", sort);

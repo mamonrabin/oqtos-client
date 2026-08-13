@@ -2,7 +2,7 @@
 import { apiBaseUrl } from "@/config";
 import { TCategory, TLogo, TSubCategory } from "@/types";
 import { menuList } from "@/utils/menuList";
-import { Heart, Search, UserRound } from "lucide-react";
+import { Heart, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -10,6 +10,7 @@ import Responsivebar from "./Responsivebar";
 import CartSidebar from "@/components/cart/CartSidebar";
 import UserMenu from "@/components/auth/UserMenu";
 import { useCurrentUser } from "@/components/auth/AuthContext";
+import SearchBar from "@/components/common/SerachBar";
 
 
 interface logoProps {
@@ -62,9 +63,11 @@ const Navbar: React.FC<logoProps> = ({
         </ul>
       </div>
       <div className="flex items-center cursor-pointer">
-        <button className="flex p-2 cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
+        {/* <button className="flex p-2 cursor-pointer rounded-full hover:bg-gray-100 transition-colors duration-200 text-gray-700 hover:text-blue-600">
           <Search size={18} />
-        </button>
+        </button> */}
+
+        <SearchBar categoryList={categoryList}/>
 
         {user ? (
           <UserMenu />
