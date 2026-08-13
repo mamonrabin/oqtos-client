@@ -139,7 +139,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
           </div>
 
           {/* =========================
-              Customer Care
+             policies
           ========================== */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
@@ -149,7 +149,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
             <ul className="mt-5 space-y-3">
               <li>
                 <Link
-                  href="/about"
+                  href="/policies/privacy-policy"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Privacy Policies
@@ -158,7 +158,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
 
               <li>
                 <Link
-                  href="/contact"
+                   href="/policies/terms-conditions"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Terms & Conditions
@@ -167,7 +167,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
 
               <li>
                 <Link
-                  href="/faq"
+                  href="/policies/return-policy"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Return Policy
@@ -176,7 +176,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
 
               <li>
                 <Link
-                  href="/returnPolicy"
+                    href="/policies/order-policy"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Order Policy
@@ -185,7 +185,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
 
               <li>
                 <Link
-                  href="/orderPolicy"
+                  href="/policies/shipping-policy"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Shipping Policy

@@ -155,6 +155,7 @@ const ShopContent: React.FC<ShopContentProps> = ({
             onLoadMore={loadMoreProducts}
             categoryList={categoryList}
             SubCategoryList={SubCategoryList}
+            brandList={brandList}
           />
         )}
       </div>

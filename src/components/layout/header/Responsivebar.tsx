@@ -11,6 +11,9 @@ import {
   X,
   ChevronRight,
   ChevronDown,
+  MoveLeft,
+  LayoutGrid,
+  Menu,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,8 +32,9 @@ const Responsivebar: React.FC<LogoProps> = ({
 }) => {
   return (
     <Sheet>
-      <SheetTrigger className="lg:hidden rounded-xl p-2.5 text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-blue-600">
-        <TextAlignJustify size={22} />
+      <SheetTrigger className="lg:hidden flex items-center gap-1 rounded-xl p-2.5 text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-blue-600">
+        <MoveLeft size={18} />{" "}
+        <span className="text-xs font-medium uppercase">Category</span>
       </SheetTrigger>
 
       <SheetContent
@@ -73,8 +77,7 @@ const Responsivebar: React.FC<LogoProps> = ({
           <ul className="space-y-1">
             {categoryList?.slice(0, 15).map((category: TCategory) => {
               const subcategories = subcategoryList?.filter(
-                (sub: TSubCategory) =>
-                  sub.category?._id === category._id,
+                (sub: TSubCategory) => sub.category?._id === category._id,
               );
 
               const hasSubcategories = subcategories?.length > 0;
@@ -103,25 +106,23 @@ const Responsivebar: React.FC<LogoProps> = ({
 
                       {/* Subcategories */}
                       <ul className="ml-6 mt-1 space-y-0.5 border-l-2 border-blue-100 pl-4">
-                        {subcategories.map(
-                          (sub: TSubCategory) => (
-                            <li key={sub._id}>
-                              <SheetClose>
-                                <Link
-                                  href={`/product?category=${category.slug}&subCategory=${sub.slug}`}
-                                  className="group/link flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm capitalize text-gray-600 transition-all duration-200 hover:bg-blue-50/70 hover:text-primary"
-                                >
-                                  <ChevronRight
-                                    size={14}
-                                    className="text-gray-300 transition-colors group-hover/link:text-blue-400"
-                                  />
+                        {subcategories.map((sub: TSubCategory) => (
+                          <li key={sub._id}>
+                            <SheetClose>
+                              <Link
+                                href={`/product?category=${category.slug}&subCategory=${sub.slug}`}
+                                className="group/link flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm capitalize text-gray-600 transition-all duration-200 hover:bg-blue-50/70 hover:text-primary"
+                              >
+                                <ChevronRight
+                                  size={14}
+                                  className="text-gray-300 transition-colors group-hover/link:text-blue-400"
+                                />
 
-                                  {sub.subcategoryName}
-                                </Link>
-                              </SheetClose>
-                            </li>
-                          ),
-                        )}
+                                {sub.subcategoryName}
+                              </Link>
+                            </SheetClose>
+                          </li>
+                        ))}
                       </ul>
                     </details>
                   ) : (

@@ -54,7 +54,7 @@ const Brand: React.FC<BrandProps> = ({ brand, brands, isLoading }) => {
       <div className="mt-8 grid grid-cols-4 xl:gap-3 lg:gap-2 gap-2 sm:grid-cols-4  md:grid-cols-8 lg:grid-cols-8 xl:grid-cols-8">
         {brands?.map((brandItem) => (
           <Link
-            href={`/brands/${brandItem.slug}`}
+           href={`/product?brand=${brandItem.slug}`}
             key={brandItem._id}
             className="group relative overflow-hidden rounded border border-gray-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
           >

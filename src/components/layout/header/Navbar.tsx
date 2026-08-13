@@ -35,7 +35,7 @@ const Navbar: React.FC<logoProps> = ({
         />
       </div>
       <Link href="/">
-      <div className="flex  items-center justify-center md:ml-0 ml-10 lg:w-auto w-full">
+      <div className="flex  items-center justify-center  lg:w-auto w-full">
         {logoList?.map((item: TLogo) => (
           <Image
             key={item._id}

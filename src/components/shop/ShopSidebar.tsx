@@ -26,7 +26,7 @@ const colors = [
   { name: "Yellow", value: "yellow" },
 ];
 
-const sizes = ["S", "M", "L", "XL", "XXL"];
+const sizes = ["S", "M", "L", "XL", "2XL"];
 
 const ShopSidebar: React.FC<ShopSidebarProps> = ({
   categoryList,

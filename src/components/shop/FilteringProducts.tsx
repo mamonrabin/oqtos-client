@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from "react";
 import { Loader2, ShoppingBag } from "lucide-react";
 
 import {
+  TBrand,
   TCategory,
   TProduct,
   TSubCategory,
@@ -23,6 +24,7 @@ interface FilterProductProps {
 
   categoryList: TCategory[];
   SubCategoryList: TSubCategory[];
+  brandList:TBrand[]
 }
 
 const FilteringProducts: React.FC<FilterProductProps> = ({
@@ -33,6 +35,7 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
   onLoadMore,
   categoryList,
   SubCategoryList,
+  brandList
 }) => {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -69,6 +72,7 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
       <ProductSort
         categoryList={categoryList}
         SubCategoryList={SubCategoryList}
+        brandList={brandList}
       />
 
       {/* Loading */}
