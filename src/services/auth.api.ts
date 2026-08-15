@@ -83,3 +83,31 @@ export const logout = async () => {
 
   return data;
 }
+
+
+
+
+export const changePassword = async (
+  oldPassword: string,
+  newPassword: string
+) => {
+  const res = await fetch(`${apiBaseUrl}/auth/change-password`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      oldPassword,
+      newPassword,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to change password");
+  }
+
+  return data;
+};

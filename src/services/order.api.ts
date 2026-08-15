@@ -32,3 +32,25 @@ export const getSingleOrder = async (id: string) => {
 
   return res.json();
 };
+
+
+export const getAllOrder = async () => {
+  const res = await fetch(`${apiBaseUrl}/order`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch order");
+  }
+
+  return res.json();
+};
+
+
+export const getSingleOrderByID = async (id: string) => {
+  const res = await fetch(`${apiBaseUrl}/order/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch order");
+  }
+
+  return res.json();
+};

@@ -6,15 +6,7 @@ import {
 } from "@/components/ui/sheet";
 import { apiBaseUrl } from "@/config";
 import { TCategory, TLogo, TSubCategory } from "@/types";
-import {
-  TextAlignJustify,
-  X,
-  ChevronRight,
-  ChevronDown,
-  MoveLeft,
-  LayoutGrid,
-  Menu,
-} from "lucide-react";
+import { X, ChevronRight, ChevronDown, MoveLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

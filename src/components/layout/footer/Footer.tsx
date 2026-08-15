@@ -111,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
 
               <li>
                 <Link
-                  href="/shop"
+                  href="/product"
                   className="text-sm text-white/60 transition-colors hover:text-white"
                 >
                   Shop

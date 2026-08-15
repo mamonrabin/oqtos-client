@@ -164,3 +164,90 @@ export type TContact = {
   phone?: string;
   message: string;
 };
+
+export type TAuth = {
+  provider: string;
+  providerId: string;
+};
+
+export type TUser = {
+  _id: string;
+  name: string;
+  email: string;
+  address: string;
+  isActive: string;
+  password: string;
+  phone: string;
+  image: string;
+  picture: string;
+  auths: TAuth[];
+  role: string;
+  createdAt: string;
+};
+
+export type TOrderProduct = {
+  productRef: TProduct;
+  quantity: number;
+  price: number;
+  color?: string;
+  size?: string;
+  _id?: string;
+};
+
+export type TShippingAddress = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  house?: string;
+  road?: string;
+  thana?: string;
+  altPhone?: string;
+  city?: string;
+};
+
+export type TPaymentInfo = {
+  method: string;
+  transactionId?: string;
+  paymentStatus: string;
+  paidAt?: string;
+};
+
+export type TDeliveryInfo = {
+  courierName?: string;
+  trackingNumber?: string;
+  estimatedDeliveryDate?: string;
+  deliveredAt?: string;
+};
+
+export type TOrder = {
+  _id: string;
+  orderId: string;
+  userRef?: TUser;
+  isGuestOrder: boolean;
+  products: TOrderProduct[];
+  subTotalPrice: number;
+  discountAmount?: number;
+  shippingCost: number;
+  totalPrice: number;
+  couponRef?: TCoupon;
+  shippingAddress: TShippingAddress;
+  payment: TPaymentInfo;
+  paymentMethod?: string;
+  name: string;
+  phone: string;
+  email?: string;
+  city: string;
+  address: string;
+  house?: string;
+  road?: string;
+  thana?: string;
+  postalCode?: string;
+  status: string;
+  deliveryInfo?: TDeliveryInfo;
+  note?: string;
+  paymentStatus?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  discount?: string;
+};
