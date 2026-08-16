@@ -110,7 +110,7 @@ export type TProduct = {
   metaTitle?: string;
   metaDescription?: string;
   warranty?: string;
-  availableQuantity?: number;
+  availableQuantity: number;
 };
 
 export type TCartProduct = {

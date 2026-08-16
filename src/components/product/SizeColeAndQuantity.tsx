@@ -76,7 +76,7 @@ const SizeColorAndQuantity: React.FC<productProps> = ({ product }) => {
         _id: product._id,
         name: product.title,
         slug: product.slug,
-        image: product.thumbnailImage, // change if your image field has a different name
+        image: product.thumbnailImage,
         price: product.price,
       },
       quantity,
@@ -166,6 +166,7 @@ const SizeColorAndQuantity: React.FC<productProps> = ({ product }) => {
         quantity={quantity}
         setQuantity={setQuantity}
         availableQuantity={selectedInventory?.quantity ?? 0}
+        orginarAvailableQuantity={product.availableQuantity}
         onAddToCart={handleAddToCart}
         isAdding={isAdding}
       />

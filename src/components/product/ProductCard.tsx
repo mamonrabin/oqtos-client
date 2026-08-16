@@ -29,6 +29,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
     slug,
     averageRating,
     totalReviews,
+    availableQuantity,
   } = product;
 
   const [isHovered, setIsHovered] = useState(false);
@@ -248,13 +249,36 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
           </div>
 
           {/* Add to Cart Button (Alternative) */}
-          <motion.button
+          {/* <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleAddToCart}
             className="w-full cursor-pointer bg-primary text-white py-2.5 rounded font-medium text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-shadow"
           >
             {isLoading ? (
+              <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <>
+                <ShoppingCart size={16} />
+                Add to Cart
+              </>
+            )}
+          </motion.button> */}
+
+          <motion.button
+            whileHover={availableQuantity > 0 ? { scale: 1.02 } : undefined}
+            whileTap={availableQuantity > 0 ? { scale: 0.98 } : undefined}
+            onClick={handleAddToCart}
+            disabled={availableQuantity === 0 || isLoading}
+            className={`w-full py-2.5 rounded font-medium text-sm flex items-center justify-center gap-2 transition-shadow ${
+              availableQuantity === 0
+                ? "bg-red-500 text-white cursor-not-allowed"
+                : "bg-primary text-white cursor-pointer hover:shadow-lg"
+            }`}
+          >
+            {availableQuantity === 0 ? (
+              "Out of Stock"
+            ) : isLoading ? (
               <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <>

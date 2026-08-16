@@ -1,25 +1,29 @@
+"use client";
 import { ArrowRight, CalendarCheck, Link2, Rocket } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { useCurrentUser } from "../auth/AuthContext";
+
+const perks = [
+  {
+    icon: "money",
+    value: "5–10%",
+    label: "Commission",
+  },
+  {
+    icon: CalendarCheck,
+    value: "Monthly",
+    label: "Payouts",
+  },
+  {
+    icon: Link2,
+    value: "Unique",
+    label: "Coupon Code",
+  },
+];
 
 const AffiliateBanner = () => {
-  const perks = [
-    {
-      icon: "money",
-      value: "5–10%",
-      label: "Commission",
-    },
-    {
-      icon: CalendarCheck,
-      value: "Monthly",
-      label: "Payouts",
-    },
-    {
-      icon: Link2,
-      value: "Unique",
-      label: "Coupon Code",
-    },
-  ];
+  const { user } = useCurrentUser();
 
   return (
     <section className="relative mt-4 overflow-hidden rounded-xl bg-[#191919] px-6 py-10 text-white sm:px-8 lg:px-10">
@@ -79,15 +83,20 @@ const AffiliateBanner = () => {
           </div>
 
           {/* CTA */}
-          <Link href="/affiliate/dashboard">
-          <button className="group cursor-pointer mt-8 inline-flex items-center gap-3 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:gap-4 hover:brightness-110">
-            <span>Start Earning Today</span>
 
-            <ArrowRight
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </button>
+          <Link href="/affiliate/dashboard">
+            <button className="group mt-8 inline-flex cursor-pointer items-center gap-3 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:gap-4 hover:brightness-110">
+              <span>
+                {user?.affiliateCoupon
+                  ? "Open Dashboard"
+                  : "Start Earning Today"}
+              </span>
+
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </button>
           </Link>
         </div>
 

@@ -1,11 +1,12 @@
-import CreateCoupon from '@/components/affiliate-program/Create-coupon';
+import AffiliateDashboard from '@/components/affiliate-program/Affiliate-Dashboard';
+
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            <CreateCoupon/>
-        </div>
+        <>
+            <AffiliateDashboard/>
+        </>
     );
 };
 

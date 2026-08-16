@@ -1,24 +1,73 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowLeft, Check, TicketPercent, Sparkles } from "lucide-react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import {
+  ArrowLeft,
+  Check,
+  TicketPercent,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useCurrentUser } from "../auth/AuthContext";
+import { updateAffiliateUser } from "@/services/user.api";
+
+type CouponFormValues = {
+  coupon: string;
+  agreeTerms: boolean;
+};
 
 const CreateCoupon = () => {
-  const [coupon, setCoupon] = useState("");
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const { user } = useCurrentUser();
 
-    if (!coupon || !agreeTerms) return;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<CouponFormValues>({
+    defaultValues: {
+      coupon: "",
+      agreeTerms: false,
+    },
+  });
 
-    console.log({
-      coupon,
-      agreeTerms,
-    });
+  const coupon = watch("coupon");
+  const agreeTerms = watch("agreeTerms");
 
-    // Create coupon API here
+  const onSubmit = async (data: CouponFormValues) => {
+    if (!user?._id) {
+      toast.error("User information not found.");
+      return;
+    }
+
+    try {
+      await updateAffiliateUser({
+        id: user._id,
+        payload: {
+          affiliateCoupon: data.coupon,
+        },
+      });
+
+      toast.success("Coupon created successfully!", {
+        description: `Your coupon code is ${data.coupon}`,
+      });
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Failed to create coupon", {
+        description:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
+    }
   };
 
   return (
@@ -54,7 +103,6 @@ const CreateCoupon = () => {
         {/* Card Top */}
         <div className="border-b border-gray-100 bg-gray-50/70 px-5 py-6 sm:px-8">
           <div className="flex items-start gap-4">
-            {/* Icon */}
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
               <TicketPercent size={23} />
             </div>
@@ -73,78 +121,134 @@ const CreateCoupon = () => {
 
         {/* Form */}
         <div className="px-5 py-6 sm:px-8 sm:py-8">
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-2xl"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl">
             {/* Coupon */}
             <div>
               <label
-                htmlFor="referrer_coupon"
+                htmlFor="coupon"
                 className="mb-2.5 block text-sm font-semibold text-gray-800"
               >
                 Your coupon code
               </label>
 
-              <div className="relative">
-                <input
-                  id="referrer_coupon"
-                  name="referrer_coupon"
-                  type="text"
-                  value={coupon}
-                  onChange={(e) =>
-                    setCoupon(
-                      e.target.value
-                        .toUpperCase()
-                        .replace(/\s/g, "")
-                    )
-                  }
-                  placeholder="YOURNAME10"
-                  required
-                  className="h-13 w-full rounded-xl border border-gray-200 bg-white px-4 text-base font-semibold tracking-wider text-gray-900 outline-none transition-all placeholder:font-normal placeholder:tracking-normal placeholder:text-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10"
-                />
-              </div>
+              <input
+                id="coupon"
+                type="text"
+                placeholder="YOURNAME10"
+                autoComplete="off"
+                {...register("coupon", {
+                  required: "Coupon code is required",
 
-              <p className="mt-2 text-xs text-gray-400">
-                Use letters and numbers only. Keep your coupon short,
-                memorable, and easy to share.
-              </p>
+                  minLength: {
+                    value: 4,
+                    message: "Coupon code must be at least 4 characters",
+                  },
+
+                  maxLength: {
+                    value: 20,
+                    message: "Coupon code cannot exceed 20 characters",
+                  },
+
+                  pattern: {
+                    value: /^[A-Z0-9]+$/,
+                    message:
+                      "Coupon can contain only letters and numbers",
+                  },
+
+                  onChange: (e) => {
+                    e.target.value = e.target.value
+                      .toUpperCase()
+                      .replace(/\s/g, "");
+                  },
+                })}
+                className={`h-13 w-full rounded-xl border bg-white px-4 text-base font-semibold tracking-wider text-gray-900 outline-none transition-all placeholder:font-normal placeholder:tracking-normal placeholder:text-gray-400 focus:ring-4 focus:ring-primary/10 ${
+                  errors.coupon
+                    ? "border-red-400 focus:border-red-500"
+                    : "border-gray-200 focus:border-primary"
+                }`}
+              />
+
+              {errors.coupon ? (
+                <p className="mt-2 text-xs font-medium text-red-500">
+                  {errors.coupon.message}
+                </p>
+              ) : (
+                <p className="mt-2 text-xs text-gray-400">
+                  Use letters and numbers only. Keep your coupon short,
+                  memorable, and easy to share.
+                </p>
+              )}
             </div>
 
-            {/* Terms */}
-            <div className="mt-6 rounded-xl border border-gray-100 bg-gray-50 p-4">
-              <label className="flex cursor-pointer items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={agreeTerms}
-                  onChange={(e) => setAgreeTerms(e.target.checked)}
-                  className="mt-1 h-[17px] w-[17px] shrink-0 cursor-pointer accent-primary"
-                />
+            {/* Coupon Preview */}
+            {coupon && !errors.coupon && (
+              <div className="mt-5 rounded-xl border border-primary/10 bg-primary/5 p-4">
+                <p className="text-xs font-medium text-gray-500">
+                  Coupon Preview
+                </p>
 
-                <span className="text-xs leading-5 text-gray-500 sm:text-sm">
-                  I agree to the{" "}
-                  <Link
-                    href="/become-an-affiliate#affiliate-terms"
-                    target="_blank"
-                    className="font-semibold text-primary underline underline-offset-2"
-                  >
-                    Affiliate Code of Conduct, Content Policy & Terms
-                  </Link>
-                  . I understand that I am responsible for the content and
-                  promotions associated with my coupon.
-                </span>
-              </label>
+                <div className="mt-2 flex items-center justify-between gap-3">
+                  <span className="text-lg font-bold tracking-wider text-gray-900">
+                    {coupon}
+                  </span>
+
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    Your Code
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Terms */}
+            <div className="mt-6">
+              <div
+                className={`rounded-xl border p-4 transition-colors ${
+                  errors.agreeTerms
+                    ? "border-red-200 bg-red-50/50"
+                    : "border-gray-100 bg-gray-50"
+                }`}
+              >
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    {...register("agreeTerms", {
+                      required: "You must agree to the terms",
+                    })}
+                    className="mt-1 h-[17px] w-[17px] shrink-0 cursor-pointer accent-primary"
+                  />
+
+                  <span className="text-xs leading-5 text-gray-500 sm:text-sm">
+                    I agree to the{" "}
+                    <Link
+                      href="/become-an-affiliate#affiliate-terms"
+                      target="_blank"
+                      className="font-semibold text-primary underline underline-offset-2"
+                    >
+                      Affiliate Code of Conduct, Content Policy & Terms
+                    </Link>
+                    . I understand that I am responsible for the content and
+                    promotions associated with my coupon.
+                  </span>
+                </label>
+
+                {errors.agreeTerms && (
+                  <p className="mt-2 pl-7 text-xs font-medium text-red-500">
+                    {errors.agreeTerms.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Action */}
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="submit"
-                disabled={!coupon || !agreeTerms}
+                disabled={!coupon || !agreeTerms || isSubmitting}
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gray-900 px-7 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-md disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none"
               >
                 <Check size={17} />
-                Create Coupon
+
+                {isSubmitting ? "Creating..." : "Create Coupon"}
               </button>
 
               <span className="text-xs text-gray-400">

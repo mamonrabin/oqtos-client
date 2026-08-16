@@ -7,6 +7,7 @@ interface AddToCartProps {
   availableQuantity: number;
   onAddToCart: () => void;
   isAdding: boolean;
+  orginarAvailableQuantity:number
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({
@@ -15,6 +16,7 @@ const AddToCart: React.FC<AddToCartProps> = ({
   availableQuantity,
   onAddToCart,
   isAdding,
+  orginarAvailableQuantity
 }) => {
   // const [quantity, setQuantity] = useState(initialQuantity);
 
@@ -39,7 +41,6 @@ const AddToCart: React.FC<AddToCartProps> = ({
 
   const handleAddToCart = () => {
     onAddToCart();
-    
   };
 
   return (
@@ -87,11 +88,18 @@ const AddToCart: React.FC<AddToCartProps> = ({
 
       {/* Add to Cart Button */}
       <button
-        disabled={availableQuantity === 0 || isAdding}
+        type="button"
+        disabled={orginarAvailableQuantity === 0 || isAdding}
         onClick={handleAddToCart}
-        className="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/35"
+        className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+          orginarAvailableQuantity === 0
+            ? "bg-red-500 text-white cursor-not-allowed"
+            : "bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/25 hover:shadow-primary/35"
+        }`}
       >
-        {isAdding ? (
+        {orginarAvailableQuantity === 0 ? (
+          "Out of Stock"
+        ) : isAdding ? (
           <>
             <Loader2 className="h-5 w-5 animate-spin" />
             Adding...
@@ -100,12 +108,11 @@ const AddToCart: React.FC<AddToCartProps> = ({
           <>
             <ShoppingCart size={20} />
             Add to Cart
+            <span className="bg-white/20 px-2 py-0.5 rounded-full text-sm">
+              {quantity}
+            </span>
           </>
         )}
-        {/* {availableQuantity === 0 ? "Out of Stock" : "Add to Cart"} */}
-        <span className="bg-white/20 px-2 py-0.5 rounded-full text-sm">
-          {quantity}
-        </span>
       </button>
     </div>
   );

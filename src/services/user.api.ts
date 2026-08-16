@@ -34,6 +34,7 @@ export const updateAffiliateUser = async ({
   payload: {
     affiliateCoupon?: string;
     affiliateStatus?: string;
+    affiliateLink?: string[];
   };
 }) => {
   const response = await fetch(`${apiBaseUrl}/user/${id}`, {
