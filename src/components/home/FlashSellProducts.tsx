@@ -5,6 +5,8 @@ import Image from "next/image";
 import { apiBaseUrl } from "@/config";
 import FlashSellSlider from "../common/FlashSellSlider";
 import TimerBanner from "../common/TimerBanner";
+import SectionHeader2 from "../shared/SectionHeader2";
+import TimerBanner2 from "../common/TimerBanner2";
 
 interface ProductProps {
   flashSale: THomeControl;
@@ -23,15 +25,21 @@ const FlashSellProducts: React.FC<ProductProps> = ({
 
   return (
     <section className="Container md:mt-12 mt-6">
-      <SectionHeader
+      {/* <SectionHeader
         title={flashSale.title}
+        subTitle={flashSale.subTitle}
+      /> */}
+
+       <SectionHeader2
+         title={flashSale.title}
         subTitle={flashSale.subTitle}
       />
 
       <div className="mt-6 flex flex-col gap-4 lg:flex-row">
         {/* Flash Sale Banner */}
         <div className="w-full lg:w-[30%] xl:w-[28%]">
-          <TimerBanner productList={productList}/>
+          {/* <TimerBanner productList={productList}/> */}
+          <TimerBanner2 productList={productList}/>
         </div>
 
         {/* Products */}

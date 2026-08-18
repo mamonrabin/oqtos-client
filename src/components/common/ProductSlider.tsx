@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import { TProduct } from "@/types";
 import React from "react";
 import ProductCard from "../product/ProductCard";
+import ProductCard2 from "../product/ProductCard2";
 
 interface productProps {
   productList: TProduct[];
@@ -19,7 +20,7 @@ interface productProps {
 
 const ProductSlider: React.FC<productProps> = ({ productList, isLoading }) => {
   return (
-    <div className="mt-8">
+    <div className="">
       <Swiper
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
         spaceBetween={8}
@@ -37,7 +38,8 @@ const ProductSlider: React.FC<productProps> = ({ productList, isLoading }) => {
       >
         {productList?.map((product) => (
           <SwiperSlide key={product._id}>
-            <ProductCard product={product} isLoading={isLoading} />
+            {/* <ProductCard product={product} isLoading={isLoading} /> */}
+            <ProductCard2 product={product} isLoading={isLoading}/>
           </SwiperSlide>
         ))}
       </Swiper>

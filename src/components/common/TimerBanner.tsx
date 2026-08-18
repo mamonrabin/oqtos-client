@@ -78,7 +78,7 @@ const TimerBanner: React.FC<ProductProps> = ({ productList }) => {
     <div className="flex min-w-[48px] flex-col items-center sm:min-w-[58px]">
       <div
         className="
-          flex h-11 w-full items-center justify-center
+          flex h-10 w-full items-center justify-center
           rounded-lg border border-white/10
           bg-black/40 px-2
           shadow-lg backdrop-blur-md
@@ -89,7 +89,7 @@ const TimerBanner: React.FC<ProductProps> = ({ productList }) => {
           className="
             font-mono text-lg font-bold tracking-tight text-white
             sm:text-2xl
-            lg:text-3xl
+            lg:text-lg
           "
         >
           {formatTime(value)}

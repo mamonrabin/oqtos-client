@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import { TBlog} from "@/types";
 import React from "react";
 import BlogCard from "../Blog/BlogCard";
+import BlogCard2 from "../Blog/BlogCard2";
 
 interface productProps {
   bloges: TBlog[];
@@ -38,7 +39,8 @@ const BlogSlider: React.FC<productProps> = ({ bloges, isLoading }) => {
         {bloges?.map((blog) => (
           <SwiperSlide key={blog._id}>
             {/* <ProductCard blog={blog} isLoading={isLoading} /> */}
-            <BlogCard blog={blog} isLoading={isLoading}/>
+            {/* <BlogCard blog={blog} isLoading={isLoading}/> */}
+            <BlogCard2 blog={blog} isLoading={isLoading}/>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -53,7 +53,10 @@ export type TBlog = {
 export type TBanner = {
   _id: string;
   image: string;
+  title: string;
   type: string;
+  link: string;
+  category:TCategory
   status: string;
 };
 export type THomeControl = {

@@ -8,14 +8,14 @@ const SectionHeader = ({
   subTitle = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus vel amet incidunt.",
 }: SectionHeaderProps) => {
   return (
-    <div className="text-center">
+    <div className="text-center mb-8">
       {/* Title */}
-      <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 capitalize">
+      <h2 className="md:text-2xl text-xl  font-bold text-gray-900 md:mb-2 capitalize">
         {title}
       </h2>
 
       {/* Subtitle */}
-      <p className="hidden md:flex max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-gray-500 justify-center">
+      <p className="hidden md:flex max-w-2xl mx-auto text-base md:text-base leading-relaxed text-gray-500 justify-center">
         {subTitle}
       </p>
 

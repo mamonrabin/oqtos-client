@@ -15,7 +15,7 @@ const Categorybar = async () => {
     <div className="bg-primary border-b border-blue-500/30 lg:block hidden shadow-md">
       <div className="Container max-w-7xl mx-auto px-4">
         <ul className="flex items-center justify-center xl:gap-8 gap-4 py-3">
-          {categoryList?.slice(0, 15).map((category: TCategory) => {
+          {categoryList?.slice(0, 10).map((category: TCategory) => {
             const subcategories = subcategoryList?.filter(
               (sub: TSubCategory) => sub.category._id === category._id,
             );

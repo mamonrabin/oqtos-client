@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "../auth/AuthContext";
 import { createOrder } from "@/services/order.api";
+import { useCartStore } from "@/store/cartStore";
 
 type CheckoutFormData = {
   name: string;
@@ -61,6 +62,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
     watch,
   } = useForm<CheckoutFormData>({
@@ -73,7 +75,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const currentUser = useCurrentUser();
-
+const {clearCart} = useCartStore()
   
 
   const onSubmit = async (data: CheckoutFormData) => {
@@ -140,8 +142,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
       // Optional
       // reset();
-      // clearCart();
-      // router.replace("/order-success");
+      clearCart();
+      router.replace("/order-success");
     } catch (error) {
       console.error(error);
 

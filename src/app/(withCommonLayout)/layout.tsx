@@ -1,4 +1,6 @@
 
+import MessengerBtn from "@/components/common/MessengerBtn";
+import ScrollToBottomToTop from "@/components/common/ScrollToBottomToTop";
 import DownFooter from "@/components/layout/footer/DownFooter";
 import Footer from "@/components/layout/footer/Footer";
 import TopFooter from "@/components/layout/footer/TopFooter";
@@ -31,7 +33,9 @@ const layout = async ({
         categoryList={categoryList}
         subcategoryList={subcategoryList}
       />
-      <Categorybar />
+      {/* <Categorybar /> */}
+       <MessengerBtn/>
+      <ScrollToBottomToTop/>
       {children}
       <TopFooter/>
       <Footer logoList={logoList} socialLinkes={socialLinkes}/>

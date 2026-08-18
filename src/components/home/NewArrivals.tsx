@@ -4,30 +4,31 @@ import React from "react";
 import SectionHeader from "../shared/SectionHeader";
 
 import ProductSlider from "../common/ProductSlider";
+import SectionHeader2 from "../shared/SectionHeader2";
 
 interface productProps {
   newArrivals: THomeControl;
   productList: TProduct[];
-  isLoading: any
+  isLoading: any;
 }
 
-const NewArrivals: React.FC<productProps> = ({ newArrivals, productList,isLoading }) => {
-
+const NewArrivals: React.FC<productProps> = ({
+  newArrivals,
+  productList,
+  isLoading,
+}) => {
   return (
     <div className="Container md:mt-12 mt-6">
-      <SectionHeader
+      {/* <SectionHeader
+        title={newArrivals.title}
+        subTitle={newArrivals.subTitle}
+      /> */}
+      <SectionHeader2
         title={newArrivals.title}
         subTitle={newArrivals.subTitle}
       />
 
-{/* 
-      <div className="grid lg:grid-cols-4 gap-2">
-        {
-          productList?.slice(0,4).map(product => <ProductCard key={product._id} product={product} isLoading={isLoading}/>)
-        }
-      </div> */}
-
-      <ProductSlider productList={productList} isLoading={isLoading}/>
+      <ProductSlider productList={productList} isLoading={isLoading} />
     </div>
   );
 };

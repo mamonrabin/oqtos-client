@@ -5,47 +5,68 @@ import { TCategory } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-interface categoryProps {
+
+import "swiper/css";
+
+interface CategoryProps {
   categoryList: TCategory[];
 }
 
-const Category: React.FC<categoryProps> = ({ categoryList }) => {
+const Category: React.FC<CategoryProps> = ({ categoryList }) => {
   return (
     <div className="Container mt-6">
       <Swiper
         slidesPerView={4}
-        loop={true}
+        spaceBetween={10}
+        loop={categoryList?.length > 10}
         breakpoints={{
-          640: { slidesPerView: 4 },
-          700: { slidesPerView: 6 },
-          768: { slidesPerView: 8 },
-          1024: { slidesPerView: 9 },
-          1280: { slidesPerView: 10 },
-          1536: { slidesPerView: 10 },
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          700: {
+            slidesPerView: 6,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 8,
+            spaceBetween: 12,
+          },
+          1024: {
+            slidesPerView: 9,
+            spaceBetween: 12,
+          },
+          1280: {
+            slidesPerView: 10,
+            spaceBetween: 12,
+          },
+          1536: {
+            slidesPerView: 10,
+            spaceBetween: 14,
+          },
         }}
-        modules={[Navigation]}
-        autoplay={{ delay: 1000, disableOnInteraction: false }}
-        // onSwiper={(swiper) => (swiperRef.current = swiper as SwiperClass)}
-        speed={1000}
+        grabCursor
       >
         {categoryList?.map((category, index) => (
-          <SwiperSlide key={category._id} className="px-1">
-            <Link href={`/product?category=${category.slug}`}>
-              <div className="overflow-hidden border border-[#262626]/24 hover:border-primary/40 duration-300 rounded cursor-pointer">
+          <SwiperSlide key={category._id}>
+            <Link href={`/product?category=${category.slug}`} className="group block">
+              {/* Category Image */}
+              <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-sm">
                 <Image
                   src={`${apiBaseUrl}${category.image}`}
                   alt={category.categoryName}
                   width={80}
                   height={80}
                   unoptimized
-                  className="bg-[#262626]/12 rounded hover:scale-110 duration-300 w-full h-full"
                   priority={index === 0}
+                  className="h-full w-full rounded-md object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <p className=" md:text-[12px] text-[10px] text-center font-semibold capitalize mt-1 text-[#262626]/60 group-hover:text-primary duration-300">
-                {category?.categoryName?.slice(0, 14) || "N/A"}
+
+              {/* Category Name */}
+              <p className="mt-1.5 truncate text-center text-[11px] font-semibold capitalize text-gray-500 transition-colors duration-300 group-hover:text-primary md:text-xs">
+                {category?.categoryName || "N/A"}
               </p>
             </Link>
           </SwiperSlide>

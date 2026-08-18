@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import { TProduct } from "@/types";
 import React from "react";
 import ProductCard from "../product/ProductCard";
+import ProductCard2 from "../product/ProductCard2";
 
 interface productProps {
   flashProducts: TProduct[];
@@ -37,7 +38,8 @@ const FlashSellSlider: React.FC<productProps> = ({ flashProducts, isLoading }) =
       >
         {flashProducts?.map((product) => (
           <SwiperSlide key={product._id}>
-            <ProductCard product={product} isLoading={isLoading} />
+            {/* <ProductCard product={product} isLoading={isLoading} /> */}
+            <ProductCard2 product={product} isLoading={isLoading} />
           </SwiperSlide>
         ))}
       </Swiper>
