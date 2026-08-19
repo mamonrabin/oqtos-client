@@ -82,7 +82,7 @@ const ProductCard2: React.FC<ProductCardProps> = ({
             <span
               className="
                 absolute left-3 top-3 z-20
-                rounded-full bg-primary
+                rounded-full bg-primary md:block hidden
                 px-2.5 py-1
                 text-[10px] font-semibold uppercase
                 tracking-wide text-white

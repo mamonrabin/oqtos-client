@@ -14,17 +14,18 @@ import {
 
 import { TBrand, TCategory, TSubCategory } from "@/types";
 import ResponsiveFilterSidebar from "./ResponsiveFilterSidebar";
+import ShopSidebar2 from "./ShopSidebar2";
 
 interface ProductSortProps {
   categoryList: TCategory[];
   SubCategoryList: TSubCategory[];
-  brandList:TBrand[]
+  brandList: TBrand[];
 }
 
-const ProductSort: React.FC<ProductSortProps> = ({
+const ProductSort2: React.FC<ProductSortProps> = ({
   categoryList,
   SubCategoryList,
-  brandList
+  brandList,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -124,15 +125,18 @@ const ProductSort: React.FC<ProductSortProps> = ({
   };
 
   return (
-    <div className="mb-3 flex lg:flex-row flex-col items-start justify-between gap-4">
+    <div className="mb-3 flex md:flex-row flex-col  items-start justify-between gap-4">
       {/* Left side */}
       <div className="min-w-0 flex-1">
-        {!selectedCategory && !selectedSubCategory ? (
-          <div className="md:text-lg lg:flex hidden text-base font-medium text-gray-900">
-            All Products
+  
+          <div className="md:text-lg flex text-base font-medium text-gray-900 mb-1">
+            <ShopSidebar2
+              categoryList={categoryList}
+              SubCategoryList={SubCategoryList}
+              brandList={brandList}
+            />
           </div>
-        ) : (
-          <>
+       
             {/* Category */}
             {selectedCategory && (
               <div className="mb-3 flex items-center gap-3">
@@ -153,7 +157,7 @@ const ProductSort: React.FC<ProductSortProps> = ({
 
             {/* Subcategories */}
             {selectedCategory && categorySubCategories.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2 w-full">
                 {categorySubCategories.map((subCategory) => {
                   const isActive = subCategorySlug === subCategory.slug;
 
@@ -177,13 +181,12 @@ const ProductSort: React.FC<ProductSortProps> = ({
                 })}
               </div>
             )}
-          </>
-        )}
+      
+      
       </div>
 
       {/* Sort - ALWAYS visible */}
-      <div className="flex items-center justify-between lg:w-auto w-full">
-        <ResponsiveFilterSidebar categoryList={categoryList} SubCategoryList={SubCategoryList} brandList={brandList}/>
+      <div className="">
         <div className="flex shrink-0 items-center">
           <Select value={currentSort} onValueChange={handleSort}>
             <SelectTrigger className="h-10 w-[180px] rounded border-gray-200 bg-white text-sm font-medium">
@@ -220,4 +223,4 @@ const ProductSort: React.FC<ProductSortProps> = ({
   );
 };
 
-export default ProductSort;
+export default ProductSort2;

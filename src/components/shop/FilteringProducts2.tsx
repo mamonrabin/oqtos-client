@@ -15,6 +15,7 @@ import {
 import ProductCard from "../product/ProductCard";
 import ProductSort from "./ProductSort";
 import ProductCard2 from "../product/ProductCard2";
+import ProductSort2 from "./ProductSort2";
 
 interface FilterProductProps {
   shopProducts: TProduct[];
@@ -28,7 +29,7 @@ interface FilterProductProps {
   brandList:TBrand[]
 }
 
-const FilteringProducts: React.FC<FilterProductProps> = ({
+const FilteringProducts2: React.FC<FilterProductProps> = ({
   shopProducts,
   isLoading,
   loadingMore,
@@ -70,7 +71,7 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
   return (
     <>
       {/* Category / Subcategory / Sort */}
-      <ProductSort
+      <ProductSort2
         categoryList={categoryList}
         SubCategoryList={SubCategoryList}
         brandList={brandList}
@@ -104,18 +105,18 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
       ) : (
         <>
           {/* Products */}
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {shopProducts.map((product) => (
-              <ProductCard
+            //   <ProductCard
+            //     key={product._id}
+            //     product={product}
+            //     isLoading={false}
+            //   />
+              <ProductCard2
                 key={product._id}
                 product={product}
                 isLoading={false}
               />
-              // <ProductCard2
-              //   key={product._id}
-              //   product={product}
-              //   isLoading={false}
-              // />
             ))}
           </div>
 
@@ -143,4 +144,4 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
   );
 };
 
-export default FilteringProducts;
+export default FilteringProducts2;

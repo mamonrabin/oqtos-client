@@ -1,0 +1,32 @@
+.price-slider {
+  pointer-events: none;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.price-slider::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background:var(--primary);
+  cursor: pointer;
+  border: 2px solid #fff;
+  pointer-events: auto;
+}
+
+.price-slider::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+.price-slider::-moz-range-track {
+  background: transparent;
+}

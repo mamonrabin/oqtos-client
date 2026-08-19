@@ -1,4 +1,5 @@
 import ShopContent from "@/components/shop/ShopContent";
+import ShopContent2 from "@/components/shop/ShopContent2";
 import { getAllBrand } from "@/services/brand.api";
 import { getAllCategory } from "@/services/category.api";
 import { getAllProducts } from "@/services/products.api";
@@ -21,7 +22,7 @@ const Page = async () => {
   ]);
 
   return (
-    <ShopContent
+    <ShopContent2
       initialProducts={productResponse.data.data}
       initialMeta={productResponse.data.meta}
       categoryList={categoryList}

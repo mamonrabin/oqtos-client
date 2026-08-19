@@ -9,6 +9,8 @@ import { getAllProducts, ProductFilter } from "@/services/products.api";
 import { TBrand, TCategory, TProduct, TSubCategory } from "@/types";
 
 import FilteringProducts from "./FilteringProducts";
+import ShopSidebar2 from "./ShopSidebar2";
+import FilteringProducts2 from "./FilteringProducts2";
 
 interface ShopMeta {
   page: number;
@@ -26,7 +28,7 @@ interface ShopContentProps {
   isLoading: boolean;
 }
 
-const ShopContent: React.FC<ShopContentProps> = ({
+const ShopContent2: React.FC<ShopContentProps> = ({
   categoryList,
   SubCategoryList,
   brandList,
@@ -131,24 +133,15 @@ const ShopContent: React.FC<ShopContentProps> = ({
   }, [meta.page, meta.totalPage, loadingMore, getFilters]);
 
   return (
-    <div className="Container mt-2 flex gap-4 md:mt-12 xl:gap-8">
-      {/* Sidebar */}
-      <div className="hidden w-1/4 lg:block">
-        <ShopSidebar
-          categoryList={categoryList}
-          SubCategoryList={SubCategoryList}
-          brandList={brandList}
-        />
-      </div>
-
+    <div className="Container md:mt-6 mt-2">
       {/* Products */}
-      <div className="w-full lg:w-3/4">
+      <div className="w-full">
         {loading ? (
           <div className="flex min-h-[300px] items-center justify-center">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
         ) : (
-          <FilteringProducts
+          <FilteringProducts2
             shopProducts={products}
             isLoading={isLoading}
             loadingMore={loadingMore}
@@ -164,4 +157,4 @@ const ShopContent: React.FC<ShopContentProps> = ({
   );
 };
 
-export default ShopContent;
+export default ShopContent2;

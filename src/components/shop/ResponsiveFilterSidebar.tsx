@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ChevronDown, ChevronRight, Funnel, X } from "lucide-react";
+import { ChevronDown, ChevronRight, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sheet";
 
 import { TBrand, TCategory, TSubCategory } from "@/types";
+import { PiSlidersHorizontalBold } from "react-icons/pi";
 
 interface FilterSidebarProps {
   categoryList: TCategory[];
@@ -41,8 +42,7 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
   // Subcategories for selected category
   const categorySubCategories = selectedCategory
     ? SubCategoryList?.filter(
-        (subCategory) =>
-          subCategory.category?._id === selectedCategory._id,
+        (subCategory) => subCategory.category?._id === selectedCategory._id,
       )
     : [];
 
@@ -85,13 +85,11 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
       <SheetTrigger>
         <button
           type="button"
-          className="flex items-center gap-1.5 text-gray-500 transition-colors duration-300 hover:text-primary md:hidden"
+          className="flex items-center gap-1.5 text-primary transition-colors duration-300 hover:text-primary lg:hidden"
         >
-          <Funnel size={18} />
+          <PiSlidersHorizontalBold size={17} />
 
-          <span className="text-sm font-medium uppercase">
-            Filter
-          </span>
+          <span className="text-sm capitalize">Filter</span>
         </button>
       </SheetTrigger>
 
@@ -107,9 +105,7 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
 
         <div className="sticky top-0 z-20 flex items-center justify-between border-b bg-white px-5 py-4">
           <div>
-            <h2 className="text-base font-semibold text-gray-900">
-              Filters
-            </h2>
+            <h2 className="text-base font-semibold text-gray-900">Filters</h2>
 
             <p className="mt-0.5 text-xs text-gray-500">
               Find products you&apos;re looking for
@@ -166,19 +162,14 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
                   (sub) => sub.category?._id === category._id,
                 );
 
-                const hasSubcategories =
-                  subcategories.length > 0;
+                const hasSubcategories = subcategories.length > 0;
 
-                const isCategoryActive =
-                  selectedCategorySlug === category.slug;
+                const isCategoryActive = selectedCategorySlug === category.slug;
 
                 return (
                   <li key={category._id}>
                     {hasSubcategories ? (
-                      <details
-                        open={isCategoryActive}
-                        className="group"
-                      >
+                      <details open={isCategoryActive} className="group">
                         <summary
                           className={`flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 transition ${
                             isCategoryActive
@@ -201,8 +192,7 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
                         <ul className="ml-3 mt-1 space-y-0.5 border-l border-gray-200 pl-3">
                           {subcategories.map((subCategory) => {
                             const isActive =
-                              selectedSubCategorySlug ===
-                              subCategory.slug;
+                              selectedSubCategorySlug === subCategory.slug;
 
                             return (
                               <li key={subCategory._id}>
@@ -216,13 +206,9 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
                                     }`}
                                   >
                                     <span className="flex items-center gap-2">
-                                      <ChevronRight
-                                        size={13}
-                                      />
+                                      <ChevronRight size={13} />
 
-                                      {
-                                        subCategory.subcategoryName
-                                      }
+                                      {subCategory.subcategoryName}
                                     </span>
 
                                     <span
@@ -268,14 +254,11 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
           ========================== */}
 
           <div className="border-b border-gray-100 py-5">
-            <h3 className="mb-3 text-sm font-semibold text-gray-900">
-              Brands
-            </h3>
+            <h3 className="mb-3 text-sm font-semibold text-gray-900">Brands</h3>
 
             <div className="space-y-1">
               {brandList?.map((brand) => {
-                const isActive =
-                  selectedBrandSlug === brand.slug;
+                const isActive = selectedBrandSlug === brand.slug;
 
                 return (
                   <button
@@ -312,9 +295,7 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
           ========================== */}
 
           <div className="py-5">
-            <h3 className="mb-3 text-sm font-semibold text-gray-900">
-              Price
-            </h3>
+            <h3 className="mb-3 text-sm font-semibold text-gray-900">Price</h3>
 
             <div className="grid grid-cols-2 gap-3">
               <input
