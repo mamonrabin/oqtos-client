@@ -11,26 +11,27 @@ import SectionHeader2 from "../shared/SectionHeader2";
 import BrandCard2 from "../brand-card/BrandCard2";
 
 import "swiper/css";
+import { TCustome } from "@/types/customeType";
+import SectionHeader from "../shared/SectionHeader";
 
 interface BrandProps {
   brand: THomeControl;
   brands: TBrand[];
+  design: TCustome;
   isLoading: any;
 }
 
-const Brand2: React.FC<BrandProps> = ({
-  brand,
-  brands,
-  isLoading,
-}) => {
+const Brand2: React.FC<BrandProps> = ({ brand, brands, design, isLoading }) => {
   // Loading skeleton
   if (isLoading) {
+    const sectionHead = design?.home?.sectionHead || "Default";
     return (
       <section className="Container mt-6 md:mt-12">
-        <SectionHeader2
-          title={brand?.title}
-          subTitle={brand?.subTitle}
-        />
+        {sectionHead === "Default" ? (
+          <SectionHeader title={brand?.title} subTitle={brand?.subTitle} />
+        ) : (
+          <SectionHeader2 title={brand?.title} subTitle={brand?.subTitle} />
+        )}
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
           {[...Array(8)].map((_, index) => (
@@ -49,14 +50,14 @@ const Brand2: React.FC<BrandProps> = ({
       </section>
     );
   }
-
+  const sectionHead = design?.home?.sectionHead || "Default";
   return (
     <section className="Container mt-6 md:mt-12">
-      {/* Section Header */}
-      <SectionHeader2
-        title={brand?.title}
-        subTitle={brand?.subTitle}
-      />
+      {sectionHead === "Default" ? (
+        <SectionHeader title={brand?.title} subTitle={brand?.subTitle} />
+      ) : (
+        <SectionHeader2 title={brand?.title} subTitle={brand?.subTitle} />
+      )}
 
       {/* Brand Slider */}
       <div className="relative mt-6">
@@ -98,10 +99,6 @@ const Brand2: React.FC<BrandProps> = ({
             </SwiperSlide>
           ))}
         </Swiper>
-
-     
-
-     
       </div>
     </section>
   );

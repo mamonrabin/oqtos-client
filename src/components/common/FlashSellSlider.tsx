@@ -12,20 +12,26 @@ import { TProduct } from "@/types";
 import React from "react";
 import ProductCard from "../product/ProductCard";
 import ProductCard2 from "../product/ProductCard2";
+import { TCustome } from "@/types/customeType";
 
 interface productProps {
   flashProducts: TProduct[];
+  design: TCustome;
   isLoading: boolean;
 }
 
-const FlashSellSlider: React.FC<productProps> = ({ flashProducts, isLoading }) => {
+const FlashSellSlider: React.FC<productProps> = ({
+  flashProducts,
+  isLoading,
+  design,
+}) => {
+  const cardType = design?.shop?.cardType || "Default";
   return (
     <div className="">
       <Swiper
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
         spaceBetween={8}
         slidesPerView={2}
-       
         loop={true}
         breakpoints={{
           640: { slidesPerView: 2 },
@@ -38,8 +44,11 @@ const FlashSellSlider: React.FC<productProps> = ({ flashProducts, isLoading }) =
       >
         {flashProducts?.map((product) => (
           <SwiperSlide key={product._id}>
-            {/* <ProductCard product={product} isLoading={isLoading} /> */}
-            <ProductCard2 product={product} isLoading={isLoading} />
+            {cardType === "Default" ? (
+              <ProductCard product={product} isLoading={isLoading} />
+            ) : (
+              <ProductCard2 product={product} isLoading={isLoading} />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>
