@@ -2,12 +2,8 @@
 import { TBrand, THomeControl } from "@/types";
 import React from "react";
 import SectionHeader from "../shared/SectionHeader";
-import Image from "next/image";
-import { apiBaseUrl } from "@/config";
-import Link from "next/link";
 import SectionHeader2 from "../shared/SectionHeader2";
 import BrandCard from "../brand-card/BrandCard";
-import BrandCard2 from "../brand-card/BrandCard2";
 import { TCustome } from "@/types/customeType";
 
 interface BrandProps {

@@ -2,6 +2,7 @@ import ShopContent from "@/components/shop/ShopContent";
 import ShopContent2 from "@/components/shop/ShopContent2";
 import { getAllBrand } from "@/services/brand.api";
 import { getAllCategory } from "@/services/category.api";
+import { getCustomeDesign } from "@/services/customeDesign.api";
 import { getAllProducts } from "@/services/products.api";
 import { getAllSubCategory } from "@/services/subcategory.api";
 
@@ -21,13 +22,30 @@ const Page = async () => {
     getAllBrand(),
   ]);
 
-  return (
+  const { data: designList } = await getCustomeDesign();
+
+  const design = designList?.[0];
+
+  const shopSection = design?.shop?.shopPage || "Default";
+
+  return shopSection === "Default" ? (
+    <ShopContent
+      initialProducts={productResponse.data.data}
+      initialMeta={productResponse.data.meta}
+      categoryList={categoryList}
+      SubCategoryList={SubCategoryList}
+      brandList={brandList}
+      design={design}
+      isLoading={false}
+    />
+  ) : (
     <ShopContent2
       initialProducts={productResponse.data.data}
       initialMeta={productResponse.data.meta}
       categoryList={categoryList}
       SubCategoryList={SubCategoryList}
       brandList={brandList}
+      design={design}
       isLoading={false}
     />
   );

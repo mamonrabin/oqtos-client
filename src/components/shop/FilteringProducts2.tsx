@@ -5,17 +5,13 @@ import React, { useEffect, useRef } from "react";
 
 import { Loader2, ShoppingBag } from "lucide-react";
 
-import {
-  TBrand,
-  TCategory,
-  TProduct,
-  TSubCategory,
-} from "@/types";
+import { TBrand, TCategory, TProduct, TSubCategory } from "@/types";
 
 import ProductCard from "../product/ProductCard";
 import ProductSort from "./ProductSort";
 import ProductCard2 from "../product/ProductCard2";
 import ProductSort2 from "./ProductSort2";
+import { TCustome } from "@/types/customeType";
 
 interface FilterProductProps {
   shopProducts: TProduct[];
@@ -23,10 +19,10 @@ interface FilterProductProps {
   loadingMore: boolean;
   hasMore: boolean;
   onLoadMore: () => void;
-
+  design: TCustome;
   categoryList: TCategory[];
   SubCategoryList: TSubCategory[];
-  brandList:TBrand[]
+  brandList: TBrand[];
 }
 
 const FilteringProducts2: React.FC<FilterProductProps> = ({
@@ -37,7 +33,8 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
   onLoadMore,
   categoryList,
   SubCategoryList,
-  brandList
+  brandList,
+  design,
 }) => {
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -68,6 +65,8 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
     };
   }, [hasMore, loadingMore, onLoadMore]);
 
+  const cardType = design?.shop?.cardType || "Default";
+
   return (
     <>
       {/* Category / Subcategory / Sort */}
@@ -86,10 +85,7 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
         /* No Products */
         <div className="flex min-h-[350px] w-full flex-col items-center justify-center rounded-lg border border-dashed border-gray-200 bg-gray-50/50 px-6 text-center">
           <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-            <ShoppingBag
-              className="h-7 w-7 text-primary"
-              strokeWidth={1.8}
-            />
+            <ShoppingBag className="h-7 w-7 text-primary" strokeWidth={1.8} />
           </div>
 
           <h3 className="text-base font-semibold text-gray-800">
@@ -97,27 +93,29 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
           </h3>
 
           <p className="mt-1 max-w-sm text-sm text-gray-500">
-            We couldn&apos;t find any products matching your
-            selected filters. Try changing or clearing your
-            filters.
+            We couldn&apos;t find any products matching your selected filters.
+            Try changing or clearing your filters.
           </p>
         </div>
       ) : (
         <>
           {/* Products */}
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {shopProducts.map((product) => (
-            //   <ProductCard
-            //     key={product._id}
-            //     product={product}
-            //     isLoading={false}
-            //   />
-              <ProductCard2
-                key={product._id}
-                product={product}
-                isLoading={false}
-              />
-            ))}
+            {shopProducts.map((product) =>
+              cardType === "Default" ? (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  isLoading={false}
+                />
+              ) : (
+                <ProductCard2
+                  key={product._id}
+                  product={product}
+                  isLoading={false}
+                />
+              ),
+            )}
           </div>
 
           {/* Infinite scroll trigger */}

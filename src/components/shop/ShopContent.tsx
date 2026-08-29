@@ -9,6 +9,7 @@ import { getAllProducts, ProductFilter } from "@/services/products.api";
 import { TBrand, TCategory, TProduct, TSubCategory } from "@/types";
 
 import FilteringProducts from "./FilteringProducts";
+import { TCustome } from "@/types/customeType";
 
 interface ShopMeta {
   page: number;
@@ -23,6 +24,7 @@ interface ShopContentProps {
   brandList: TBrand[];
   initialProducts: TProduct[];
   initialMeta: ShopMeta;
+  design:TCustome
   isLoading: boolean;
 }
 
@@ -32,6 +34,7 @@ const ShopContent: React.FC<ShopContentProps> = ({
   brandList,
   initialProducts,
   initialMeta,
+  design,
   isLoading,
 }) => {
   const searchParams = useSearchParams();
@@ -130,6 +133,9 @@ const ShopContent: React.FC<ShopContentProps> = ({
     }
   }, [meta.page, meta.totalPage, loadingMore, getFilters]);
 
+
+   
+
   return (
     <div className="Container mt-2 flex gap-4 md:mt-12 xl:gap-8">
       {/* Sidebar */}
@@ -138,6 +144,7 @@ const ShopContent: React.FC<ShopContentProps> = ({
           categoryList={categoryList}
           SubCategoryList={SubCategoryList}
           brandList={brandList}
+          
         />
       </div>
 
@@ -157,6 +164,7 @@ const ShopContent: React.FC<ShopContentProps> = ({
             categoryList={categoryList}
             SubCategoryList={SubCategoryList}
             brandList={brandList}
+            design={design}
           />
         )}
       </div>
