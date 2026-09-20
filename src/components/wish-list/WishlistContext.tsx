@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/set-state-in-effect */
+
 "use client";
 
 import { useCurrentUser } from "@/components/auth/AuthContext";
-import { getWishlistByUser } from "@/services/wishlist.api";
+import {
+  createWishlist,
+  getWishlistByUser,
+} from "@/services/wishlist.api";
 import {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
   ReactNode,
 } from "react";
+
+const LOCAL_WISHLIST_KEY = "guestWishlist";
 
 type WishlistContextType = {
   wishlist: any[];
@@ -22,7 +28,7 @@ type WishlistContextType = {
 };
 
 const WishlistContext = createContext<WishlistContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const WishlistProvider = ({
@@ -36,54 +42,140 @@ export const WishlistProvider = ({
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const refreshWishlist = async () => {
-    if (!user?._id) {
-      setWishlist([]);
-      setLoading(false);
-      return;
+  // Track previous user
+  const previousUserId = useRef<string | null>(null);
+
+  // Get wishlist from localStorage
+  const getGuestWishlist = () => {
+    if (typeof window === "undefined") {
+      return [];
     }
 
     try {
-      setLoading(true);
+      const saved = localStorage.getItem(LOCAL_WISHLIST_KEY);
 
-      const response = await getWishlistByUser(user._id);
-
-      setWishlist(response?.data?.productRef || []);
+      return saved ? JSON.parse(saved) : [];
     } catch (error) {
-      console.error("Failed to fetch wishlist:", error);
-      setWishlist([]);
-    } finally {
-      setLoading(false);
+      console.error("Failed to read guest wishlist:", error);
+      return [];
     }
   };
 
-  useEffect(() => {
-    if (user?._id) {
-      refreshWishlist();
-    } else {
-      setWishlist([]);
-      setLoading(false);
+  // Save wishlist to localStorage
+  const saveGuestWishlist = (products: any[]) => {
+    if (typeof window === "undefined") {
+      return;
     }
+
+    localStorage.setItem(
+      LOCAL_WISHLIST_KEY,
+      JSON.stringify(products),
+    );
+  };
+
+  // Login / Logout / Initial load
+  useEffect(() => {
+    const handleWishlist = async () => {
+      // =========================
+      // LOGOUT
+      // =========================
+      if (!user?._id) {
+        // Save current wishlist before clearing
+        if (previousUserId.current) {
+          saveGuestWishlist(wishlist);
+        }
+
+        // Load guest wishlist
+        const guestWishlist = getGuestWishlist();
+
+        setWishlist(guestWishlist);
+        setLoading(false);
+
+        previousUserId.current = null;
+
+        return;
+      }
+
+      // =========================
+      // LOGIN
+      // =========================
+      try {
+        setLoading(true);
+
+        const guestWishlist = getGuestWishlist();
+
+        // Sync guest wishlist to backend
+        if (guestWishlist.length > 0) {
+          for (const product of guestWishlist) {
+            try {
+              await createWishlist({
+                userRef: user._id,
+                productRef: product._id,
+              });
+            } catch (error) {
+              console.error(
+                `Failed to sync wishlist product ${product._id}`,
+                error,
+              );
+            }
+          }
+
+          localStorage.removeItem(LOCAL_WISHLIST_KEY);
+        }
+
+        // Get backend wishlist
+        const response = await getWishlistByUser(user._id);
+
+        setWishlist(response?.data?.productRef || []);
+
+        previousUserId.current = user._id;
+      } catch (error) {
+        console.error("Failed to load wishlist:", error);
+        setWishlist([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    handleWishlist();
   }, [user?._id]);
 
+  // Add wishlist
   const addWishlist = (product: any) => {
     setWishlist((prev) => {
       const alreadyExists = prev.some(
-        (item) => item._id === product._id
+        (item) => item._id === product._id,
       );
 
       if (alreadyExists) {
         return prev;
       }
 
-      return [...prev, product];
+      const updated = [...prev, product];
+
+      // Guest → localStorage
+      if (!user?._id) {
+        saveGuestWishlist(updated);
+      }
+
+      return updated;
     });
   };
 
+  // Remove wishlist
   const removeWishlist = (productId: string) => {
-    setWishlist((prev) =>
-      prev.filter((item) => item._id !== productId)
-    );
+    setWishlist((prev) => {
+      const updated = prev.filter(
+        (item) => item._id !== productId,
+      );
+
+      // Guest → localStorage
+      if (!user?._id) {
+        saveGuestWishlist(updated);
+      }
+
+      return updated;
+    });
   };
 
   return (
@@ -92,7 +184,16 @@ export const WishlistProvider = ({
         wishlist,
         loading,
         setWishlist,
-        refreshWishlist,
+        refreshWishlist: async () => {
+          if (!user?._id) {
+            setWishlist(getGuestWishlist());
+            return;
+          }
+
+          const response = await getWishlistByUser(user._id);
+
+          setWishlist(response?.data?.productRef || []);
+        },
         addWishlist,
         removeWishlist,
       }}
@@ -107,9 +208,10 @@ export const useWishlist = () => {
 
   if (!context) {
     throw new Error(
-      "useWishlist must be used inside WishlistProvider"
+      "useWishlist must be used inside WishlistProvider",
     );
   }
 
   return context;
 };
+

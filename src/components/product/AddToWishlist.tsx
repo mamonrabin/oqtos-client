@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Heart } from "lucide-react";
@@ -10,51 +9,58 @@ import { useCurrentUser } from "../auth/AuthContext";
 import { createWishlist } from "@/services/wishlist.api";
 import { useWishlist } from "../wish-list/WishlistContext";
 
-
 interface ProductProps {
   product: TProduct;
 }
 
 const AddToWishlist: React.FC<ProductProps> = ({ product }) => {
-  const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const currentUser = useCurrentUser();
   const user = currentUser?.user;
 
-  const { addWishlist } = useWishlist();
+  const { wishlist, addWishlist } = useWishlist();
 
-  const wishlistProduct = {
-    productRef: product._id,
-    userRef: user?._id,
-  };
+  const isLiked = wishlist.some(
+    (item) => item._id === product._id,
+  );
 
   const handleLike = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!user) {
-      toast.error("Please login first");
+    if (isLiked) {
       return;
     }
 
     try {
       setLoading(true);
 
-      if (!isLiked) {
-        await createWishlist(wishlistProduct);
-
-        // Update shared wishlist state
+      // Guest user
+      if (!user?._id) {
         addWishlist(product);
-
-        // Update this heart
-        setIsLiked(true);
 
         toast.success("Added to wishlist", {
           duration: 2000,
           position: "bottom-right",
         });
+
+        return;
       }
+
+      // Logged-in user
+      await createWishlist({
+        userRef: user._id,
+        productRef: product._id,
+      });
+
+      // Update shared context immediately
+      addWishlist(product);
+
+      toast.success("Added to wishlist", {
+        duration: 2000,
+        position: "bottom-right",
+      });
     } catch (error) {
       console.error(error);
 
