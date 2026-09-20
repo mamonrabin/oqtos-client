@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
-import { ShoppingCart, Heart, Eye, Star } from "lucide-react";
+import { ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { apiBaseUrl } from "@/config";
 import ViewProduct from "./ViewProduct";
 import { useCartStore } from "@/store/cartStore";
+import AddToWishlist from "./AddToWishlist";
 
 interface productProps {
   product: TProduct;
@@ -34,7 +35,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
 
   const [isHovered, setIsHovered] = useState(false);
   //   const [isCartLoading, setIsCartLoading] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+ 
   const [quantity, setQuantity] = useState(1);
   const handleAddToCart = async () => {
     addToCart({
@@ -51,14 +52,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
     toast.success("Added to cart");
   };
 
-  const handleLike = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsLiked(!isLiked);
-    toast.success(isLiked ? "Removed from wishlist" : "Added to wishlist", {
-      duration: 2000,
-      position: "bottom-right",
-    });
-  };
+ 
 
   return (
     <motion.div
@@ -115,29 +109,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
             </motion.span>
           )}
 
-          {/* Quick Action Buttons */}
-          {/* <div className="absolute right-3 top-3 flex flex-col gap-2">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={handleLike}
-              className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow hover:bg-white transition-colors"
-            >
-              <Heart
-                size={18}
-                className={
-                  isLiked ? "fill-red-500 text-red-500" : "text-gray-700"
-                }
-              />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className=""
-            >
-              <ViewProduct product={product} />
-            </motion.button>
-          </div> */}
+         
 
           {/* Quick Action Buttons */}
           <motion.div
@@ -157,30 +129,8 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
             }}
           >
             {/* Wishlist */}
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              onClick={handleLike}
-              className="
-      flex h-9 w-9
-      items-center justify-center
-      rounded-full
-      bg-white/95
-      text-gray-700
-      shadow-md
-      backdrop-blur-sm
-      transition-colors
-      hover:bg-white
-    "
-              aria-label="Add to wishlist"
-            >
-              <Heart
-                size={17}
-                className={
-                  isLiked ? "fill-red-500 text-red-500" : "text-gray-700"
-                }
-              />
-            </motion.button>
+           
+            <AddToWishlist product={product}/>
 
             {/* Quick View */}
             <motion.div

@@ -27,6 +27,7 @@ const Page = async () => {
   const design = designList?.[0];
 
   const shopSection = design?.shop?.shopPage || "Default";
+  const shopCardCount = design?.shop?.shopCardCount || "4cards";
 
   return shopSection === "Default" ? (
     <ShopContent

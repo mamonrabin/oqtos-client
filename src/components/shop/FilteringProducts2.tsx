@@ -67,6 +67,15 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
 
   const cardType = design?.shop?.cardType || "Default";
 
+  const shopCardCount = design?.shop?.shopCardCount || "4cards";
+
+  const gridClass = {
+  "3cards": "grid-cols-2 md:grid-cols-3",
+  "4cards": "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+  "5cards": "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
+  "6cards": "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6",
+}[shopCardCount] || "grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
+
   return (
     <>
       {/* Category / Subcategory / Sort */}
@@ -100,7 +109,7 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
       ) : (
         <>
           {/* Products */}
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className={`grid gap-4 ${gridClass}`}>
             {shopProducts.map((product) =>
               cardType === "Default" ? (
                 <ProductCard

@@ -26,6 +26,17 @@ const ProductSlider: React.FC<productProps> = ({
   design,
 }) => {
   const cardType = design?.shop?.cardType || "Default";
+  const cardCount = design?.shop?.cardCount || "4cards";
+
+
+  const desktopCardCount = {
+  "3cards": 3,
+  "4cards": 4,
+  "5cards": 5,
+  "6cards": 6,
+}[cardCount] || 4;
+
+  console.log("cardCount", cardCount);
   return (
     <div className="">
       <Swiper
@@ -33,14 +44,23 @@ const ProductSlider: React.FC<productProps> = ({
         spaceBetween={8}
         slidesPerView={2}
         loop={true}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          700: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-          1280: { slidesPerView: 4 },
-          1536: { slidesPerView: 4 },
-        }}
+         breakpoints={{
+    640: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
+    },
+    1280: {
+      slidesPerView: Math.min(desktopCardCount, 6),
+    },
+    1536: {
+      slidesPerView: desktopCardCount,
+    },
+  }}
       >
         {productList?.map((product) => (
           <SwiperSlide key={product._id}>

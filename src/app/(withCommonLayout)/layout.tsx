@@ -1,6 +1,7 @@
 import MessengerBtn from "@/components/common/MessengerBtn";
 import ScrollToBottomToTop from "@/components/common/ScrollToBottomToTop";
 import DownFooter from "@/components/layout/footer/DownFooter";
+import DownFooter2 from "@/components/layout/footer/DownFooter2";
 import Footer from "@/components/layout/footer/Footer";
 import TopFooter from "@/components/layout/footer/TopFooter";
 import Categorybar from "@/components/layout/header/Categorybar";
@@ -29,8 +30,9 @@ const layout = async ({
   const design = designList?.[0];
 
   // Default হলে Categorybar দেখাবে
-  const showCategorybar =
-    design?.home?.bannerType === "Default";
+  const showCategorybar = design?.home?.bannerType === "Default";
+  const modileFooterSection = design?.home?.footerSection === "Default";
+  
 
   return (
     <div>
@@ -38,6 +40,7 @@ const layout = async ({
         logoList={logoList}
         categoryList={categoryList}
         subcategoryList={subcategoryList}
+        design={design}
       />
 
       {showCategorybar && <Categorybar />}
@@ -50,12 +53,9 @@ const layout = async ({
 
       <TopFooter />
 
-      <Footer
-        logoList={logoList}
-        socialLinkes={socialLinkes}
-      />
+      <Footer logoList={logoList} socialLinkes={socialLinkes} />
 
-      <DownFooter />
+      {modileFooterSection ? <DownFooter /> : <DownFooter2 />}
     </div>
   );
 };

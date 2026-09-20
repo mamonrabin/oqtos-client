@@ -136,7 +136,7 @@ const ShopContent2: React.FC<ShopContentProps> = ({
   }, [meta.page, meta.totalPage, loadingMore, getFilters]);
 
 
-
+ 
 
   return (
     <div className="Container md:mt-6 mt-2">
