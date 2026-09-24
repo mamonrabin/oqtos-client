@@ -15,7 +15,6 @@ import { useCurrentUser } from "@/components/auth/AuthContext";
 import SearchBar from "@/components/common/SerachBar";
 import SearchBar2 from "@/components/common/SerachBar2";
 import { TCustome } from "@/types/customeType";
-import { getWishlistByUser } from "@/services/wishlist.api";
 import { useWishlist } from "@/components/wish-list/WishlistContext";
 
 interface logoProps {

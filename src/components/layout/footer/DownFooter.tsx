@@ -11,10 +11,13 @@ import {
   UserRound,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useCurrentUser } from "@/components/auth/AuthContext";
 
 const DownFooter = () => {
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
+
+    const { user } = useCurrentUser();
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -50,28 +53,28 @@ const DownFooter = () => {
     };
   }, []);
 
-  const navItems = [
-    {
-      label: "Home",
-      href: "/",
-      icon: RxHome,
-    },
-    {
-      label: "Shop",
-      href: "/product",
-      icon: Store,
-    },
-    {
-      label: "Contact",
-      href: "/contact",
-      icon: Phone,
-    },
-    {
-      label: "Account",
-      href: "/account",
-      icon: UserRound,
-    },
-  ];
+ const navItems = [
+  {
+    label: "Home",
+    href: "/",
+    icon: RxHome,
+  },
+  {
+    label: "Shop",
+    href: "/product",
+    icon: Store,
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: Phone,
+  },
+  {
+    label: "Account",
+    href: user ? "/dashboard" : "/logIn",
+    icon: UserRound,
+  },
+];
 
   return (
     <div

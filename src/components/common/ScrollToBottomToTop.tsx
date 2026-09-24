@@ -54,7 +54,7 @@ const ScrollToBottomToTop = () => {
       title="Back to top"
       className="
         group fixed
-       
+       cursor-pointer
         right-4
         z-50
 

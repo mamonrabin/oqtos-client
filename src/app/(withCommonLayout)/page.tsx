@@ -28,6 +28,7 @@ import Brand from "@/components/home/Brand";
 
 import { TBanner, THomeControl } from "@/types";
 import React from "react";
+import WelcomePopup from "@/components/common/WelcomePopup";
 
 const Home = async () => {
   // Fetch everything at the same time
@@ -187,6 +188,7 @@ const Home = async () => {
 
   return (
     <div>
+          <WelcomePopup bannerList={bannerList} />
       {/* Banner */}
       {bannerType === "Default" ? (
         <Banner mainBanners={mainBanners} />

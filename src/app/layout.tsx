@@ -5,28 +5,55 @@ import { Toaster } from "sonner";
 import Providers from "@/providers/Providers";
 import NextTopLoader from "nextjs-toploader";
 import { WishlistProvider } from "@/components/wish-list/WishlistContext";
+import { getTheme } from "@/services/theme.api";
+
 export const metadata: Metadata = {
   title: "Oqtos",
   description: "Oqtos is new morden clothing brand",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={`${poppins.className} antialiased`}>
+  let theme = null;
 
-      <body className="">
+  try {
+    const response = await getTheme("Active");
+    theme = response?.data;
+  } catch (error) {
+    console.error("Failed to load theme:", error);
+  }
+
+  const primary = theme?.primary || "#087096";
+  const secondary = theme?.secondary || "#e6f4f8";
+
+  return (
+    <html
+      lang="en"
+      className={`${poppins.className} antialiased`}
+      style={
+        {
+          "--primary": primary,
+          "--secondary": secondary,
+        } as React.CSSProperties
+      }
+    >
+      <body>
         <Toaster richColors position="top-right" />
+
         <Providers>
-          <NextTopLoader showSpinner={false} color="#087096" />
+          <NextTopLoader
+            showSpinner={false}
+            color={primary}
+          />
+
           <WishlistProvider>
-          {children}
+            {children}
           </WishlistProvider>
-          </Providers>
-        </body>
+        </Providers>
+      </body>
     </html>
   );
 }

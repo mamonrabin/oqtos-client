@@ -36,12 +36,12 @@ const MessengerBtn = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="
-            group flex items-center gap-2
+            group flex items-center  gap-2
           "
         >
           <span
             className="
-              rounded-lg bg-white px-3 py-1.5
+              rounded bg-white px-3 py-1.5
               text-xs font-medium text-gray-700
               shadow-md
               opacity-0 translate-x-2
@@ -55,14 +55,14 @@ const MessengerBtn = () => {
 
           <span
             className="
-              flex h-9 w-9 items-center justify-center
+              flex h-12 w-12 items-center justify-center
               rounded-full bg-[#25D366]
               text-white shadow-md
               transition-all duration-300
               hover:scale-110
             "
           >
-            <FaWhatsapp size={19} />
+            <FaWhatsapp size={22} />
           </span>
         </Link>
 
@@ -77,7 +77,7 @@ const MessengerBtn = () => {
         >
           <span
             className="
-              rounded-lg bg-white px-3 py-1.5
+              rounded bg-white px-3 py-1.5
               text-xs font-medium text-gray-700
               shadow-md
               opacity-0 translate-x-2
@@ -91,7 +91,7 @@ const MessengerBtn = () => {
 
           <span
             className="
-              flex h-9 w-9 items-center justify-center
+              flex h-12 w-12 items-center justify-center
               rounded-full
               bg-[#0866FF]
               text-white shadow-md
@@ -99,7 +99,7 @@ const MessengerBtn = () => {
               hover:scale-110
             "
           >
-            <FaFacebookMessenger size={18} />
+            <FaFacebookMessenger size={22} />
           </span>
         </Link>
       </div>
@@ -122,7 +122,7 @@ const MessengerBtn = () => {
           transition-all duration-300
           hover:-translate-y-1
           hover:shadow-xl hover:shadow-primary/30
-          active:scale-90
+          active:scale-90 cursor-pointer
         "
       >
         {/* Pulse */}
@@ -138,7 +138,7 @@ const MessengerBtn = () => {
         )}
 
         {/* Icon */}
-        <span className="relative z-10">
+        <span className="relative z-10 cursor-pointer">
           {showOptions ? (
             <X size={20} strokeWidth={2} />
           ) : (
