@@ -203,17 +203,24 @@
 =========================== */
 
 .swiper-pagination-bullet {
-  background: #155DFC !important;
+  background: var(--primary) !important;
   opacity: 0.5 !important;
-  width: 10px !important;
-  height: 10px !important;
+  width: 12px !important;
+  height: 12px !important;
+
+   border: 1px solid var(--primary) !important;
+  border-radius: 2px !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #155DFC !important;
+  background: var(--primary) !important;
   opacity: 1 !important;
-  width: 24px !important;
-  border-radius: 5px !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+
+   border: 1px solid var(--primary) !important;
+  border-radius: 2px !important;
 }
 
 .swiper-button-next,
@@ -239,14 +246,15 @@
 /* Custom */
 
 .custome .swiper-pagination-bullet {
-  background: primary !important;
+  background: var(--primary) !important;
   opacity: 0.5 !important;
   width: 10px !important;
   height: 6px !important;
+  
 }
 
 .custome .swiper-pagination-bullet-active {
-  background: primary !important;
+  background: var(--primary) !important;
   opacity: 1 !important;
   width: 24px !important;
   border-radius: 2px !important;

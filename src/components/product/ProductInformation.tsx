@@ -3,13 +3,19 @@
 
 import { TProduct } from "@/types";
 import React, { useRef, useState } from "react";
-import RatingsReviews from "./RatingsReviews";
+import { useCurrentUser } from "../auth/AuthContext";
+import RatingsReviews from "../product-review/RatingsReviews";
 
 interface ProductProps {
   product: TProduct;
 }
 
 const ProductDescription: React.FC<ProductProps> = ({ product }) => {
+
+  const currentUser = useCurrentUser();
+    const user = currentUser?.user;
+
+
   const [activeTab, setActiveTab] = useState("desc");
   const specRef = useRef(null);
   const descRef = useRef(null);
@@ -131,10 +137,10 @@ const ProductDescription: React.FC<ProductProps> = ({ product }) => {
       </div>
 
       {/* Reviews */}
-      {/* <div className="bg-[#EEEEEE] py-2"></div>
+      <div className="bg-[#EEEEEE] py-2"></div>
       <div ref={reviewRef} className="review scroll-mt-24 bg-white">
-     
-      </div> */}
+        <RatingsReviews productId={product._id} userId={user?._id} />
+      </div>
     </div>
   );
 };
