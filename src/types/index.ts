@@ -54,6 +54,7 @@ export type TBanner = {
   _id: string;
   image: string;
   title: string;
+  description: string;
   type: string;
   link: string;
   category:TCategory
@@ -64,6 +65,7 @@ export type THomeControl = {
   landing: string;
   order: string;
   status: string;
+  sliderStatus: string;
   subTitle?: string;
   title?: string;
 };

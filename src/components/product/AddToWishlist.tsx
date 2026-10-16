@@ -11,9 +11,10 @@ import { useWishlist } from "../wish-list/WishlistContext";
 
 interface ProductProps {
   product: TProduct;
+  style?:string
 }
 
-const AddToWishlist: React.FC<ProductProps> = ({ product }) => {
+const AddToWishlist: React.FC<ProductProps> = ({ product,style }) => {
   const [loading, setLoading] = useState(false);
 
   const currentUser = useCurrentUser();
@@ -81,8 +82,7 @@ const AddToWishlist: React.FC<ProductProps> = ({ product }) => {
       whileTap={{ scale: 0.92 }}
       onClick={handleLike}
       disabled={loading}
-      className="
-        flex h-9 w-9
+      className={`flex h-9 w-9
         items-center justify-center
         rounded-full
         bg-white/95
@@ -92,8 +92,7 @@ const AddToWishlist: React.FC<ProductProps> = ({ product }) => {
         transition-colors
         hover:bg-white
         disabled:cursor-not-allowed
-        disabled:opacity-50
-      "
+        disabled:opacity-50 ${style}`}
       aria-label="Add to wishlist"
     >
       <Heart

@@ -26,7 +26,7 @@ const Brand2: React.FC<BrandProps> = ({ brand, brands, design, isLoading }) => {
   if (isLoading) {
     const sectionHead = design?.home?.sectionHead || "Default";
     return (
-      <section className="Container mt-6 md:mt-12">
+      <section className="Container mt-6 md:mt-10">
         {sectionHead === "Default" ? (
           <SectionHeader title={brand?.title} subTitle={brand?.subTitle} />
         ) : (

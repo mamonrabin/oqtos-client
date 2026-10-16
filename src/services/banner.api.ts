@@ -9,3 +9,5 @@ export const getAllBanner = async () => {
 
   return res.json();
 };
+
+

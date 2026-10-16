@@ -5,6 +5,7 @@ import SectionHeader from "../shared/SectionHeader";
 import ProductSlider from "../common/ProductSlider";
 import SectionHeader2 from "../shared/SectionHeader2";
 import { TCustome } from "@/types/customeType";
+import ProductWithoutSlider from "../common/ProductWithoutSlider";
 
 interface productProps {
   featured: THomeControl;
@@ -21,14 +22,26 @@ const FeaturedProducts: React.FC<productProps> = ({
 }) => {
   const sectionHead = design?.home?.sectionHead || "Default";
   return (
-    <div className="Container md:mt-12 mt-6">
+    <div className="Container md:mt-10 mt-6">
       {sectionHead === "Default" ? (
         <SectionHeader title={featured.title} subTitle={featured.subTitle} />
       ) : (
         <SectionHeader2 title={featured.title} subTitle={featured.subTitle} />
       )}
 
-      <ProductSlider productList={productList} isLoading={isLoading} design={design} />
+      {featured?.sliderStatus === "withslider" ? (
+        <ProductSlider
+          productList={productList}
+          isLoading={isLoading}
+          design={design}
+        />
+      ) : (
+        <ProductWithoutSlider
+          productList={productList}
+          isLoading={isLoading}
+          design={design}
+        />
+      )}
     </div>
   );
 };

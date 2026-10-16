@@ -18,6 +18,17 @@ export const getBestSellingProducts = async () => {
 
   return res.json();
 };
+
+export const getRatedProducts = async () => {
+  const res = await fetch(`${apiBaseUrl}/product/top-rated`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  return res.json();
+};
+
 export const getSingleProductBySlug = async (slug: string) => {
   const res = await fetch(`${apiBaseUrl}/product/productSlug/${slug}`);
 
@@ -28,11 +39,29 @@ export const getSingleProductBySlug = async (slug: string) => {
   return res.json();
 };
 
+// export const getProductsByLabel = async (label: string) => {
+//   const res = await fetch(`${apiBaseUrl}/product/labels/${label}`);
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch products");
+//   }
+
+//   return res.json();
+// };
+
 export const getProductsByLabel = async (label: string) => {
-  const res = await fetch(`${apiBaseUrl}/product/labels/${label}`);
+  const res = await fetch(
+    `${apiBaseUrl}/product/labels/${encodeURIComponent(label)}`,
+    {
+      next: {
+        revalidate: 60,
+        tags: ["products", `products-label-${label}`],
+      },
+    },
+  );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch products");
+    throw new Error(`Failed to fetch products for label: ${label}`);
   }
 
   return res.json();

@@ -8,6 +8,7 @@ import TimerBanner from "../common/TimerBanner";
 import SectionHeader2 from "../shared/SectionHeader2";
 import TimerBanner2 from "../common/TimerBanner2";
 import { TCustome } from "@/types/customeType";
+import TimerBanner3 from "../common/TimerBanner3";
 
 interface ProductProps {
   flashSale: THomeControl;
@@ -30,7 +31,7 @@ const FlashSellProducts: React.FC<ProductProps> = ({
   const flashBanner = design?.home?.flashBanner || "Default";
 
   return (
-    <section className="Container md:mt-12 mt-6">
+    <section className="Container md:mt-10 mt-6">
       {sectionHead === "Default" ? (
         <SectionHeader title={flashSale.title} subTitle={flashSale.subTitle} />
       ) : (

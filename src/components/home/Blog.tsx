@@ -16,7 +16,7 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ blog, bloges,design, isLoading }) => {
   const sectionHead = design?.home?.sectionHead || "Default";
   return (
-    <section className="Container md:mt-12 mt-6 pb-20">
+    <section className="Container md:mt-10 mt-6 pb-20">
       {sectionHead === "Default" ? (
         <SectionHeader title={blog?.title} subTitle={blog?.subTitle} />
       ) : (

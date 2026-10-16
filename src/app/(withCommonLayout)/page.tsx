@@ -15,6 +15,7 @@ import {
   getBestSellingProducts,
   getNewArrivalProducts,
   getProductsByLabel,
+  getRatedProducts,
 } from "@/services/products.api";
 
 import { getAllSubCategory } from "@/services/subcategory.api";
@@ -29,6 +30,10 @@ import Brand from "@/components/home/Brand";
 import { TBanner, THomeControl } from "@/types";
 import React from "react";
 import WelcomePopup from "@/components/common/WelcomePopup";
+import TrendingProducts from "@/components/home/TrendingProducts";
+import TopRatedProduct from "@/components/home/TopRatedProduct";
+import Banner3 from "@/components/second-design/banner/Banner3";
+import Banner4 from "@/components/second-design/banner/Banner4";
 
 const Home = async () => {
   // Fetch everything at the same time
@@ -41,6 +46,8 @@ const Home = async () => {
     bestSellingResponse,
     flashSaleResponse,
     featuredResponse,
+    trendingResponse,
+    ratedResponse,
     brandResponse,
     blogResponse,
     sectionResponse,
@@ -53,6 +60,8 @@ const Home = async () => {
     getBestSellingProducts(),
     getflasSellProducts(),
     getProductsByLabel("Featured"),
+    getProductsByLabel("Trending"),
+    getRatedProducts(),
     getAllBrand(),
     getAllBlog(),
     getHomeControl(),
@@ -75,6 +84,9 @@ const Home = async () => {
 
   const { data: featuredProduct, isLoading: featuredLoading } =
     featuredResponse;
+  const { data: trendingProduct, isLoading: trendingLoading } =
+    trendingResponse;
+  const { data: ratedProduct, isLoading: ratedLoading } = ratedResponse;
 
   const { data: brands, isLoading: brandLoading } = brandResponse;
 
@@ -138,6 +150,24 @@ const Home = async () => {
         design={design}
       />
     ),
+    Trending: (section) => (
+      <TrendingProducts
+        key={section._id}
+        trending={section}
+        productList={trendingProduct}
+        isLoading={trendingLoading}
+        design={design}
+      />
+    ),
+    "Top Rated": (section) => (
+      <TopRatedProduct
+        key={section._id}
+        featured={section}
+        productList={ratedProduct}
+        isLoading={ratedLoading}
+        design={design}
+      />
+    ),
 
     Brands: (section) =>
       brandSection === "Default" ? (
@@ -188,9 +218,9 @@ const Home = async () => {
 
   return (
     <div>
-          <WelcomePopup bannerList={bannerList} />
+      <WelcomePopup bannerList={bannerList} />
       {/* Banner */}
-      {bannerType === "Default" ? (
+      {/* {bannerType === "Default" ? (
         <Banner mainBanners={mainBanners} />
       ) : (
         <Banner2
@@ -198,6 +228,20 @@ const Home = async () => {
           subcategoryList={subcategoryList}
           mainBanners={mainBanners}
         />
+      )} */}
+
+      {bannerType === "Default" ? (
+        <Banner mainBanners={mainBanners} />
+      ) : bannerType === "SecondBanner" ? (
+        <Banner2
+          categoryList={categoryList}
+          subcategoryList={subcategoryList}
+          mainBanners={mainBanners}
+        />
+      ) : bannerType === "ThirdBanner" ? (
+        <Banner3 mainBanners={mainBanners} />
+      ) : (
+        <Banner4 mainBanners={mainBanners} />
       )}
 
       {/* Category */}

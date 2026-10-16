@@ -9,15 +9,17 @@ import SizeColorAndQuantity from "./SizeColeAndQuantity";
 
 interface productProps {
   product: TProduct;
+  className?:string
+  iconStyle?:string
 }
 
-const ViewProduct: React.FC<productProps> = ({ product }) => {
+const ViewProduct: React.FC<productProps> = ({ product,className,iconStyle }) => {
  
 
   return (
     <Dialog>
-      <DialogTrigger className="p-2 cursor-pointer bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-colors">
-        <Eye size={18} className="text-gray-700" />
+      <DialogTrigger className={`p-2 cursor-pointer bg-white/90 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-colors ${className}`}>
+        <Eye size={18} className={`text-gray-700 ${iconStyle}`} />
       </DialogTrigger>
       <DialogContent className="lg:max-w-5xl sm:max-w-xl w-full max-h-[90vh] !rounded-none p-0 overflow-y-auto">
         <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">

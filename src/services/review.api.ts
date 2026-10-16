@@ -20,7 +20,7 @@ export const createReview = async (data: FormData) => {
 
 
 export const getAllReviews = async () => {
-  const res = await fetch(`${apiBaseUrl}/review`);
+  const res = await fetch(`${apiBaseUrl}/review/status`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch reviews");

@@ -13,6 +13,7 @@ import React from "react";
 import ProductCard from "../product/ProductCard";
 import ProductCard2 from "../product/ProductCard2";
 import { TCustome } from "@/types/customeType";
+import ProductCard3 from "../product/ProductCard3";
 
 interface productProps {
   flashProducts: TProduct[];
@@ -44,10 +45,12 @@ const FlashSellSlider: React.FC<productProps> = ({
       >
         {flashProducts?.map((product) => (
           <SwiperSlide key={product._id}>
-            {cardType === "Default" ? (
-              <ProductCard product={product} isLoading={isLoading} />
-            ) : (
+            {cardType === "SecondCard" ? (
               <ProductCard2 product={product} isLoading={isLoading} />
+            ) : cardType === "ThirdCard" ? (
+              <ProductCard3 product={product} isLoading={isLoading} />
+            ) : (
+              <ProductCard product={product} isLoading={isLoading} />
             )}
           </SwiperSlide>
         ))}
