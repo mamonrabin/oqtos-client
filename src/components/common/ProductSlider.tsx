@@ -28,6 +28,7 @@ const ProductSlider: React.FC<productProps> = ({
   isLoading,
   design,
 }) => {
+  const sectionHead = design?.home?.sectionHead || "Default";
   const cardType = design?.shop?.cardType || "Default";
   const cardCount = design?.shop?.cardCount || "4cards";
 
@@ -42,19 +43,21 @@ const ProductSlider: React.FC<productProps> = ({
   console.log("cardCount", cardCount);
   return (
     <div className="">
-      <div className="flex items-end justify-end  mb-2">
-        <Link
-          href="/product"
-          className="group inline-flex items-center gap-1.5 md:text-sm text-xs font-medium text-primary transition-colors duration-300 hover:text-black"
-        >
-          <span>View More</span>
+      {sectionHead === "Default" && (
+        <div className="flex items-end justify-end mb-2">
+          <Link
+            href="/product"
+            className="group inline-flex items-center gap-1.5 md:text-sm text-xs font-medium text-primary transition-colors duration-300 hover:text-black"
+          >
+            <span>View More</span>
 
-          <ArrowRight
-            size={16}
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </Link>
-      </div>
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </div>
+      )}
 
       <Swiper
         modules={[Autoplay, Pagination, Navigation, EffectFade]}

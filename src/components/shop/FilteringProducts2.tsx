@@ -12,6 +12,7 @@ import ProductSort from "./ProductSort";
 import ProductCard2 from "../product/ProductCard2";
 import ProductSort2 from "./ProductSort2";
 import { TCustome } from "@/types/customeType";
+import ProductCard3 from "../product/ProductCard3";
 
 interface FilterProductProps {
   shopProducts: TProduct[];
@@ -110,15 +111,21 @@ const FilteringProducts2: React.FC<FilterProductProps> = ({
         <>
           {/* Products */}
           <div className={`grid gap-4 ${gridClass}`}>
-            {shopProducts.map((product) =>
+             {shopProducts.map((product) =>
               cardType === "Default" ? (
                 <ProductCard
                   key={product._id}
                   product={product}
                   isLoading={false}
                 />
-              ) : (
+              ) : cardType === "SecondCard" ? (
                 <ProductCard2
+                  key={product._id}
+                  product={product}
+                  isLoading={false}
+                />
+              ) : (
+                <ProductCard3
                   key={product._id}
                   product={product}
                   isLoading={false}

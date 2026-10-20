@@ -49,7 +49,10 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
       quantity,
     });
 
-    toast.success("Added to cart");
+
+     toast.success("Added to cart", {
+      duration: 800,
+    });
   };
 
  

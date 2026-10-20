@@ -80,10 +80,10 @@ const CartSidebar = () => {
                         {item.product.name}
                       </h4>
                       <p className="text-xs text-gray-500 mt-1">
-                        Size: {item.size}
+                        Size: {item.size || "N/A"}
                       </p>
                       <p className="text-xs text-gray-500">
-                        Color: {item.color}
+                        Color: {item.color || "N/A"}
                       </p>
                     </div>
                     <button

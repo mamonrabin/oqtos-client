@@ -27,7 +27,7 @@ const SectionHeader2 = ({
             </p>
 
             <Link
-              href="/"
+              href="/product"
               className="group inline-flex items-center gap-1 text-sm font-semibold text-primary"
             >
               View More

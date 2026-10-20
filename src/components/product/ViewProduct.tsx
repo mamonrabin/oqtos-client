@@ -1,7 +1,7 @@
 "use client"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { TProduct } from "@/types";
-import { Eye } from "lucide-react";
+import { Eye, X } from "lucide-react";
 import React from "react";
 import QuickImageGallery from "./QuickImageGallery";
 import SizeColorAndQuantity from "./SizeColeAndQuantity";
@@ -22,9 +22,17 @@ const ViewProduct: React.FC<productProps> = ({ product,className,iconStyle }) =>
         <Eye size={18} className={`text-gray-700 ${iconStyle}`} />
       </DialogTrigger>
       <DialogContent className="lg:max-w-5xl sm:max-w-xl w-full max-h-[90vh] !rounded-none p-0 overflow-y-auto">
+        <DialogClose
+          aria-label="Close product details"
+          className="absolute right-3 top-3 z-50 flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-700 shadow border border-primary/10 transition-colors hover:bg-gray-100 hover:text-black"
+        >
+          <X size={18} />
+        </DialogClose>
+       
+       
         <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
           {/* LEFT: Product Gallery */}
-          <div className="w-full">
+          <div className="w-full min-w-0 overflow-hidden">
             <QuickImageGallery product={product} />
           </div>
 

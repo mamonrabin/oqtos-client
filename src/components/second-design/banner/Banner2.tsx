@@ -21,7 +21,7 @@ const Banner2: React.FC<CategoryProps> = ({ categoryList,subcategoryList, mainBa
 
       {/* Banner Slider */}
       <div className="min-w-0 flex-1 overflow-hidden rounded-xl">
-        <div className="flex h-[420px] items-center justify-center">
+        <div className="flex md:h-[420px] h-[200px] items-center justify-center">
         <Banner2Slide mainBanners={mainBanners}/>
         </div>
       </div>

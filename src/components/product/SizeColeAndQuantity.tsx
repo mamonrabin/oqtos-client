@@ -84,11 +84,11 @@ const SizeColorAndQuantity: React.FC<productProps> = ({ product }) => {
       size: selectedInventory.size,
     });
 
-    toast.success("Added to cart");
+    toast.success("Added to cart", {
+      duration: 800,
+    });
     setIsAdding(false);
   };
-
- 
 
   return (
     <div>

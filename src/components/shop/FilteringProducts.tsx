@@ -11,6 +11,7 @@ import ProductCard from "../product/ProductCard";
 import ProductSort from "./ProductSort";
 import ProductCard2 from "../product/ProductCard2";
 import { TCustome } from "@/types/customeType";
+import ProductCard3 from "../product/ProductCard3";
 
 interface FilterProductProps {
   shopProducts: TProduct[];
@@ -66,14 +67,17 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
 
   const cardType = design?.shop?.cardType || "Default";
 
-   const shopCardCount = design?.shop?.shopCardCount || "4cards";
+  const shopCardCount = design?.shop?.shopCardCount || "4cards";
 
-  const gridClass = {
-  "3cards": "grid-cols-2 gap-3 md:grid-cols-3",
-  "4cards": "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4",
-  "5cards": "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
-  "6cards": "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6",
-}[shopCardCount] || "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-3";
+  const gridClass =
+    {
+      "3cards": "grid-cols-2 gap-3 md:grid-cols-3",
+      "4cards": "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4",
+      "5cards":
+        "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
+      "6cards":
+        "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6",
+    }[shopCardCount] || "grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-3";
 
   return (
     <>
@@ -116,8 +120,14 @@ const FilteringProducts: React.FC<FilterProductProps> = ({
                   product={product}
                   isLoading={false}
                 />
-              ) : (
+              ) : cardType === "SecondCard" ? (
                 <ProductCard2
+                  key={product._id}
+                  product={product}
+                  isLoading={false}
+                />
+              ) : (
+                <ProductCard3
                   key={product._id}
                   product={product}
                   isLoading={false}

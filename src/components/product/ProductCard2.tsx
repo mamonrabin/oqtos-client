@@ -4,25 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { TProduct } from "@/types";
 import { apiBaseUrl } from "@/config";
+import AddToWishlist from "./AddToWishlist";
+import ViewProduct from "./ViewProduct";
 
 interface ProductCardProps {
   product: TProduct;
   isLoading: boolean;
 }
 
-const ProductCard2: React.FC<ProductCardProps> = ({
-  product,
-  isLoading,
-}) => {
-  const {
-    title,
-    price,
-    mrpPrice,
-    thumbnailImage,
-    backviewImage,
-    slug,
-    label
-  } = product;
+const ProductCard2: React.FC<ProductCardProps> = ({ product, isLoading }) => {
+  const { title, price, mrpPrice, thumbnailImage, backviewImage, slug, label } =
+    product;
 
   const hasSecondImage = Boolean(backviewImage);
 
@@ -77,6 +69,21 @@ const ProductCard2: React.FC<ProductCardProps> = ({
             />
           )}
 
+          {/* Product Actions */}
+          <div
+            className="
+    absolute right-2 top-5 z-20
+    flex flex-col items-center gap-2
+   
+    translate-x-10 opacity-0
+    transition-all duration-300 ease-in-out
+    group-hover:translate-x-0
+    group-hover:opacity-100
+  "
+          >
+            <AddToWishlist product={product} />
+            <ViewProduct product={product} />
+          </div>
           {/* Sale Badge */}
           {label && (
             <span
@@ -113,9 +120,7 @@ const ProductCard2: React.FC<ProductCardProps> = ({
 
         {/* Price */}
         <div className="mt-2.5 flex items-center justify-center gap-2">
-          <span className="text-base font-bold text-gray-900">
-            TK.{price}
-          </span>
+          <span className="text-base font-bold text-gray-900">TK.{price}</span>
 
           {mrpPrice && mrpPrice > price && (
             <span className="text-xs font-medium text-gray-400 line-through">
