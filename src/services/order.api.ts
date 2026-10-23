@@ -48,23 +48,16 @@ export const getSingleOrder = async (id: string) => {
 
 
 export const getAllOrder = async () => {
-  try {
-    const res = await fetch(`${apiBaseUrl}/order`, {
-      cache: "no-store",
-      signal: AbortSignal.timeout(15000),
-    });
+  const res = await fetch(`${apiBaseUrl}/order`, {
+    cache: "no-store",
+  });
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch orders: ${res.status}`);
-    }
-
-    return await res.json();
-  } catch (error) {
-    console.error("Get all orders error:", error);
-    throw error;
+  if (!res.ok) {
+    throw new Error("Failed to fetch orders");
   }
-};
 
+  return res.json();
+};
 
 export const getSingleOrderByID = async (id: string) => {
   const res = await fetch(`${apiBaseUrl}/order/${id}`);

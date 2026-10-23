@@ -1,16 +1,17 @@
-import MyOrders from '@/components/userDashboard/order/MyOrders';
-import { getAllOrder } from '@/services/order.api';
-import React from 'react';
 
-const page = async() => {
-    const {data:orderList} = await getAllOrder()
-    
-      const orders = orderList?.data
-    return (
-        <div className=''>
-            <MyOrders orders={orders}/>
-        </div>
-    );
-};
+import MyOrders from "@/components/userDashboard/order/MyOrders";
+import { getAllOrder } from "@/services/order.api";
 
-export default page;
+export const dynamic = "force-dynamic";
+
+export default async function MyOrdersPage() {
+  const { data: orderList } = await getAllOrder();
+
+  const orders = orderList?.data ?? [];
+
+  return (
+    <div>
+      <MyOrders orders={orders} />
+    </div>
+  );
+}

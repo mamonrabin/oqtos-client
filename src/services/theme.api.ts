@@ -1,7 +1,14 @@
+
 import { apiBaseUrl } from "@/config";
 
 export const getTheme = async (status: string) => {
-  const res = await fetch(`${apiBaseUrl}/theme/${status}`);
+  const res = await fetch(`${apiBaseUrl}/theme/${status}`, {
+    next: {
+      revalidate: 300,
+      tags: ["theme"],
+    },
+    signal: AbortSignal.timeout(10000),
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch theme");

@@ -1,7 +1,14 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { getRecentUser } from "@/services/auth.api";
 
 type AuthContextType = {
@@ -21,7 +28,7 @@ export const AuthProvider = ({
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const refetch = async () => {
+  const refetch = useCallback(async () => {
     try {
       setLoading(true);
       const res = await getRecentUser();
@@ -31,22 +38,15 @@ export const AuthProvider = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    refetch();
-  }, []);
+    void refetch();
+  }, [refetch]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        setUser,
-        loading,
-        refetch,
-      }}
-    >
+    <AuthContext.Provider value={{ user, setUser, loading, refetch }}>
       {children}
     </AuthContext.Provider>
   );

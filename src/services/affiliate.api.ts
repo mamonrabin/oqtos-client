@@ -1,10 +1,13 @@
+
 import { apiBaseUrl } from "@/config";
 
-export const getAffiliate = async () => {
-  const res = await fetch(`${apiBaseUrl}/affiliate/active`);
+export const getActiveAffiliate = async () => {
+  const res = await fetch(`${apiBaseUrl}/affiliate/active`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch affiliate");
+    throw new Error("Failed to fetch active affiliate");
   }
 
   return res.json();
