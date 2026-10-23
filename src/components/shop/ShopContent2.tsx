@@ -135,16 +135,39 @@ const ShopContent2: React.FC<ShopContentProps> = ({
     }
   }, [meta.page, meta.totalPage, loadingMore, getFilters]);
 
-
- 
-
   return (
     <div className="Container md:mt-6 mt-2">
       {/* Products */}
       <div className="w-full">
         {loading ? (
-          <div className="flex min-h-[300px] items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <div
+                key={index}
+                className="animate-pulse overflow-hidden rounded-lg border border-gray-100 bg-white"
+              >
+                {/* Product Image */}
+                <div className="aspect-[3/4] w-full bg-gray-200" />
+
+                {/* Product Details */}
+                <div className="space-y-3 p-3">
+                  {/* Product Title */}
+                  <div className="space-y-2">
+                    <div className="h-3 w-full rounded bg-gray-200" />
+                    <div className="h-3 w-2/3 rounded bg-gray-200" />
+                  </div>
+
+                  {/* Price */}
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-20 rounded bg-gray-200" />
+                    <div className="h-3 w-12 rounded bg-gray-100" />
+                  </div>
+
+                  {/* Rating */}
+                  <div className="h-3 w-24 rounded bg-gray-200" />
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <FilteringProducts2

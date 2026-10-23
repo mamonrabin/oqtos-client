@@ -82,6 +82,66 @@ export type ProductFilter = {
   sort?: string;
 };
 
+// export const getAllProducts = async ({
+//   page = 1,
+//   limit = 4,
+//   searchTerm,
+//   brand,
+//   category,
+//   subCategory,
+//   color,
+//   size,
+//   minPrice,
+//   maxPrice,
+//   dateFilter,
+//   sort,
+// }: ProductFilter = {}) => {
+//   const params = new URLSearchParams();
+
+//   params.set("page", page.toString());
+//   params.set("limit", limit.toString());
+
+//   // Search
+//   if (searchTerm?.trim()) {
+//     params.set("searchTerm", searchTerm.trim());
+//   }
+
+//   // Filters
+
+//   if (brand) params.set("brand", brand);
+//   if (category) params.set("category", category);
+//   if (subCategory) params.set("subCategory", subCategory);
+//   if (color) params.set("color", color);
+//   if (size) params.set("size", size);
+
+//   // Price
+
+//   if (minPrice !== undefined) {
+//     params.set("minPrice", minPrice.toString());
+//   }
+
+//   if (maxPrice !== undefined) {
+//     params.set("maxPrice", maxPrice.toString());
+//   }
+
+//   // Other
+
+//   if (dateFilter) params.set("dateFilter", dateFilter);
+//   if (sort) params.set("sort", sort);
+
+//   const res = await fetch(`${apiBaseUrl}/product?${params.toString()}`, {
+//     cache: "no-store",
+//   });
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch products");
+//   }
+
+//   return res.json();
+// };
+
+
+
 export const getAllProducts = async ({
   page = 1,
   limit = 4,
@@ -96,17 +156,14 @@ export const getAllProducts = async ({
   dateFilter,
   sort,
 }: ProductFilter = {}) => {
-  const params = new URLSearchParams();
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
 
-  params.set("page", page.toString());
-  params.set("limit", limit.toString());
-
-  // Search
   if (searchTerm?.trim()) {
     params.set("searchTerm", searchTerm.trim());
   }
-
-  // Filters
 
   if (brand) params.set("brand", brand);
   if (category) params.set("category", category);
@@ -114,27 +171,27 @@ export const getAllProducts = async ({
   if (color) params.set("color", color);
   if (size) params.set("size", size);
 
-  // Price
-
   if (minPrice !== undefined) {
-    params.set("minPrice", minPrice.toString());
+    params.set("minPrice", String(minPrice));
   }
 
   if (maxPrice !== undefined) {
-    params.set("maxPrice", maxPrice.toString());
+    params.set("maxPrice", String(maxPrice));
   }
-
-  // Other
 
   if (dateFilter) params.set("dateFilter", dateFilter);
   if (sort) params.set("sort", sort);
 
-  const res = await fetch(`${apiBaseUrl}/product?${params.toString()}`, {
+  const url = `${apiBaseUrl}/product?${params.toString()}`;
+
+  const res = await fetch(url, {
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch products");
+    throw new Error(
+      `Failed to fetch products: ${res.status} ${res.statusText}`
+    );
   }
 
   return res.json();

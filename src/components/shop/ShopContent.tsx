@@ -10,6 +10,7 @@ import { TBrand, TCategory, TProduct, TSubCategory } from "@/types";
 
 import FilteringProducts from "./FilteringProducts";
 import { TCustome } from "@/types/customeType";
+import ProductSkeleton from "./ProductSkeleton";
 
 interface ShopMeta {
   page: number;
@@ -137,38 +138,37 @@ const ShopContent: React.FC<ShopContentProps> = ({
    
 
   return (
-    <div className="Container mt-2 flex gap-4 md:mt-12 xl:gap-8">
-      {/* Sidebar */}
-      <div className="hidden w-1/4 lg:block">
-        <ShopSidebar
-          categoryList={categoryList}
-          SubCategoryList={SubCategoryList}
-          brandList={brandList}
-          
-        />
-      </div>
-
-      {/* Products */}
-      <div className="w-full lg:w-3/4">
-        {loading ? (
-          <div className="flex min-h-[300px] items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          </div>
-        ) : (
-          <FilteringProducts
-            shopProducts={products}
-            isLoading={isLoading}
-            loadingMore={loadingMore}
-            hasMore={meta.page < meta.totalPage}
-            onLoadMore={loadMoreProducts}
-            categoryList={categoryList}
-            SubCategoryList={SubCategoryList}
-            brandList={brandList}
-            design={design}
-          />
-        )}
-      </div>
+    <div className="Container mt-2 flex items-start gap-4 md:mt-12 xl:gap-8">
+  {/* Sidebar */}
+  <aside className="hidden w-1/4 pb-20 shrink-0 self-stretch lg:block">
+    <div className="sticky top-20 pb-4 scrollbar-hide  max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain">
+      <ShopSidebar
+        categoryList={categoryList}
+        SubCategoryList={SubCategoryList}
+        brandList={brandList}
+      />
     </div>
+  </aside>
+
+  {/* Products */}
+  <div className="w-full min-w-0 lg:w-3/4">
+    {loading ? (
+      <ProductSkeleton />
+    ) : (
+      <FilteringProducts
+        shopProducts={products}
+        isLoading={isLoading}
+        loadingMore={loadingMore}
+        hasMore={meta.page < meta.totalPage}
+        onLoadMore={loadMoreProducts}
+        categoryList={categoryList}
+        SubCategoryList={SubCategoryList}
+        brandList={brandList}
+        design={design}
+      />
+    )}
+  </div>
+</div>
   );
 };
 

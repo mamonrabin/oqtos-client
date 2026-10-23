@@ -12,6 +12,7 @@ const Page = async () => {
     { data: categoryList },
     { data: SubCategoryList },
     { data: brandList },
+    { data: designList },
   ] = await Promise.all([
     getAllProducts({
       page: 1,
@@ -20,35 +21,29 @@ const Page = async () => {
     getAllCategory(),
     getAllSubCategory(),
     getAllBrand(),
+    getCustomeDesign(),
   ]);
 
-  const { data: designList } = await getCustomeDesign();
-
+  const products = productResponse.data.data;
+  const meta = productResponse.data.meta;
   const design = designList?.[0];
 
   const shopSection = design?.shop?.shopPage || "Default";
-  const shopCardCount = design?.shop?.shopCardCount || "4cards";
+
+  const props = {
+    initialProducts: products,
+    initialMeta: meta,
+    categoryList,
+    SubCategoryList,
+    brandList,
+    design,
+    isLoading: false,
+  };
 
   return shopSection === "Default" ? (
-    <ShopContent
-      initialProducts={productResponse.data.data}
-      initialMeta={productResponse.data.meta}
-      categoryList={categoryList}
-      SubCategoryList={SubCategoryList}
-      brandList={brandList}
-      design={design}
-      isLoading={false}
-    />
+    <ShopContent {...props} />
   ) : (
-    <ShopContent2
-      initialProducts={productResponse.data.data}
-      initialMeta={productResponse.data.meta}
-      categoryList={categoryList}
-      SubCategoryList={SubCategoryList}
-      brandList={brandList}
-      design={design}
-      isLoading={false}
-    />
+    <ShopContent2 {...props} />
   );
 };
 
