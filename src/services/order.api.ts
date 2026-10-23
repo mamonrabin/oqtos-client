@@ -34,14 +34,35 @@ export const getSingleOrder = async (id: string) => {
 };
 
 
+// export const getAllOrder = async () => {
+//   const res = await fetch(`${apiBaseUrl}/order`);
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch order");
+//   }
+
+//   return res.json();
+// };
+
+
+
+
 export const getAllOrder = async () => {
-  const res = await fetch(`${apiBaseUrl}/order`);
+  try {
+    const res = await fetch(`${apiBaseUrl}/order`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(15000),
+    });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch order");
+    if (!res.ok) {
+      throw new Error(`Failed to fetch orders: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Get all orders error:", error);
+    throw error;
   }
-
-  return res.json();
 };
 
 
