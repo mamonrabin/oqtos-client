@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MessengerBtn from "@/components/common/MessengerBtn";
 import ScrollToBottomToTop from "@/components/common/ScrollToBottomToTop";
 import DownFooter from "@/components/layout/footer/DownFooter";
@@ -15,24 +16,58 @@ import { getAllSubCategory } from "@/services/subcategory.api";
 
 import React from "react";
 
-const layout = async ({
+async function safeFetch(
+  request: () => Promise<any>,
+  fallback: any = [],
+) {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  try {
+    const result = await Promise.race([
+      request(),
+      new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(
+          () => reject(new Error("API request timed out")),
+          10000,
+        );
+      }),
+    ]);
+
+    return result?.data ?? fallback;
+  } catch (error) {
+    console.error("Layout API error:", error);
+    return fallback;
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
+  }
+}
+
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
-  const { data: designList } = await getCustomeDesign();
-  const { data: logoList } = await getLogoAndFooter();
-  const { data: categoryList } = await getAllCategory();
-  const { data: subcategoryList } = await getAllSubCategory();
-  const { data: socialLinkes } = await getAllSocilLink();
+}>) {
+  const [
+    designList,
+    logoList,
+    categoryList,
+    subcategoryList,
+    socialLinkes,
+  ] = await Promise.all([
+    safeFetch(() => getCustomeDesign()),
+    safeFetch(() => getLogoAndFooter()),
+    safeFetch(() => getAllCategory()),
+    safeFetch(() => getAllSubCategory()),
+    safeFetch(() => getAllSocilLink()),
+  ]);
 
-  // API returns an array
   const design = designList?.[0];
 
-  // Default হলে Categorybar দেখাবে
-  const showCategorybar = design?.home?.bannerType === "Default";
-  const modileFooterSection = design?.home?.footerSection === "Default";
-  
+  const showCategorybar =
+    design?.home?.bannerType === "Default";
+
+  const modileFooterSection =
+    design?.home?.footerSection === "Default";
 
   return (
     <div>
@@ -46,18 +81,18 @@ const layout = async ({
       {showCategorybar && <Categorybar />}
 
       <MessengerBtn />
-
       <ScrollToBottomToTop />
 
       {children}
 
       <TopFooter />
 
-      <Footer logoList={logoList} socialLinkes={socialLinkes} />
+      <Footer
+        logoList={logoList}
+        socialLinkes={socialLinkes}
+      />
 
       {modileFooterSection ? <DownFooter /> : <DownFooter2 />}
     </div>
   );
-};
-
-export default layout;
+}
