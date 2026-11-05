@@ -37,7 +37,7 @@ const UserMenu = () => {
     {
       label: "My Orders",
       icon: <ShoppingBasket size={16} />,
-      href: "/orders",
+      href: "/my-orders",
     },
     {
       label: "Track Order",

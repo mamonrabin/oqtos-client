@@ -154,7 +154,7 @@ const Page = async ({
         {/* Back */}
         <div className="mb-5">
           <Link
-            href="/orders"
+            href="/my-orders"
             className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-gray-900"
           >
             <ArrowLeft size={17} />
