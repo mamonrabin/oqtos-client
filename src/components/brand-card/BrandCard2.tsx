@@ -51,7 +51,6 @@ const BrandCard2: React.FC<BrandProps> = ({ brandItem }) => {
             src={`${apiBaseUrl}${brandItem.image}`}
             alt={brandItem.title}
             fill
-            unoptimized
             sizes="(max-width: 640px) 35vw, (max-width: 1024px) 20vw, 140px"
             className="
               object-contain

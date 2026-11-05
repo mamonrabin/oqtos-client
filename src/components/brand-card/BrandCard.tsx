@@ -22,7 +22,6 @@ const BrandCard:React.FC<brandProps> = ({brandItem}) => {
                 src={apiBaseUrl + brandItem.image}
                 alt={brandItem.title}
                 fill
-                unoptimized
                 sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 12.5vw"
                 className="object-contain p-5 transition-transform duration-500 ease-out group-hover:scale-110"
               />

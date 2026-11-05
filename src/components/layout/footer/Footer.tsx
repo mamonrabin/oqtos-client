@@ -34,7 +34,6 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
                   alt="Logo"
                   width={140}
                   height={50}
-                  unoptimized
                   className="h-auto max-h-12 w-auto object-contain"
                 />
               </Link>

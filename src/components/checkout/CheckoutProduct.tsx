@@ -44,7 +44,6 @@ const CheckoutProduct: React.FC<CheckoutProductProps> = ({
               alt={item.product.name}
               width={100}
               height={100}
-              unoptimized
               className="object-cover rounded w-16 h-16"
             />
 

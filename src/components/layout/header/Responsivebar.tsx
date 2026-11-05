@@ -43,7 +43,6 @@ const Responsivebar: React.FC<LogoProps> = ({
                 alt="Optos"
                 width={120}
                 height={50}
-                unoptimized
                 className="h-11 w-auto object-contain"
               />
             ))}

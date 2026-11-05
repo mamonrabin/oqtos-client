@@ -88,7 +88,6 @@ const TimerBanner2: React.FC<ProductProps> = ({ productList }) => {
         src={`${apiBaseUrl}${productList?.image}`}
         alt="Flash Sale"
         fill
-        unoptimized
         sizes="(max-width: 640px) 100vw, 50vw"
         className="
           object-cover

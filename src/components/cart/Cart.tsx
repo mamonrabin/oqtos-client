@@ -64,7 +64,6 @@ const Cart = () => {
                     alt={item.product.name}
                     width={80}
                     height={80}
-                    unoptimized
                     className="object-cover rounded w-20 h-20 bg-gray-50"
                   />
                   <div className="flex flex-col justify-center">
@@ -168,7 +167,7 @@ const Cart = () => {
               </button>
             </Link>
 
-            <Link href="/shop">
+            <Link href="/product">
               <button className="w-full mt-2 text-primary hover:underline text-sm transition-colors">
                 Continue Shopping
               </button>

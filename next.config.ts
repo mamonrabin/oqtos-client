@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         port: "5000",
         pathname: "/api/v1/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "oqtos.vercel.app",
+        pathname: "/api/v1/uploads/**",
+      },
     ],
   },
 

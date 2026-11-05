@@ -83,14 +83,14 @@ const ResponsiveFilterSidebar: React.FC<FilterSidebarProps> = ({
       ========================== */}
 
       <SheetTrigger>
-        <button
-          type="button"
+        <span
+          role="button"
           className="flex items-center gap-1.5 text-primary transition-colors duration-300 hover:text-primary lg:hidden"
         >
           <PiSlidersHorizontalBold size={17} />
 
           <span className="text-sm capitalize">Filter</span>
-        </button>
+        </span>
       </SheetTrigger>
 
       {/* =========================

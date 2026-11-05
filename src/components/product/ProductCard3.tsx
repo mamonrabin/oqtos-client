@@ -92,7 +92,6 @@ export default function ProductCard3({
           width={500}
           height={500}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          unoptimized
         />
 
         {/* Product Label */}

@@ -75,7 +75,6 @@ const Category2: React.FC<CategoryProps> = ({ categoryList }) => {
                       alt={category.categoryName}
                       fill
                       sizes="120px"
-                      unoptimized
                       priority={index < 3}
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     />

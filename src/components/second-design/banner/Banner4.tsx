@@ -102,7 +102,6 @@ const Banner4: React.FC<BannerProps> = ({ mainBanners }) => {
                     src={`${apiBaseUrl}${banner.image}`}
                     alt={banner.title || "Promotional banner"}
                     fill
-                    unoptimized
                     priority={index === 0}
                     
                     className="object-center"

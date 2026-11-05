@@ -59,7 +59,6 @@ return (
               width={600}
               height={600}
               priority={index === 0}
-              unoptimized
               className="block  w-full object-contain h-[350px] md:h-auto md:max-h-[90vh] md:object-cover"
             />
           </div>

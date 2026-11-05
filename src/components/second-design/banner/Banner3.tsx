@@ -73,7 +73,6 @@ const Banner3: React.FC<BannerProps> = ({ mainBanners }) => {
                     src={`${apiBaseUrl}${banner.image}`}
                     alt={banner.title || "Banner"}
                     fill
-                    unoptimized
                     priority={index === 0}
                     sizes="100vw"
                     className="object-cover object-center"

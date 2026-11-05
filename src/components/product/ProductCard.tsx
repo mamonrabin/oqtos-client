@@ -78,7 +78,6 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
               height={500}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               priority
-              unoptimized
             />
 
             {/* Hover Image */}
@@ -95,7 +94,6 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
                   alt={title}
                   width={500}
                   height={500}
-                  unoptimized
                   className="w-full h-full object-cover"
                 />
               </motion.div>

@@ -281,7 +281,6 @@ export default function RatingsReviews({
                               className="h-full w-full object-cover"
                               width={64}
                               height={64}
-                              unoptimized
                             />
                           </div>
                         ))}

@@ -38,7 +38,6 @@ const ProductCard2: React.FC<ProductCardProps> = ({ product, isLoading }) => {
             alt={title}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"
-            unoptimized
             className={`
               object-cover
               transition-all duration-500 ease-in-out
@@ -57,7 +56,6 @@ const ProductCard2: React.FC<ProductCardProps> = ({ product, isLoading }) => {
               alt={`${title} alternate view`}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"
-              unoptimized
               className="
                 absolute inset-0
                 translate-x-1/2 opacity-0

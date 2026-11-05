@@ -129,13 +129,13 @@ const SearchBar: React.FC<SearchProps> = ({ categoryList }) => {
           SEARCH ICON
       ======================================== */}
       <SheetTrigger>
-        <button
-          type="button"
+        <span
+          role="button"
           aria-label="Search"
           className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-primary"
         >
           <Search size={19} strokeWidth={1.8} />
-        </button>
+        </span>
       </SheetTrigger>
 
       {/* ========================================

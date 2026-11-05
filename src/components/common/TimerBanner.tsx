@@ -110,7 +110,6 @@ const TimerBanner: React.FC<ProductProps> = ({ productList }) => {
         alt="Flash Sale"
         fill
         className="object-cover transition-transform duration-700 hover:scale-105"
-        unoptimized
       />
 
       {/* Dark gradient */}

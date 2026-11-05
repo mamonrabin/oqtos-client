@@ -151,7 +151,6 @@ const WelcomePopup: React.FC<BannerProps> = ({ bannerList }) => {
                   alt="Promotion"
                   fill
                   priority
-                  unoptimized
                   className="object-cover p-5"
                 />
               </div>

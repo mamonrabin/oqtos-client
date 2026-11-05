@@ -29,11 +29,33 @@ export const getRatedProducts = async () => {
   return res.json();
 };
 
+// export const getSingleProductBySlug = async (slug: string) => {
+//   const res = await fetch(`${apiBaseUrl}/product/productSlug/${slug}`);
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch product");
+//   }
+
+//   return res.json();
+// };
+
+
 export const getSingleProductBySlug = async (slug: string) => {
-  const res = await fetch(`${apiBaseUrl}/product/productSlug/${slug}`);
+  const res = await fetch(
+    `${apiBaseUrl}/product/productSlug/${encodeURIComponent(slug)}`,
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+        tags: [`product-${slug}`],
+      },
+    }
+  );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch product");
+    throw new Error(
+      `Failed to fetch product: ${res.status} ${res.statusText}`
+    );
   }
 
   return res.json();
@@ -142,6 +164,121 @@ export type ProductFilter = {
 
 
 
+// export const getAllProducts = async ({
+//   page = 1,
+//   limit = 4,
+//   searchTerm,
+//   brand,
+//   category,
+//   subCategory,
+//   color,
+//   size,
+//   minPrice,
+//   maxPrice,
+//   dateFilter,
+//   sort,
+// }: ProductFilter = {}) => {
+//   const params = new URLSearchParams({
+//     page: String(page),
+//     limit: String(limit),
+//   });
+
+//   if (searchTerm?.trim()) {
+//     params.set("searchTerm", searchTerm.trim());
+//   }
+
+//   if (brand) params.set("brand", brand);
+//   if (category) params.set("category", category);
+//   if (subCategory) params.set("subCategory", subCategory);
+//   if (color) params.set("color", color);
+//   if (size) params.set("size", size);
+
+//   if (minPrice !== undefined) {
+//     params.set("minPrice", String(minPrice));
+//   }
+
+//   if (maxPrice !== undefined) {
+//     params.set("maxPrice", String(maxPrice));
+//   }
+
+//   if (dateFilter) params.set("dateFilter", dateFilter);
+//   if (sort) params.set("sort", sort);
+
+//   const url = `${apiBaseUrl}/product?${params.toString()}`;
+
+//   const res = await fetch(url, {
+//     cache: "no-store",
+//   });
+
+//   if (!res.ok) {
+//     throw new Error(
+//       `Failed to fetch products: ${res.status} ${res.statusText}`
+//     );
+//   }
+
+//   return res.json();
+// };
+
+
+
+// export const getAllProducts = async ({
+//   page = 1,
+//   limit = 4,
+//   searchTerm,
+//   brand,
+//   category,
+//   subCategory,
+//   color,
+//   size,
+//   minPrice,
+//   maxPrice,
+//   dateFilter,
+//   sort,
+// }: ProductFilter = {}) => {
+//   const params = new URLSearchParams({
+//     page: String(page),
+//     limit: String(limit),
+//   });
+
+//   if (searchTerm?.trim()) {
+//     params.set("searchTerm", searchTerm.trim());
+//   }
+
+//   if (brand) params.set("brand", brand);
+//   if (category) params.set("category", category);
+//   if (subCategory) params.set("subCategory", subCategory);
+//   if (color) params.set("color", color);
+//   if (size) params.set("size", size);
+
+//   if (minPrice !== undefined) {
+//     params.set("minPrice", String(minPrice));
+//   }
+
+//   if (maxPrice !== undefined) {
+//     params.set("maxPrice", String(maxPrice));
+//   }
+
+//   if (dateFilter) params.set("dateFilter", dateFilter);
+//   if (sort) params.set("sort", sort);
+
+//   const url = `${apiBaseUrl}/product?${params.toString()}`;
+
+//   const res = await fetch(url, {
+//     next: {
+//       revalidate: 60,
+//       tags: ["products"],
+//     },
+//   });
+
+//   if (!res.ok) {
+//     throw new Error(
+//       `Failed to fetch products: ${res.status} ${res.statusText}`
+//     );
+//   }
+
+//   return res.json();
+// };
+
 export const getAllProducts = async ({
   page = 1,
   limit = 4,
@@ -161,31 +298,31 @@ export const getAllProducts = async ({
     limit: String(limit),
   });
 
-  if (searchTerm?.trim()) {
-    params.set("searchTerm", searchTerm.trim());
-  }
+  const filters: Record<string, string | undefined> = {
+    searchTerm: searchTerm?.trim() || undefined,
+    brand,
+    category,
+    subCategory,
+    color,
+    size,
+    minPrice: minPrice !== undefined ? String(minPrice) : undefined,
+    maxPrice: maxPrice !== undefined ? String(maxPrice) : undefined,
+    dateFilter,
+    sort,
+  };
 
-  if (brand) params.set("brand", brand);
-  if (category) params.set("category", category);
-  if (subCategory) params.set("subCategory", subCategory);
-  if (color) params.set("color", color);
-  if (size) params.set("size", size);
-
-  if (minPrice !== undefined) {
-    params.set("minPrice", String(minPrice));
-  }
-
-  if (maxPrice !== undefined) {
-    params.set("maxPrice", String(maxPrice));
-  }
-
-  if (dateFilter) params.set("dateFilter", dateFilter);
-  if (sort) params.set("sort", sort);
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) params.set(key, value);
+  });
 
   const url = `${apiBaseUrl}/product?${params.toString()}`;
 
   const res = await fetch(url, {
-    cache: "no-store",
+    method: "GET",
+    next: {
+      revalidate: 60,
+      tags: ["products"],
+    },
   });
 
   if (!res.ok) {

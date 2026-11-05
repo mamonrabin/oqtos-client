@@ -1,4 +1,4 @@
-"use client";
+
 
 import { TProduct } from "@/types";
 import SizeColorAndQuantity from "./SizeColeAndQuantity";

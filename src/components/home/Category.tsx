@@ -58,7 +58,6 @@ const Category: React.FC<CategoryProps> = ({ categoryList }) => {
                   alt={category.categoryName}
                   width={80}
                   height={80}
-                  unoptimized
                   priority={index === 0}
                   className="h-full w-full rounded-md object-cover transition-transform duration-300 group-hover:scale-105"
                 />

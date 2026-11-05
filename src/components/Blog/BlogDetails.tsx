@@ -134,7 +134,6 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
               alt={blog.title}
               fill
               priority
-              unoptimized
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 896px"
             />
@@ -171,7 +170,6 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
                       src={`${apiBaseUrl}${image}`}
                       alt={`${blog.title} - image ${index + 1}`}
                       fill
-                      unoptimized
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />
