@@ -1,4 +1,3 @@
-
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -7,6 +6,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
       },
       {
         protocol: "http",
@@ -22,7 +26,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Temporarily test with one CPU for page generation.
   experimental: {
     cpus: 1,
   },

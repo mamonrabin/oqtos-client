@@ -1,6 +1,5 @@
 "use client";
 
-import { apiBaseUrl } from "@/config";
 import { TFlashProduct } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -121,7 +120,7 @@ const TimerBanner3: React.FC<ProductProps> = ({ productList }) => {
       {/* Product Image */}
       <div className="relative aspect-[4/3] max-h-[180px] shrink-0 overflow-hidden rounded-[18px] bg-white/10">
         <Image
-          src={apiBaseUrl + productList?.image}
+          src={productList?.image}
           alt="Flash Sale"
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

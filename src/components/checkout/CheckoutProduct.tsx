@@ -1,4 +1,4 @@
-import { apiBaseUrl } from "@/config";
+
 import { TCartItem } from "@/types";
 import { RotateCcw, ShieldCheck, Van } from "lucide-react";
 import Image from "next/image";
@@ -40,7 +40,7 @@ const CheckoutProduct: React.FC<CheckoutProductProps> = ({
             className="flex gap-3 border-b py-4 last:border-transparent last:mb-0"
           >
             <Image
-              src={apiBaseUrl + item.product.image}
+              src={item.product.image}
               alt={item.product.name}
               width={100}
               height={100}

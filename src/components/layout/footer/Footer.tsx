@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 import { TLogo, TSocilaLink } from "@/types";
-import { apiBaseUrl } from "@/config";
 import SocialLink from "./SocialLink";
 
 interface FooterProps {
@@ -30,7 +29,7 @@ const Footer: React.FC<FooterProps> = ({ logoList,socialLinkes }) => {
             {logo?.footerLogo && (
               <Link href="/" className="inline-block">
                 <Image
-                  src={`${apiBaseUrl}${logo.footerLogo}`}
+                  src={logo.footerLogo}
                   alt="Logo"
                   width={140}
                   height={50}

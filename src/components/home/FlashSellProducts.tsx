@@ -1,14 +1,13 @@
 import { TFlashProduct, THomeControl } from "@/types";
 import React from "react";
 import SectionHeader from "../shared/SectionHeader";
-import Image from "next/image";
-import { apiBaseUrl } from "@/config";
+
 import FlashSellSlider from "../common/FlashSellSlider";
 import TimerBanner from "../common/TimerBanner";
 import SectionHeader2 from "../shared/SectionHeader2";
 import TimerBanner2 from "../common/TimerBanner2";
 import { TCustome } from "@/types/customeType";
-import TimerBanner3 from "../common/TimerBanner3";
+
 
 interface ProductProps {
   flashSale: THomeControl;

@@ -1,6 +1,6 @@
 "use client";
 
-import { apiBaseUrl } from "@/config";
+
 import { TCategory } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,7 @@ const Category: React.FC<CategoryProps> = ({ categoryList }) => {
               {/* Category Image */}
               <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-sm">
                 <Image
-                  src={`${apiBaseUrl}${category.image}`}
+                  src={category.image}
                   alt={category.categoryName}
                   width={80}
                   height={80}

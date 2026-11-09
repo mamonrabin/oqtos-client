@@ -1,6 +1,5 @@
 "use client";
 
-import { apiBaseUrl } from "@/config";
 import { TCategory } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,7 +70,7 @@ const Category2: React.FC<CategoryProps> = ({ categoryList }) => {
                 <div className="mx-auto aspect-square w-full max-w-[110px] overflow-hidden rounded-full border border-gray-200 bg-gray-50 p-1.5 transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-md md:max-w-[120px]">
                   <div className="relative h-full w-full overflow-hidden rounded-full bg-gray-100">
                     <Image
-                      src={`${apiBaseUrl}${category.image}`}
+                      src={category.image}
                       alt={category.categoryName}
                       fill
                       sizes="120px"

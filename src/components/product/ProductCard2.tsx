@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TProduct } from "@/types";
-import { apiBaseUrl } from "@/config";
+
 import AddToWishlist from "./AddToWishlist";
 import ViewProduct from "./ViewProduct";
 
@@ -34,7 +34,7 @@ const ProductCard2: React.FC<ProductCardProps> = ({ product, isLoading }) => {
         <div className="relative aspect-square w-full overflow-hidden bg-gray-50">
           {/* Main Image */}
           <Image
-            src={`${apiBaseUrl}${thumbnailImage}`}
+            src={thumbnailImage}
             alt={title}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"
@@ -52,7 +52,7 @@ const ProductCard2: React.FC<ProductCardProps> = ({ product, isLoading }) => {
           {/* Second Image */}
           {hasSecondImage && (
             <Image
-              src={`${apiBaseUrl}${backviewImage}`}
+              src={`${backviewImage}`}
               alt={`${title} alternate view`}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 300px"

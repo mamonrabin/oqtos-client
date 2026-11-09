@@ -1,4 +1,4 @@
-import { apiBaseUrl } from '@/config';
+
 import { TBrand } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ const BrandCard:React.FC<brandProps> = ({brandItem}) => {
             {/* Logo */}
             <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-gray-50/70 p-5 transition-colors duration-300 group-hover:bg-primary/[0.03]">
               <Image
-                src={apiBaseUrl + brandItem.image}
+                src={brandItem.image}
                 alt={brandItem.title}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 12.5vw"

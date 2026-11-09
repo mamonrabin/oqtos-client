@@ -1,17 +1,11 @@
 "use client";
 
 import { TBlog } from "@/types";
-import { apiBaseUrl } from "@/config";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Calendar,
-  Clock,
-  Share2,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Calendar, Clock, Share2 } from "lucide-react";
 
 interface BlogProps {
   blog: TBlog;
@@ -35,9 +29,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
   // Calculate Reading Time
   // -----------------------------
   const getReadingTime = (content: string) => {
-    const plainText = content
-      ?.replace(/<[^>]*>/g, "")
-      .trim();
+    const plainText = content?.replace(/<[^>]*>/g, "").trim();
 
     if (!plainText) return 1;
 
@@ -97,10 +89,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
           {/* Meta Information */}
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-gray-500">
             <div className="flex items-center gap-2">
-              <Calendar
-                size={16}
-                className="text-[#087096]"
-              />
+              <Calendar size={16} className="text-[#087096]" />
 
               <span>{formatDate(blog.createdAt)}</span>
             </div>
@@ -108,10 +97,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
             <span className="hidden h-1 w-1 rounded-full bg-gray-300 sm:block" />
 
             <div className="flex items-center gap-2">
-              <Clock
-                size={16}
-                className="text-[#087096]"
-              />
+              <Clock size={16} className="text-[#087096]" />
 
               <span>{readingTime} min read</span>
             </div>
@@ -126,11 +112,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
         <div className="mx-auto w-full max-w-4xl">
           <div className="relative aspect-[16/9] overflow-hidden rounded bg-gray-100">
             <Image
-              src={
-                blog.image
-                  ? `${apiBaseUrl}${blog.image}`
-                  : "/placeholder-image.webp"
-              }
+              src={blog.image}
               alt={blog.title}
               fill
               priority
@@ -167,7 +149,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
                     className="group relative aspect-[4/3] overflow-hidden rounded bg-gray-100"
                   >
                     <Image
-                      src={`${apiBaseUrl}${image}`}
+                      src={image}
                       alt={`${blog.title} - image ${index + 1}`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -209,9 +191,7 @@ const BlogDetails: React.FC<BlogProps> = ({ blog }) => {
                       url: window.location.href,
                     });
                   } else {
-                    await navigator.clipboard.writeText(
-                      window.location.href
-                    );
+                    await navigator.clipboard.writeText(window.location.href);
                   }
                 } catch (error) {
                   console.log("Share cancelled", error);

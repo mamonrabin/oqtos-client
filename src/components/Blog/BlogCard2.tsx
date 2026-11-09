@@ -1,5 +1,5 @@
 import { TBlog } from "@/types";
-import { apiBaseUrl } from "@/config";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -54,11 +54,7 @@ const BlogCard2: React.FC<BlogProps> = ({ blog, isLoading }) => {
         "
       >
         <Image
-          src={
-            blog.image
-              ? `${apiBaseUrl}${blog.image}`
-              : "/placeholder-image.webp"
-          }
+          src={blog.image}
           alt={blog.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -149,8 +145,7 @@ const BlogCard2: React.FC<BlogProps> = ({ blog, isLoading }) => {
             text-sm leading-6 text-gray-500
           "
         >
-          {blog.cardDescription ||
-            truncateContent(blog.content)}
+          {blog.cardDescription || truncateContent(blog.content)}
         </p>
 
         {/* Bottom */}

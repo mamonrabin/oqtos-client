@@ -10,7 +10,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { TProduct } from "@/types";
-import { apiBaseUrl } from "@/config";
 
 interface ProductProps {
   product: TProduct;
@@ -54,7 +53,7 @@ return (
         <SwiperSlide key={img} className="min-w-0!">
           <div className="flex w-full min-w-0 items-center justify-center overflow-hidden border bg-gray-50">
             <Image
-              src={`${apiBaseUrl}${img}`}
+              src={img}
               alt={`${product.title || "Product"} - Image ${index + 1}`}
               width={600}
               height={600}

@@ -79,6 +79,9 @@ const Home = async () => {
   const { data: bestSelingProduct, isLoading: bestSellingLoading } =
     bestSellingResponse;
 
+
+    console.log("-----------------bestSelingProduct-------------------", bestSelingProduct);
+
   const { data: flasSellProducts, isLoading: flasSellProductsLoading } =
     flashSaleResponse;
 

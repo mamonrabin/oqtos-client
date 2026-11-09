@@ -23,6 +23,8 @@ const BestSelles: React.FC<productProps> = ({
   isLoading,
 }) => {
   const sectionHead = design?.home?.sectionHead || "Default";
+
+  console.log("-----------------productList-------------------", productList);
   return (
     <div className="Container md:mt-10 mt-6">
       {sectionHead === "Default" ? (

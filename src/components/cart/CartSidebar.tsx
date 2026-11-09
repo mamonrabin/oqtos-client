@@ -7,7 +7,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { apiBaseUrl } from "@/config";
 import { useCartStore } from "@/store/cartStore";
 import { ShoppingCart, X, Plus, Minus, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -64,7 +63,7 @@ const CartSidebar = () => {
                 {/* Product Image */}
                 <div className="relative w-24 h-24 flex-shrink-0 bg-gray-50 rounded-lg overflow-hidden">
                   <Image
-                    src={apiBaseUrl + item.product.image}
+                    src={item.product.image}
                     alt={item.product.name}
                     fill
                     className="object-cover"

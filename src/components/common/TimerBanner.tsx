@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/static-components */
 "use client";
 
-import { apiBaseUrl } from "@/config";
+
 import { TFlashProduct } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -106,7 +106,7 @@ const TimerBanner: React.FC<ProductProps> = ({ productList }) => {
     <div className="relative h-full min-h-[300px] w-full overflow-hidden rounded sm:min-h-[360px] lg:min-h-[420px]">
       {/* Image */}
       <Image
-        src={apiBaseUrl + productList?.image}
+        src={productList?.image}
         alt="Flash Sale"
         fill
         className="object-cover transition-transform duration-700 hover:scale-105"

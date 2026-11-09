@@ -1,5 +1,5 @@
 import { TBlog } from "@/types";
-import { apiBaseUrl } from "@/config";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -47,11 +47,7 @@ const BlogCard: React.FC<BlogProps> = ({ blog, isLoading }) => {
         className="relative block aspect-[16/10] overflow-hidden rounded bg-gray-100"
       >
         <Image
-          src={
-            blog.image
-              ? `${apiBaseUrl}${blog.image}`
-              : "/placeholder-image.webp"
-          }
+          src={blog.image}
           alt={blog.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { apiBaseUrl } from "@/config";
+
 import { TCategory, TLogo, TSubCategory } from "@/types";
 import { menuList } from "@/utils/menuList";
 import { Heart, UserRound } from "lucide-react";
@@ -73,7 +73,7 @@ const { wishlist } = useWishlist();
           {logoList?.map((item: TLogo) => (
             <Image
               key={item._id}
-              src={`${apiBaseUrl}${item.headerLogo}`}
+              src={item.headerLogo}
               alt="optos"
               width={100}
               height={100}

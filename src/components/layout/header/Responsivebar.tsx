@@ -4,7 +4,6 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { apiBaseUrl } from "@/config";
 import { TCategory, TLogo, TSubCategory } from "@/types";
 import { X, ChevronRight, ChevronDown, MoveLeft } from "lucide-react";
 import Image from "next/image";
@@ -39,7 +38,7 @@ const Responsivebar: React.FC<LogoProps> = ({
             {logoList?.map((item: TLogo) => (
               <Image
                 key={item._id}
-                src={`${apiBaseUrl}${item.headerLogo}`}
+                src={item.headerLogo}
                 alt="Optos"
                 width={120}
                 height={50}

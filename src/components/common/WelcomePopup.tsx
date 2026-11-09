@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { TBanner } from "@/types";
-import { apiBaseUrl } from "@/config";
 import Link from "next/link";
 
 const COUNT_KEY = "oqtos-popup-count";
@@ -147,7 +146,7 @@ const WelcomePopup: React.FC<BannerProps> = ({ bannerList }) => {
             <Link href={banner.link || "/"}>
               <div className="relative h-[300px] w-full md:h-[500px] rounded border">
                 <Image
-                  src={`${apiBaseUrl}${banner.image}`}
+                  src={banner.image}
                   alt="Promotion"
                   fill
                   priority

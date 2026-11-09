@@ -8,7 +8,6 @@ import {
   TrendingUp,
   GitCompareArrows,
 } from "lucide-react";
-import { apiBaseUrl } from "@/config";
 import ViewProduct from "./ViewProduct";
 import { TProduct } from "@/types";
 import AddToWishlist from "./AddToWishlist";
@@ -87,7 +86,7 @@ export default function ProductCard3({
         className="relative block aspect-[4/4.5] shrink-0 overflow-hidden rounded-t-[20px] bg-white"
       >
         <Image
-          src={apiBaseUrl + thumbnailImage}
+          src={thumbnailImage}
           alt={title}
           width={500}
           height={500}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
-import { apiBaseUrl } from "@/config";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
@@ -60,7 +60,7 @@ const Cart = () => {
                 {/* Product Info */}
                 <div className="col-span-6 flex gap-4">
                   <Image
-                    src={apiBaseUrl + item.product.image}
+                    src={item.product.image}
                     alt={item.product.name}
                     width={80}
                     height={80}

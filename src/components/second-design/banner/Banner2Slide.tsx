@@ -1,6 +1,5 @@
 "use client";
 
-import { apiBaseUrl } from "@/config";
 import { TBanner } from "@/types";
 import Image from "next/image";
 import React from "react";
@@ -68,7 +67,7 @@ const Banner2Slide: React.FC<BannerProps> = ({ mainBanners }) => {
                 }`}
               >
                 <Image
-                  src={`${apiBaseUrl}${banner.image}`}
+                  src={banner.image}
                   alt={banner.title || "banner"}
                   fill
                   priority

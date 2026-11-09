@@ -13,7 +13,6 @@ import {
 import RatingSummary from "./RatingSummary";
 import { getAllReviews } from "@/services/review.api";
 import Image from "next/image";
-import { apiBaseUrl } from "@/config";
 import { RatingForm } from "./RatingForm";
 
 type RatingsReviewsProps = {
@@ -276,7 +275,7 @@ export default function RatingsReviews({
                             className="h-16 w-16 overflow-hidden rounded-lg bg-gray-100"
                           >
                             <Image
-                              src={apiBaseUrl + image}
+                              src={image}
                               alt={`Review image ${index + 1}`}
                               className="h-full w-full object-cover"
                               width={64}

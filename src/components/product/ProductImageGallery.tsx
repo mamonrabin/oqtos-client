@@ -15,7 +15,6 @@ import { Navigation, Thumbs, FreeMode } from "swiper/modules";
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
 
-import { apiBaseUrl } from "@/config";
 
 interface ProductImageGalleryProps {
   product: TProduct;
@@ -83,7 +82,7 @@ const ProductImageGallery = ({
                     onMouseLeave={handleMouseLeave}
                   >
                     <Image
-                      src={`${apiBaseUrl}${image}`}
+                      src={image}
                       alt={`${product.title} - Image ${index + 1}`}
                       fill
                       priority={index === 0}
@@ -159,7 +158,7 @@ const ProductImageGallery = ({
               <SwiperSlide key={`thumb-${image}-${index}`}>
                 <div className="aspect-square cursor-pointer overflow-hidden rounded-lg border-2 border-transparent transition hover:border-primary">
                   <Image
-                    src={`${apiBaseUrl}${image}`}
+                    src={image}
                     alt={`${product.title} thumbnail ${index + 1}`}
                     width={120}
                     height={120}

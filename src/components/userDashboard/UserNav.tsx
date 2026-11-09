@@ -1,5 +1,4 @@
 "use client";
-import { apiBaseUrl } from "@/config";
 import { TLogo } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +22,7 @@ const UserNav: React.FC<logoProps> = ({ logoList }) => {
           {logoList?.map((item: TLogo) => (
             <Image
               key={item._id}
-              src={`${apiBaseUrl}${item.headerLogo}`}
+              src={item.headerLogo}
               alt="optos"
               width={100}
               height={100}

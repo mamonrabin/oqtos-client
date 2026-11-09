@@ -1,7 +1,6 @@
 
 "use client";
 
-import { apiBaseUrl } from "@/config";
 import { TBanner } from "@/types";
 import Image from "next/image";
 import React from "react";
@@ -99,7 +98,7 @@ const Banner4: React.FC<BannerProps> = ({ mainBanners }) => {
                   }`}
                 >
                   <Image
-                    src={`${apiBaseUrl}${banner.image}`}
+                    src={banner.image}
                     alt={banner.title || "Promotional banner"}
                     fill
                     priority={index === 0}

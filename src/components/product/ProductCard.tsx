@@ -8,7 +8,6 @@ import Link from "next/link";
 
 import { TProduct } from "@/types";
 import { toast } from "sonner";
-import { apiBaseUrl } from "@/config";
 import ViewProduct from "./ViewProduct";
 import { useCartStore } from "@/store/cartStore";
 import AddToWishlist from "./AddToWishlist";
@@ -72,7 +71,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
         <div className="relative block overflow-hidden aspect-square bg-gray-50 dark:bg-zinc-800">
           <Link href={`/product/${slug}`} className="">
             <Image
-              src={apiBaseUrl + thumbnailImage}
+              src={thumbnailImage}
               alt={title}
               width={500}
               height={500}
@@ -90,7 +89,7 @@ const ProductCard: React.FC<productProps> = ({ product, isLoading }) => {
                 className="absolute inset-0"
               >
                 <Image
-                  src={apiBaseUrl + backviewImage}
+                  src={backviewImage}
                   alt={title}
                   width={500}
                   height={500}

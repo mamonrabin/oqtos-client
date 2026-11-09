@@ -1,6 +1,5 @@
 "use client";
 
-import { apiBaseUrl } from "@/config";
 import { deleteSingleWishlist } from "@/services/wishlist.api";
 import { Heart, ShoppingBag, Trash2, Star } from "lucide-react";
 import Image from "next/image";
@@ -104,7 +103,7 @@ const WishList = () => {
             <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-gray-100">
               {product.thumbnailImage ? (
                 <Image
-                  src={apiBaseUrl + product.thumbnailImage}
+                  src={product.thumbnailImage}
                   alt={product.title}
                   fill
                   className="object-cover transition duration-500 group-hover:scale-105"

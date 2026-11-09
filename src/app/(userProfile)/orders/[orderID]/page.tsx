@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { apiBaseUrl } from "@/config";
+
 import { getSingleOrderByID } from "@/services/order.api";
 import {
   ArrowLeft,
@@ -409,7 +409,7 @@ const Page = async ({
                   <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-100">
                     {item.productRef?.thumbnailImage ? (
                       <Image
-                        src={apiBaseUrl + item.productRef.thumbnailImage}
+                        src={item.productRef.thumbnailImage}
                         alt={item.productRef.title}
                         width={200}
                         height={200}
