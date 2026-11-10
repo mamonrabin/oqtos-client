@@ -40,7 +40,6 @@ const ProductSlider: React.FC<productProps> = ({
       "6cards": 6,
     }[cardCount] || 4;
 
-  console.log("cardCount", cardCount);
   return (
     <div className="">
       {sectionHead === "Default" && (

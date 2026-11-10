@@ -4,7 +4,7 @@ import { useCurrentUser } from "@/components/auth/AuthContext";
 import { format } from "date-fns";
 const UserInfo = () => {
   const { user } = useCurrentUser();
-  console.log("--------------------user----------------------------", user);
+
   return (
     <div className="h-fit rounded-xl bg-white p-6 text-center shadow-sm">
       <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-primary text-3xl font-bold text-white">

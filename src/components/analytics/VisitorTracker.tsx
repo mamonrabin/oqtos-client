@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { apiBaseUrl } from "@/config";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 
 const getOrCreateId = (
   key: string,
@@ -25,7 +26,7 @@ export default function VisitorTracker() {
   const lastTrackedPath = useRef("");
 
   useEffect(() => {
-    if (!API_URL || !pathname) return;
+    if (!apiBaseUrl || !pathname) return;
 
     try {
       const visitorId = getOrCreateId(
@@ -42,7 +43,7 @@ export default function VisitorTracker() {
         endpoint: string,
         data: Record<string, string>,
       ) => {
-        fetch(`${API_URL}/visitor/${endpoint}`, {
+        fetch(`${apiBaseUrl}/visitor/${endpoint}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

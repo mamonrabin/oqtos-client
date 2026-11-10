@@ -1,16 +1,13 @@
 
 import { getActiveAffiliate } from "@/services/affiliate.api";
-import { CheckCircle2, CircleDollarSign, Gift, Link2, ShieldCheck } from "lucide-react";
+import { CheckCircle2,  ShieldCheck } from "lucide-react";
 
 const page = async () => {
   const { data } = await getActiveAffiliate();
 
   const affiliate = data?.[0];
 
-  console.log(
-    "------------------getAffiliate-------------------",
-    affiliate
-  );
+
 
   return (
     <main className="min-h-screen bg-gray-50/70">

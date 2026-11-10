@@ -81,9 +81,9 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <button className="p-2 lg:flex hidden cursor-pointer rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 text-primary hover:scale-105">
+        <span className="p-2 lg:flex hidden cursor-pointer rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 text-primary hover:scale-105">
           <UserRound size={18} />
-        </button>
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-4 w-72 rounded-b rounded-t-[0px] border border-gray-200 bg-white shadow-xl p-0 overflow-hidden">
         {/* User Header */}

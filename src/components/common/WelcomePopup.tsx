@@ -34,9 +34,7 @@ const WelcomePopup: React.FC<BannerProps> = ({ bannerList }) => {
 
     const cooldownUntil = Number(localStorage.getItem(COOLDOWN_KEY) || "0");
 
-    console.log("Promotion banner:", banner);
-    console.log("Current count:", count);
-    console.log("Cooldown:", cooldownUntil);
+  
 
     // Still inside cooldown
     if (now < cooldownUntil) {
