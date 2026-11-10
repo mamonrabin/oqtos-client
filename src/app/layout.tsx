@@ -6,7 +6,8 @@ import Providers from "@/providers/Providers";
 import NextTopLoader from "nextjs-toploader";
 import { WishlistProvider } from "@/components/wish-list/WishlistContext";
 import { getTheme } from "@/services/theme.api";
-
+import { Analytics } from "@vercel/analytics/next";
+import VisitorTracker from "@/components/analytics/VisitorTracker";
 export const metadata: Metadata = {
   title: "Oqtos",
   description: "Oqtos is new morden clothing brand",
@@ -50,7 +51,9 @@ export default async function RootLayout({
           />
 
           <WishlistProvider>
+              <VisitorTracker />
             {children}
+             <Analytics />
           </WishlistProvider>
         </Providers>
       </body>
